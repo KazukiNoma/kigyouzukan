@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://kigyouzukan.vercel.app/top.html</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://kigyouzukan.vercel.app/shindan.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- アパレル -->
   <url>
     <loc>https://kigyouzukan.vercel.app/firstretailing.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 自動車 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/toyota.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- IT・通信 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/softbank.html</loc>
     <changefreq>monthly</changefreq>
@@ -35,6 +43,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 金融 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/mufg.html</loc>
     <changefreq>monthly</changefreq>
@@ -45,6 +55,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 製造 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/sony.html</loc>
     <changefreq>monthly</changefreq>
@@ -60,6 +72,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 小売 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/aeon.html</loc>
     <changefreq>monthly</changefreq>
@@ -70,6 +84,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 食品 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/ajinomoto.html</loc>
     <changefreq>monthly</changefreq>
@@ -80,6 +96,54 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 商社 -->
+  <url>
+    <loc>https://kigyouzukan.vercel.app/mitsubishi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kigyouzukan.vercel.app/itochu.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kigyouzukan.vercel.app/mitsui.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kigyouzukan.vercel.app/sumitomo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kigyouzukan.vercel.app/marubeni.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 不動産 -->
+  <url>
+    <loc>https://kigyouzukan.vercel.app/mec.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kigyouzukan.vercel.app/mitsuifudosan.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 医薬品 -->
+  <url>
+    <loc>https://kigyouzukan.vercel.app/takeda.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- その他 -->
   <url>
     <loc>https://kigyouzukan.vercel.app/terms.html</loc>
     <changefreq>yearly</changefreq>
@@ -90,4 +154,5 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>
