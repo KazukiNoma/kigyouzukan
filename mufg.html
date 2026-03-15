@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三菱UFJ｜企業図鑑</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D12;
+    --bg2: #13131A;
+    --bg3: #1A1A24;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.12);
+    --white: #ffffff;
+    --ink: #F0EFF8;
+    --ink2: #B8B5CC;
+    --ink3: #7A778E;
+    --p1: #A855F7;
+    --p2: #EC4899;
+    --p3: #6366F1;
+    --g1: #10B981;
+    --y1: #F59E0B;
+    --grad: linear-gradient(135deg, #A855F7, #EC4899);
+    --grad2: linear-gradient(135deg, #6366F1, #A855F7);
+    --grad3: linear-gradient(135deg, #10B981, #6366F1);
+    --glow: 0 0 30px rgba(168,85,247,0.25);
+    --glow2: 0 0 20px rgba(236,72,153,0.2);
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(13,13,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 24px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 24px;
+    padding: 8px 18px;
+    gap: 8px;
+    width: 260px;
+    font-size: 13px;
+    color: var(--ink3);
+    transition: border 0.2s;
+  }
+  .nav-search:hover { border-color: rgba(168,85,247,0.4); }
+  .nav-right { display: flex; gap: 10px; align-items: center; }
+  .nav-btn {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--ink2);
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { border-color: var(--p1); color: var(--p1); }
+  .nav-btn.filled {
+    background: var(--grad);
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--glow);
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 16px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--bg2);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border2); }
+
+  /* HERO */
+  .hero-cover {
+    height: 180px;
+    background: var(--bg3);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cover-grad {
+    position: absolute;
+    inset: 0;
+    background:linear-gradient(135deg,#080c14 0%,#10182a 30%,#080e1c 60%,#040810 100%);
+  }
+  .hero-cover-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background:radial-gradient(circle,rgba(245,158,11,0.35) 0%,transparent 70%);
+    top: -80px; left: -50px;
+  }
+  .hero-cover-glow2 {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%);
+    top: -40px; right: 20px;
+  }
+  .hero-cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  /* 株価チャートオーバーレイ */
+  .hero-stock-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px 20px;
+    gap: 0;
+  }
+  .hero-stock-info {
+    position: absolute;
+    top: 14px; left: 20px;
+    z-index: 4;
+  }
+  .hero-stock-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .hero-stock-change {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #34D399;
+    margin-top: 3px;
+  }
+  .hero-stock-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+  .hero-chart-svg {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.6;
+  }
+
+  .hero-body { padding: 0 24px 28px; }
+  .hero-logo {
+    width: 76px; height: 76px;
+    border-radius: 16px;
+    background: var(--bg3);
+    border: 2px solid var(--border2);
+    margin-top: -38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    font-family: 'Space Grotesk', sans-serif;
+    background: linear-gradient(135deg, #1E1E2E, #2A1A3E);
+    box-shadow: var(--glow), 0 8px 24px rgba(0,0,0,0.4);
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-logo::after {
+    content: 'MU';
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .hero-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .badge-hot {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--grad);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .hero-sub { font-size: 13px; color: var(--ink3); margin-bottom: 14px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--ink2);
+    background: var(--bg3);
+    transition: all 0.15s;
+  }
+  .tag:hover { border-color: var(--p1); color: var(--p1); }
+  .tag.purple { border-color: rgba(168,85,247,0.4); color: #C084FC; background: rgba(168,85,247,0.1); }
+  .tag.green { border-color: rgba(16,185,129,0.4); color: #34D399; background: rgba(16,185,129,0.1); }
+  .tag.pink { border-color: rgba(236,72,153,0.4); color: #F472B6; background: rgba(236,72,153,0.1); }
+
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .hero-stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-stat-val .unit { font-size: 12px; -webkit-text-fill-color: var(--ink3); }
+  .hero-stat-label { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--grad);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--glow);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(168,85,247,0.4); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink2);
+    border: 1px solid var(--border2);
+    padding: 10px 18px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--p1); color: var(--p1); }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    gap: 4px;
+  }
+  .tab {
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab.active { color: var(--p1); border-bottom-color: var(--p1); }
+  .tab:hover:not(.active) { color: var(--ink2); }
+
+  .tab-content { display: none; padding: 24px; }
+  .tab-content.active { display: block; }
+
+  /* METRICS */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .metric-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--grad);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .metric-card:hover { border-color: rgba(168,85,247,0.3); transform: translateY(-2px); }
+  .metric-card:hover::before { opacity: 1; }
+  .metric-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; font-weight: 500; }
+  .metric-value {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+  }
+  .metric-unit { font-size: 12px; -webkit-text-fill-color: var(--ink3); }
+  .metric-change { font-size: 12px; font-weight: 500; margin-top: 5px; }
+  .metric-change.up { color: var(--g1); }
+  .metric-change.down { color: #F87171; }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title span {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* CHART */
+  .chart-wrap {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 20px 0;
+    margin-bottom: 10px;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 160px;
+    margin-bottom: 0;
+  }
+  .bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .bar-val {
+    font-size: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--ink2);
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+  .bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    transition: opacity 0.2s, transform 0.2s;
+    cursor: pointer;
+    min-height: 4px;
+  }
+  .bar:hover { opacity: 0.85; transform: scaleY(1.03); transform-origin: bottom; }
+  .bar-label {
+    font-size: 11px;
+    color: var(--ink3);
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 8px 0 12px;
+    text-align: center;
+  }
+
+  /* INFO */
+  .info-list { display: flex; flex-direction: column; }
+  .info-row {
+    display: flex;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: var(--ink3); width: 140px; flex-shrink: 0; }
+  .info-val { color: var(--ink); font-weight: 500; }
+
+  /* SALARY */
+  .salary-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .salary-label { font-size: 13px; color: var(--ink2); width: 110px; flex-shrink: 0; }
+  .salary-bar-bg { flex: 1; background: var(--bg3); border-radius: 20px; height: 8px; overflow: hidden; }
+  .salary-bar-fill { height: 100%; border-radius: 20px; background: var(--grad); }
+  .salary-val { font-size: 13px; font-weight: 600; color: var(--ink); width: 90px; text-align: right; font-family: 'Space Grotesk', sans-serif; }
+
+  /* SCORE */
+  .score-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  .score-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .score-title { font-size: 12px; color: var(--ink3); margin-bottom: 8px; font-weight: 500; }
+  .score-bar-bg { background: rgba(255,255,255,0.06); border-radius: 20px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+  .score-bar-fill { height: 100%; border-radius: 20px; background: var(--grad); }
+  .score-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink3); }
+  .score-num { color: var(--p1); font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+
+  /* SIDEBAR */
+  .sidebar-card {
+    background: var(--bg2);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .sidebar-card:hover { border-color: var(--border2); }
+  .sidebar-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+  .affil-btn {
+    display: block;
+    width: 100%;
+    background: var(--grad);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+    text-align: center;
+    box-shadow: var(--glow);
+  }
+  .affil-btn:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
+  .affil-btn.green { background: var(--grad3); box-shadow: 0 0 20px rgba(16,185,129,0.2); }
+  .affil-note { font-size: 11px; color: var(--ink3); text-align: center; margin-top: 8px; }
+
+  .similar-company {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .similar-company:last-child { border-bottom: none; }
+  .similar-company:hover .sim-name { color: var(--p1); }
+  .sim-logo {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--bg3); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, #1E1E2E, #2A1A3E);
+    color: var(--p1); font-family: 'Space Grotesk', sans-serif;
+    flex-shrink: 0;
+  }
+  .sim-name { font-size: 13px; font-weight: 600; color: var(--ink); transition: color 0.15s; }
+  .sim-sub { font-size: 11px; color: var(--ink3); }
+
+  /* GLOW BG EFFECT */
+  .bg-glow {
+    position: fixed;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 60%);
+    top: -200px; right: -100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-glow2 {
+    position: fixed;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236,72,153,0.05) 0%, transparent 60%);
+    bottom: 0; left: -100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ANIMATE */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card { animation: fadeUp 0.5s ease both; }
+  .card:nth-child(2) { animation-delay: 0.07s; }
+  .sidebar-card { animation: fadeUp 0.5s ease both; }
+  .sidebar-card:nth-child(2) { animation-delay: 0.1s; }
+  .sidebar-card:nth-child(3) { animation-delay: 0.15s; }
+
+  @media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .score-grid { grid-template-columns: 1fr; }
+    .nav-search { display: none; }
+  }
+
+  /* NEWS */
+  .news-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .news-filter-btn {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--ink3);
+    background: var(--bg3);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .news-filter-btn.all.active  { border-color: var(--p1); color: var(--p1); background: rgba(168,85,247,0.08); }
+  .news-filter-btn.pos.active  { border-color: #10B981; color: #34D399; background: rgba(16,185,129,0.08); }
+  .news-filter-btn.neg.active  { border-color: #F87171; color: #F87171; background: rgba(248,113,113,0.08); }
+
+  .news-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .news-card:hover { border-color: var(--border2); transform: translateX(3px); }
+  .news-badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+  .news-badge.pos { background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.3); }
+  .news-badge.neg { background: rgba(248,113,113,0.15); color: #F87171; border: 1px solid rgba(248,113,113,0.3); }
+  .news-badge.neu { background: rgba(168,85,247,0.1); color: #C084FC; border: 1px solid rgba(168,85,247,0.2); }
+  .news-content { flex: 1; }
+  .news-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+  .news-meta {
+    font-size: 11px;
+    color: var(--ink3);
+    display: flex;
+    gap: 10px;
+  }
+  .news-summary {
+    font-size: 12px;
+    color: var(--ink2);
+    margin-top: 6px;
+    line-height: 1.7;
+  }
+  .news-impact {
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .news-impact-val {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .news-impact-val.pos { color: #34D399; }
+  .news-impact-val.neg { color: #F87171; }
+  .news-impact-label { font-size: 10px; color: var(--ink3); }
+
+
+  .hero-cover-logo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+
+  /* スマホ対応 */
+  @media (max-width: 768px) {
+    nav { padding: 0 14px; }
+    .nav-search { display: none; }
+    .nav-right { gap: 6px; }
+    .nav-right a { display: none; }
+    .container { grid-template-columns: 1fr; padding: 12px; gap: 16px; }
+    .hero-body { padding: 16px; }
+    .hero-name { font-size: 18px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .hero-stat-val { font-size: 22px; }
+    .hero-actions { flex-wrap: wrap; gap: 8px; }
+    .hero-actions a, .hero-actions button { font-size: 12px; padding: 8px 14px; }
+    .tabs { gap: 0; }
+    .tab { font-size: 12px; padding: 12px 10px; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .score-grid { grid-template-columns: 1fr; }
+    .sidebar-card { margin-bottom: 12px; }
+  }
+  @media (max-width: 480px) {
+    .hero-cover { height: 120px; }
+    .hero-stat-val { font-size: 18px; }
+    .hero-tags { gap: 4px; }
+    .tag { font-size: 10px; padding: 3px 8px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">企業図鑑</div>
+  <div class="nav-search">🔍 企業名・業界で検索...</div>
+  <div class="nav-right">
+    <a href="top.html" style="font-size:13px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid rgba(255,255,255,0.12);color:#B8B5CC;text-decoration:none;transition:all 0.15s">← 企業一覧</a>
+    <a href="shindan.html" style="font-size:13px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid rgba(168,85,247,0.4);color:#C084FC;background:rgba(168,85,247,0.08);text-decoration:none">🤖 企業診断</a>
+    <button class="nav-btn">ログイン</button>
+    <button class="nav-btn filled">無料登録</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div>
+
+    <!-- HERO -->
+    <div class="card">
+      <div class="hero-cover" id="heroCover">
+        <div class="hero-cover-grad"></div>
+        <div class="hero-cover-glow"></div>
+        <div class="hero-cover-glow2"></div>
+        <div class="hero-cover-grid"></div>
+        <!-- 株価情報 -->
+        <div class="hero-stock-info">
+          <div class="hero-stock-price">¥1,842</div>
+          <div class="hero-stock-change">▲ +18 (+0.99%)</div>
+          <div class="hero-stock-label">8306｜東証プライム｜ダミーデータ</div>
+        </div>
+        <!-- 株価チャートSVG（ダミー） -->
+        <svg class="hero-chart-svg" viewBox="0 0 1000 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- エリア塗り -->
+          <path d="M0,160 L0,130 C50,125 80,140 120,128 C160,116 180,100 230,95 C280,90 300,105 350,98 C400,91 420,80 470,72 C520,64 550,75 600,68 C650,61 670,50 720,42 C770,34 800,45 850,38 C900,31 940,20 1000,15 L1000,180 Z"
+                fill="url(#chartGrad)"/>
+          <!-- ライン -->
+          <path d="M0,130 C50,125 80,140 120,128 C160,116 180,100 230,95 C280,90 300,105 350,98 C400,91 420,80 470,72 C520,64 550,75 600,68 C650,61 670,50 720,42 C770,34 800,45 850,38 C900,31 940,20 1000,15"
+                fill="none" stroke="#F59E0B" stroke-width="2.5"/>
+          <!-- 現在値ドット -->
+          <circle cx="1000" cy="15" r="5" fill="#EF4444"/>
+          <circle cx="1000" cy="15" r="9" fill="none" stroke="#EF4444" stroke-opacity="0.4" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="hero-body">
+        <div class="hero-logo"></div>
+        <div class="hero-name">
+          株式会社三菱UFJフィナンシャル・グループ
+          <span class="badge-hot">🏦 メガバンク最大手</span>
+        </div>
+        <div class="hero-sub">銀行業・金融業｜東証プライム上場｜東京都千代田区</div>
+        <div class="hero-tags">
+          <span class="tag purple">🏦 メガバンク</span>
+          <span class="tag purple">🌍 グローバル展開</span>
+          <span class="tag green">📈 増収増益</span>
+          <span class="tag pink">💰 高年収</span>
+          <span class="tag">2025年3月期</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-val">21.7兆<span class="unit">円</span></div>
+            <div class="hero-stat-label">業務粗利益</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">1,093<span class="unit">万円</span></div>
+            <div class="hero-stat-label">平均年収</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">156,253<span class="unit">名</span></div>
+            <div class="hero-stat-label">従業員数(連結)</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">40.1<span class="unit">歳</span></div>
+            <div class="hero-stat-label">平均年齢</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary">📋 転職相談する（無料）</button>
+          <button class="btn-outline">🔖 保存</button>
+          <button class="btn-outline">📤 シェア</button>
+          <!-- 企業HPリンク: COMPANY_URL を実際のURLに変更 -->
+          <a href="https://www.mufg.jp/" target="_blank" rel="noopener" class="btn-outline" style="text-decoration:none;display:inline-flex;align-items:center;gap:5px">🌐 公式サイト</a>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('overview',this)">概要</div>
+        <div class="tab" onclick="switchTab('finance',this)">財務データ</div>
+        <div class="tab" onclick="switchTab('culture',this)">社風・働き方</div>
+        <div class="tab" onclick="switchTab('news',this)">ニュース</div>
+      </div>
+
+      <!-- 概要 -->
+      <div class="tab-content active" id="tab-overview">
+        <div class="section-title">📊 <span>主要財務指標</span></div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">売上高</div>
+            <div class="metric-value">21兆7,480<span class="metric-unit">億円</span></div>
+            <div class="metric-change up">↑ +15.2% 前期比</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">営業利益</div>
+            <div class="metric-value">2兆2,400<span class="metric-unit">億円</span></div>
+            <div class="metric-change up">↑ +48.1% 前期比</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">純利益</div>
+            <div class="metric-value">1兆4,900<span class="metric-unit">億円</span></div>
+            <div class="metric-change up">↑ +33.4% 前期比</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">総資産</div>
+            <div class="metric-value">413兆1,135<span class="metric-unit">億円</span></div>
+            <div class="metric-change up">↑ +3.6% 前期比</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">営業利益率</div>
+            <div class="metric-value">10.3<span class="metric-unit">%</span></div>
+            <div class="metric-change up">↑ 金利上昇で拡大</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">EPS</div>
+            <div class="metric-value">472.7<span class="metric-unit">円</span></div>
+            <div class="metric-change up">↑ +33.4% 前期比</div>
+          </div>
+        </div>
+
+        <!-- AI企業要約（本番公開後にClaude APIで自動生成予定） -->
+        <div class="section-title">🤖 <span>AI企業サマリー</span></div>
+        <div style="background:linear-gradient(135deg,rgba(168,85,247,0.07),rgba(236,72,153,0.05));border:1px solid rgba(168,85,247,0.2);border-radius:14px;padding:20px;margin-bottom:24px">
+          <div style="font-size:13px;color:var(--ink2);line-height:2">
+            三菱UFJフィナンシャル・グループは日本最大・アジア最大級の総合金融グループ。銀行・信託・証券・カードを擁し、40か国以上でグローバル展開。2025年3月期は金利上昇の恩恵を受け最高益を更新。平均年収1,093万円と金融業界トップ水準。
+          </div>
+          <div style="font-size:11px;color:var(--ink3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+            ✨ このサマリーはIR資料・有価証券報告書をもとにAIが生成しています（独自調査・推定値を含む）
+          </div>
+        </div>
+
+        <div class="section-title">🏢 <span>企業情報</span></div>
+        <div class="info-list">
+          <div class="info-row"><span class="info-key">正式名称</span><span class="info-val">株式会社三菱UFJフィナンシャル・グループ</span></div>
+          <div class="info-row"><span class="info-key">証券コード</span><span class="info-val">8306（東証プライム）</span></div>
+          <div class="info-row"><span class="info-key">業種</span><span class="info-val">銀行業・金融持株会社</span></div>
+          <div class="info-row"><span class="info-key">設立</span><span class="info-val">2001年4月2日</span></div>
+          <div class="info-row"><span class="info-key">本社</span><span class="info-val">東京都千代田区丸の内二丁目7番1号</span></div>
+          <div class="info-row"><span class="info-key">決算期</span><span class="info-val">3月31日</span></div>
+          <div class="info-row"><span class="info-key">主要ブランド</span><span class="info-val">三菱UFJ銀行 / 三菱UFJ信託 / MUFGカード</span></div>
+        </div>
+      </div>
+
+      <!-- 財務 -->
+      <div class="tab-content" id="tab-finance">
+        <div class="section-title">📈 <span>売上高推移（過去5期）</span></div>
+        <div class="chart-wrap">
+        <div class="chart-bars">
+          <div class="bar-group">
+            <div class="bar-val">13.2兆</div>
+            <div class="bar" style="height:61%;background:linear-gradient(180deg,rgba(168,85,247,0.5),rgba(168,85,247,0.2))"></div>
+            <div class="bar-label">2020</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-val">15.4兆</div>
+            <div class="bar" style="height:71%;background:linear-gradient(180deg,rgba(168,85,247,0.6),rgba(168,85,247,0.25))"></div>
+            <div class="bar-label">2021</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-val">17.8兆</div>
+            <div class="bar" style="height:82%;background:linear-gradient(180deg,rgba(168,85,247,0.7),rgba(168,85,247,0.3))"></div>
+            <div class="bar-label">2022</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-val">18.9兆</div>
+            <div class="bar" style="height:87%;background:linear-gradient(180deg,rgba(168,85,247,0.85),rgba(168,85,247,0.4))"></div>
+            <div class="bar-label">2023</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-val" style="color:var(--p1);font-weight:900">21.7兆</div>
+            <div class="bar" style="height:100%;background:linear-gradient(180deg,#A855F7,#7C3AED)"></div>
+            <div class="bar-label" style="color:var(--p1);font-weight:700">2024</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="section-title">💰 <span>年収・給与データ</span></div>
+        <div style="margin-bottom:20px">
+          <div class="salary-bar-row">
+            <span class="salary-label">平均年収</span>
+            <div class="salary-bar-bg"><div class="salary-bar-fill" style="width:83%"></div></div>
+            <span class="salary-val">1,093万円</span>
+          </div>
+          <div class="salary-bar-row">
+            <span class="salary-label">平均勤続年数</span>
+            <div class="salary-bar-bg"><div class="salary-bar-fill" style="width:55%"></div></div>
+            <span class="salary-val">13.1年</span>
+          </div>
+          <div class="salary-bar-row">
+            <span class="salary-label">平均年齢</span>
+            <div class="salary-bar-bg"><div class="salary-bar-fill" style="width:62%"></div></div>
+            <span class="salary-val">40.1歳</span>
+          </div>
+          <div class="salary-bar-row">
+            <span class="salary-label">女性管理職比率</span>
+            <div class="salary-bar-bg"><div class="salary-bar-fill" style="width:23%"></div></div>
+            <span class="salary-val">23.4%</span>
+          </div>
+        </div>
+
+        <!-- 株価グラフ（本番公開後に実装予定） -->
+        <div class="section-title" style="margin-top:24px">📉 <span>株価チャート（直近3ヶ月）</span></div>
+        <div id="stockChartWrap" style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+          <div style="font-size:28px;font-weight:900;font-family:'Space Grotesk',sans-serif;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent" id="stockPrice">¥ ---</div>
+          <div style="font-size:12px;color:var(--ink3)" id="stockChange">リアルタイム株価はVercel公開後に有効化予定</div>
+          <!-- ダミーチャートバー -->
+          <div style="display:flex;align-items:flex-end;gap:3px;height:50px;margin-top:8px;opacity:0.3">
+            <div style="width:8px;height:60%;background:var(--p1);border-radius:2px"></div>
+            <div style="width:8px;height:75%;background:var(--p1);border-radius:2px"></div>
+            <div style="width:8px;height:55%;background:var(--p1);border-radius:2px"></div>
+            <div style="width:8px;height:80%;background:var(--p1);border-radius:2px"></div>
+            <div style="width:8px;height:70%;background:var(--p1);border-radius:2px"></div>
+            <div style="width:8px;height:90%;background:var(--p2);border-radius:2px"></div>
+            <div style="width:8px;height:85%;background:var(--p2);border-radius:2px"></div>
+            <div style="width:8px;height:100%;background:var(--p2);border-radius:2px"></div>
+          </div>
+          <div style="font-size:11px;color:var(--ink3)">証券コード：9983｜東証プライム</div>
+        </div>
+
+        <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:14px;font-size:12px;color:var(--ink2);margin-top:16px">
+          📌 出典：EDINET 有価証券報告書 2025年3月期｜金融庁公式データ
+        </div>
+      </div>
+
+      <!-- 社風 -->
+      <div class="tab-content" id="tab-culture">
+        <div class="section-title">🎯 <span>社風スコア</span></div>
+        <div class="score-grid">
+          <div class="score-card">
+            <div class="score-title">グローバル志向</div>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:88%"></div></div>
+            <div class="score-labels"><span>国内</span><span class="score-num">88</span><span>グローバル</span></div>
+          </div>
+          <div class="score-card">
+            <div class="score-title">安定性</div>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:96%"></div></div>
+            <div class="score-labels"><span>不安定</span><span class="score-num">96</span><span>超安定</span></div>
+          </div>
+          <div class="score-card">
+            <div class="score-title">専門性・資格重視</div>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:90%"></div></div>
+            <div class="score-labels"><span>低い</span><span class="score-num">90</span><span>高い</span></div>
+          </div>
+          <div class="score-card">
+            <div class="score-title">成果主義</div>
+            <div class="score-bar-bg"><div class="score-bar-fill" style="width:70%"></div></div>
+            <div class="score-labels"><span>年功序列</span><span class="score-num">70</span><span>成果主義</span></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;padding:18px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:10px">
+          <div style="font-size:13px;font-weight:700;margin-bottom:10px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">💡 こんな人に向いている</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:2">
+            ・金融・経済のプロとしてキャリアを積みたい人<br>
+            ・グローバルな金融市場で働きたい人<br>
+            ・安定した大企業で長期キャリアを築きたい人<br>
+            ・資格を活かして専門性を高めたい人
+          </div>
+        </div>
+      </div>
+
+      <!-- ニュース -->
+      <div class="tab-content" id="tab-news">
+
+        <div class="news-filter">
+          <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
+          <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
+          <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
+        </div>
+
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">2025年3月期 純利益1.49兆円で過去最高益を更新</div>
+            <div class="news-meta"><span>📅 2025年5月</span><span>📰 日本経済新聞</span></div>
+            <div class="news-summary">日銀の利上げによる金利収入増加と海外事業の好調が重なり、純利益が過去最高を記録。国内外でのバランスのとれた収益基盤が評価された。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">業績</div></div>
+        </div>
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">米国子会社MUFGユニオンバンクの売却完了で資本効率が改善</div>
+            <div class="news-meta"><span>📅 2024年9月</span><span>📰 Bloomberg</span></div>
+            <div class="news-summary">米国の中堅銀行MUFGユニオンバンクの売却を完了し、資本を高収益事業に集中。アジア・新興国市場への再投資戦略が奏功している。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">戦略</div></div>
+        </div>
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">金利上昇局面で貸出金利収益が拡大、国内預金残高も増加</div>
+            <div class="news-meta"><span>📅 2025年2月</span><span>📰 東洋経済</span></div>
+            <div class="news-summary">日銀の利上げサイクルに伴い、国内貸出の金利収入が大幅増加。長年の低金利で圧迫されてきた銀行業の収益構造が改善に転じている。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">金利</div></div>
+        </div>
+        <div class="news-card" data-type="neg">
+          <span class="news-badge neg">ネガ</span>
+          <div class="news-content">
+            <div class="news-title">不正融資・コンプライアンス問題が一部グループ会社で発生</div>
+            <div class="news-meta"><span>📅 2024年10月</span><span>📰 各メディア</span></div>
+            <div class="news-summary">グループ証券会社における顧客情報の不正利用が発覚し、金融庁から業務改善命令を受けた。グループ全体のコンプライアンス体制の見直しが急務となっている。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val neg">↓ 要注意</div><div class="news-impact-label">ガバナンス</div></div>
+        </div>
+        <div class="news-card" data-type="neg">
+          <span class="news-badge neg">ネガ</span>
+          <div class="news-content">
+            <div class="news-title">国内市場の縮小と人口減少でリテール事業の成長に限界</div>
+            <div class="news-meta"><span>📅 2025年1月</span><span>📰 各メディア</span></div>
+            <div class="news-summary">日本の人口減少と高齢化に伴い、国内リテール（個人向け）銀行業務の成長余地が縮小。デジタルバンキングへの対応と海外展開のスピードが課題とされている。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val neg">↓ 注視</div><div class="news-impact-label">構造</div></div>
+        </div>
+        <div class="news-card" data-type="neg">
+          <span class="news-badge neg">ネガ</span>
+          <div class="news-content">
+            <div class="news-title">システム障害リスク、大規模IT投資の費用対効果が問われる</div>
+            <div class="news-meta"><span>📅 2024年11月</span><span>📰 ITmedia</span></div>
+            <div class="news-summary">老朽化した基幹システムの刷新に向け大規模投資が続く。システム統合の遅れや障害リスクは依然として経営課題であり、デジタル化投資の費用対効果への注目が高まっている。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val neg">↓ 課題</div><div class="news-impact-label">IT</div></div>
+        </div>
+      </div>
+
+    </div><!-- .card -->
+  </div>
+
+  <!-- SIDEBAR -->
+  <div>
+    <div class="sidebar-card">
+      <div class="sidebar-title">🚀 転職・就活サポート</div>
+      <button class="affil-btn">転職エージェントに相談（無料）</button>
+      <button class="affil-btn green">新卒向け就活サポート（無料）</button>
+      <div class="affil-note">※アフィリエイトリンクを含みます</div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">🏢 似たような企業</div>
+      <div class="similar-company">
+        <div class="sim-logo">SS</div>
+        <div class="sim-info"><div class="sim-name">株式会社しまむら</div><div class="sim-sub">アパレル・小売</div></div>
+      </div>
+      <div class="similar-company">
+        <div class="sim-logo">PL</div>
+        <div class="sim-info"><div class="sim-name">パル グループ</div><div class="sim-sub">アパレル・小売</div></div>
+      </div>
+      <div class="similar-company">
+        <div class="sim-logo">WN</div>
+        <div class="sim-info"><div class="sim-name">ワールド</div><div class="sim-sub">アパレル・製造小売</div></div>
+      </div>
+    </div>
+
+    <div class="sidebar-card" style="background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(236,72,153,0.08));border-color:rgba(168,85,247,0.2)">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🤖 AI社風診断</div>
+      <div style="font-size:12px;color:var(--ink3);margin-bottom:14px;line-height:1.7">20問に答えるだけで、あなたに合う企業TOP10がわかる！</div>
+      <a href="shindan.html" style="display:block;text-decoration:none">
+        <button class="btn-primary" style="width:100%;border-radius:10px">診断してみる（無料）</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(name, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+}
+function filterNews(type, el) {
+  document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.news-card').forEach(card => {
+    if (type === 'all' || card.dataset.type === type) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
