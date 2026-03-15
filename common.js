@@ -89,3 +89,73 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'Escape') { suggest.style.display = 'none'; input.value = ''; }
   });
 });
+
+/* ===== サイドバー（企業詳細ページ） ===== */
+(function() {
+  // top.htmlでは実行しない
+  if (location.pathname.endsWith('top.html') || location.pathname === '/') return;
+
+  // サイドバーHTML
+  const sidebarHTML = `
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="detail-sidebar" id="detailSidebar">
+  <div class="sb-btns">
+    <button class="sb-btn outline">ログイン</button>
+    <button class="sb-btn filled">無料登録</button>
+  </div>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">メニュー</div>
+  <a class="sb-item" href="top.html"><span class="sb-item-icon">🏠</span>企業一覧</a>
+  <a class="sb-item" href="shindan.html"><span class="sb-item-icon">🤖</span>AI適性診断</a>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">企業を探す</div>
+  <button class="sb-item" id="sbNavSearch"><span class="sb-item-icon">🔍</span>企業を検索</button>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">コンテンツ</div>
+  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">📰</span>最新ニュース</button>
+  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">⭐</span>お気に入り</button>
+</aside>`;
+
+  // navの直後に挿入
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  nav.insertAdjacentHTML('afterend', sidebarHTML);
+
+  // containerをflex化（サイドバー＋メイン）
+  const container = document.querySelector('.container');
+  if (container) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'detail-page-wrap';
+    container.parentNode.insertBefore(wrapper, container);
+    wrapper.appendChild(container);
+  }
+
+  // ハンバーガーをnaに追加
+  const hamburgerHTML = `<button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>`;
+  const navLogo = nav.querySelector('.nav-logo');
+  if (navLogo) navLogo.insertAdjacentHTML('beforebegin', hamburgerHTML);
+
+  // イベント
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('detailSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    hamburger?.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    overlay?.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+
+    // 企業を検索 → navSearchにフォーカス
+    document.getElementById('sbNavSearch')?.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+      const input = document.getElementById('navSearch');
+      if (input) { input.focus(); input.select(); }
+    });
+  });
+})();
