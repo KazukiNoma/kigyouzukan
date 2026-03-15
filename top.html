@@ -623,67 +623,52 @@
   .card-coming-text { font-size: 13px; color: var(--ink3); }
 
   @media (max-width: 768px) {
-    .container.grid-mode { grid-template-columns: 1fr; }
+    .container.grid-mode { grid-template-columns: 1fr; gap: 10px; padding: 0 12px 40px; }
     /* スマホ版グリッドカード：横長レイアウト */
     .container.grid-mode .company-card {
       display: grid !important;
-      grid-template-columns: 120px 1fr;
-      height: 120px;
+      grid-template-columns: 100px 1fr;
+      height: 100px;
       overflow: hidden;
+      border-radius: 14px;
     }
     .container.grid-mode .card-cover {
-      height: 120px;
-      border-radius: 16px 0 0 16px;
+      height: 100px;
+      border-radius: 14px 0 0 14px;
     }
     .container.grid-mode .card-body {
-      padding: 10px 12px;
+      padding: 10px 14px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 3px;
     }
-    .container.grid-mode .card-logo {
-      display: none;
-    }
+    .container.grid-mode .card-logo { display: none; }
     .container.grid-mode .card-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      margin-bottom: 2px;
-      white-space: nowrap;
+      line-height: 1.3;
       overflow: hidden;
-      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .container.grid-mode .card-sub {
       font-size: 10px;
-      margin-bottom: 4px;
+      color: var(--ink3);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .container.grid-mode .card-tags {
-      display: flex;
-      gap: 4px;
-      flex-wrap: nowrap;
-      overflow: hidden;
-      margin-bottom: 4px;
-    }
-    .container.grid-mode .card-tag {
-      font-size: 9px;
-      padding: 2px 6px;
-      white-space: nowrap;
-    }
+    .container.grid-mode .card-tags { display: none; }
     .container.grid-mode .card-stats {
       display: flex;
-      gap: 8px;
+      gap: 12px;
+      margin-top: 2px;
     }
-    .container.grid-mode .card-stat-val {
-      font-size: 11px;
-    }
-    .container.grid-mode .card-stat-label {
-      font-size: 9px;
-    }
-    .container.grid-mode .card-arrow {
-      display: none;
-    }
+    .container.grid-mode .card-stat-val { font-size: 12px; font-weight: 700; }
+    .container.grid-mode .card-stat-label { font-size: 9px; }
+    .container.grid-mode .card-arrow { display: none; }
     .hero-title { font-size: 32px; }
     .nav-search { display: none; }
     .hero-stats { gap: 24px; }
@@ -1029,7 +1014,7 @@
   <div class="hero-bg-glow"></div>
   <div id="companyCount" style="font-size:12px;color:var(--ink3);margin-bottom:6px;text-align:center"></div>
   <div class="hero-badge">✨ Z世代のための企業データベース</div>
-  <h1 class="hero-title"><span style="white-space:nowrap">就活・転職に使える</span><br><span>企業図鑑</span></h1>
+  <h1 class="hero-title"><span style="white-space:nowrap;background:none;-webkit-text-fill-color:var(--ink)">就活・転職に使える</span><br><span>企業図鑑</span></h1>
   <p class="hero-sub">財務データ・平均年収・社風スコアまで。気になる企業をリアルな数字で比較しよう。</p>
   <div class="hero-stats">
     <div>
@@ -2052,6 +2037,49 @@
       navLogo.style.cursor = 'pointer';
       navLogo.addEventListener('click', () => window.location.href = 'top.html');
     }
+
+    // ハンバーガーメニュー
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    if (overlay) overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+
+    // サイドバー：企業を検索
+    document.getElementById('sbSearch')?.addEventListener('click', () => {
+      sidebar.classList.remove('open'); overlay.classList.remove('open');
+      const input = document.getElementById('searchInput');
+      if (input) { input.scrollIntoView({ behavior:'smooth', block:'center' }); setTimeout(() => input.focus(), 400); }
+    });
+
+    // サイドバー：年収ランキング
+    document.getElementById('sbSalary')?.addEventListener('click', () => {
+      sidebar.classList.remove('open'); overlay.classList.remove('open');
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn').classList.add('active');
+      container.classList.add('grid-mode');
+      scrollWrap.style.display = 'none';
+      document.querySelectorAll('.company-card.grid-card').forEach(c => c.remove());
+      const half = Math.floor(scrollTrack.querySelectorAll('.company-card').length / 2);
+      const cards = [...scrollTrack.querySelectorAll('.company-card')].slice(0, half);
+      cards.sort((a, b) => {
+        const getSalary = c => parseFloat(([...c.querySelectorAll('.card-stats > div')]
+          .find(d => d.querySelector('.card-stat-label')?.textContent === '平均年収')
+          ?.querySelector('.card-stat-val')?.textContent || '0').replace(/[^0-9]/g, ''));
+        return getSalary(b) - getSalary(a);
+      }).forEach(card => {
+        const cl = card.cloneNode(true);
+        cl.classList.add('grid-card');
+        cl.addEventListener('click', () => window.location.href = cl.getAttribute('href'));
+        container.appendChild(cl);
+      });
+    });
 
 
   });
