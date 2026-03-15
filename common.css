@@ -744,10 +744,11 @@ body.has-detail-sidebar .sidebar-overlay ~ * {
 .detail-main {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 .detail-main .container {
-  max-width: none;
-  margin: 0;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 .sidebar-sep {
   border: none;
