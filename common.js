@@ -47,6 +47,13 @@ const COMPANIES = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
+  // ロゴクリックでトップへ
+  const logo = document.querySelector('.nav-logo');
+  if (logo) {
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', () => window.location.href = 'top.html');
+  }
+
   const input = document.getElementById('navSearch');
   const suggest = document.getElementById('navSuggest');
   if (!input || !suggest) return;
