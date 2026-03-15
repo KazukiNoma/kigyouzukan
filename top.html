@@ -286,6 +286,7 @@
   .scroll-track .company-card {
     width: 280px;
     flex-shrink: 0;
+    cursor: pointer;
   }
 
   /* グリッド表示（業界フィルター選択時） */
@@ -1700,40 +1701,93 @@
 </div>
 
 <script>
-  function updateCount() {
-    const total = document.querySelectorAll('.company-card').length;
-    const visible = [...document.querySelectorAll('.company-card')].filter(c => c.style.display !== 'none').length;
-    const el = document.getElementById('companyCount');
-    if (el) el.textContent = visible < total ? `${visible}社表示中 / 全${total}社掲載` : `全${total}社掲載中`;
-  }
-
-  // ===== スクロール ↔ グリッド切り替え =====
   const container = document.getElementById('cardContainer');
   const scrollTrack = document.getElementById('scrollTrack');
   const scrollWrap = document.getElementById('scrollWrap');
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
 
-  // 起動時: scroll-trackの中のカードを2倍複製（無限スクロール）
-  document.addEventListener('DOMContentLoaded', function() {
-    // heroカウント更新
+  function updateCount() {
+    const total = scrollTrack ? scrollTrack.querySelectorAll('.company-card').length / 2 : 0;
+    const el = document.getElementById('companyCount');
     const heroCount = document.getElementById('heroCompanyCount');
-    const allCards = scrollTrack.querySelectorAll('.company-card');
-    if (heroCount) {
-      heroCount.innerHTML = allCards.length + '<span style="font-size:16px;-webkit-text-fill-color:var(--ink3)">社</span>';
-    }
-    updateCount();
+    if (heroCount) heroCount.innerHTML = Math.round(total) + '<span style="font-size:16px;-webkit-text-fill-color:var(--ink3)">社</span>';
+    if (el) el.textContent = `全${Math.round(total)}社掲載中`;
+  }
 
-    // 無限スクロール用に複製
-    const clone = scrollTrack.innerHTML;
-    scrollTrack.innerHTML = clone + clone;
+  function getFilteredCards() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const activeFilter = document.querySelector('.filter-btn.active')?.textContent.trim() || 'すべて';
+    const allCards = [...scrollTrack.querySelectorAll('.company-card')];
+    const half = Math.floor(allCards.length / 2);
+    const firstHalf = allCards.slice(0, half);
 
-    // カードクリック
-    document.querySelectorAll('.company-card').forEach(card => {
-      card.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href) window.location.href = href;
-      });
+    return firstHalf.filter(card => {
+      const t = [
+        card.querySelector('.card-name')?.textContent || '',
+        card.querySelector('.card-sub')?.textContent || '',
+        card.querySelector('.card-tags')?.textContent || '',
+      ].join('').toLowerCase();
+
+      const matchQuery = query === '' || t.includes(query);
+      const matchFilter = activeFilter === 'すべて' ||
+        (activeFilter === 'アパレル'  && t.includes('アパレル')) ||
+        (activeFilter === '自動車'    && (t.includes('自動車') || t.includes('輸送'))) ||
+        (activeFilter === 'IT・テック' && (t.includes('通信') || t.includes('情報') || t.includes('itサービス') || t.includes('sier'))) ||
+        (activeFilter === '金融'      && (t.includes('銀行') || t.includes('証券') || t.includes('金融') || t.includes('メガバンク'))) ||
+        (activeFilter === '製造'      && (t.includes('電気機器') || t.includes('センサー') || t.includes('車載') || t.includes('ゲーム・音楽'))) ||
+        (activeFilter === '小売'      && (t.includes('小売') || t.includes('コンビニ') || t.includes('スーパー'))) ||
+        (activeFilter === '食品'      && (t.includes('食料') || t.includes('調味料') || t.includes('即席') || t.includes('カップヌードル'))) ||
+        (activeFilter === '商社'      && t.includes('総合商社')) ||
+        (activeFilter === '不動産'    && t.includes('不動産')) ||
+        (activeFilter === '医薬品'    && t.includes('医薬品'));
+
+      return matchQuery && matchFilter;
     });
-  });
+  }
+
+  function filterCards() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const activeFilter = document.querySelector('.filter-btn.active')?.textContent.trim() || 'すべて';
+    const isAll = activeFilter === 'すべて' && query === '';
+
+    // 既存グリッドカードを削除
+    document.querySelectorAll('.company-card.grid-card').forEach(c => c.remove());
+
+    if (isAll) {
+      // スクロールモード
+      container.classList.remove('grid-mode');
+      scrollWrap.style.display = '';
+    } else {
+      // グリッドモード
+      container.classList.add('grid-mode');
+      scrollWrap.style.display = 'none';
+
+      const filtered = getFilteredCards();
+      filtered.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add('grid-card');
+        clone.style.display = 'block';
+        clone.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const href = this.getAttribute('href');
+          if (href) window.location.href = href;
+        });
+        container.appendChild(clone);
+      });
+
+      // 結果なし表示
+      let noResult = document.getElementById('noResult');
+      if (!noResult) {
+        noResult = document.createElement('div');
+        noResult.id = 'noResult';
+        noResult.style.cssText = 'text-align:center;padding:60px;color:var(--ink3);font-size:15px;grid-column:1/-1';
+        container.appendChild(noResult);
+      }
+      noResult.style.display = filtered.length === 0 ? 'block' : 'none';
+      if (filtered.length === 0) noResult.textContent = '該当する企業が見つかりませんでした';
+    }
+  }
 
   // フィルターボタン
   document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1744,12 +1798,10 @@
     });
   });
 
-  const searchInput = document.getElementById('searchInput');
-  const searchClear = document.getElementById('searchClear');
-
+  // 検索窓
   if (searchInput) {
     searchInput.addEventListener('input', () => {
-      searchClear.style.display = searchInput.value ? 'block' : 'none';
+      if (searchClear) searchClear.style.display = searchInput.value ? 'block' : 'none';
       filterCards();
     });
   }
@@ -1761,78 +1813,27 @@
     });
   }
 
-  function filterCards() {
-    const query = (searchInput?.value || '').trim().toLowerCase();
-    const activeFilter = document.querySelector('.filter-btn.active')?.textContent.trim() || 'すべて';
-    const isAll = activeFilter === 'すべて' && query === '';
+  document.addEventListener('DOMContentLoaded', function() {
+    // 無限スクロール用に複製
+    const clone = scrollTrack.innerHTML;
+    scrollTrack.innerHTML = clone + clone;
 
-    if (isAll) {
-      // スクロールモード
-      container.classList.remove('grid-mode');
-      scrollWrap.style.display = '';
-      // グリッドカードを非表示
-      document.querySelectorAll('.company-card.grid-card').forEach(c => c.remove());
-    } else {
-      // グリッドモード
-      container.classList.add('grid-mode');
-      scrollWrap.style.display = 'none';
-
-      // グリッドモード用カードを取得（scroll-trackの前半のみ）
-      const allCards = [...scrollTrack.querySelectorAll('.company-card')];
-      const half = allCards.length / 2;
-      const firstHalf = allCards.slice(0, half);
-
-      // 既存グリッドカードを削除
-      document.querySelectorAll('.company-card.grid-card').forEach(c => c.remove());
-
-      // フィルタして追加
-      firstHalf.forEach(card => {
-        const t = [
-          card.querySelector('.card-name')?.textContent || '',
-          card.querySelector('.card-sub')?.textContent || '',
-          card.querySelector('.card-tags')?.textContent || '',
-        ].join('').toLowerCase();
-
-        const matchQuery = query === '' || t.includes(query);
-        const matchFilter = activeFilter === 'すべて' ||
-          (activeFilter === 'アパレル'  && t.includes('アパレル')) ||
-          (activeFilter === '自動車'    && (t.includes('自動車') || t.includes('輸送'))) ||
-          (activeFilter === 'IT・テック' && (t.includes('通信') || t.includes('情報') || t.includes('itサービス') || t.includes('sier'))) ||
-          (activeFilter === '金融'      && (t.includes('銀行') || t.includes('証券') || t.includes('金融') || t.includes('メガバンク'))) ||
-          (activeFilter === '製造'      && (t.includes('電気機器') || t.includes('センサー') || t.includes('車載') || t.includes('ゲーム・音楽'))) ||
-          (activeFilter === '小売'      && (t.includes('小売') || t.includes('コンビニ') || t.includes('スーパー'))) ||
-          (activeFilter === '食品'      && (t.includes('食料') || t.includes('調味料') || t.includes('即席') || t.includes('カップヌードル'))) ||
-          (activeFilter === '商社'      && t.includes('総合商社')) ||
-          (activeFilter === '不動産'    && t.includes('不動産')) ||
-          (activeFilter === '医薬品'    && t.includes('医薬品'));
-
-        if (matchQuery && matchFilter) {
-          const clone = card.cloneNode(true);
-          clone.classList.add('grid-card');
-          clone.style.display = 'block';
-          clone.addEventListener('click', function() {
-            const href = this.getAttribute('href');
-            if (href) window.location.href = href;
-          });
-          container.appendChild(clone);
-        }
-      });
-
-      // 結果なし
-      let noResult = document.getElementById('noResult');
-      if (!noResult) {
-        noResult = document.createElement('div');
-        noResult.id = 'noResult';
-        noResult.style.cssText = 'text-align:center;padding:60px;color:var(--ink3);font-size:15px;grid-column:1/-1';
-        container.appendChild(noResult);
-      }
-      const visible = document.querySelectorAll('.company-card.grid-card').length;
-      noResult.style.display = visible === 0 ? 'block' : 'none';
-      if (visible === 0) noResult.textContent = '該当する企業が見つかりませんでした';
-    }
     updateCount();
-  }
 
+    // ロゴクリック
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo) {
+      navLogo.style.cursor = 'pointer';
+      navLogo.addEventListener('click', () => window.location.href = 'top.html');
+    }
+  });
+
+  // カードクリック（アニメーション中でもhrefに飛ぶ）
+  document.addEventListener('click', function(e) {
+    const card = e.target.closest('a.company-card');
+    if (card) {
+      window.location.href = card.href;
+    }
   });
 </script>
 
