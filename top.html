@@ -242,26 +242,28 @@
     position: relative;
     overflow: hidden;
   }
+  .card-cover > * { pointer-events: none !important; }
   .card-cover-chart {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none !important;
     opacity: 0.55;
   }
+  .card-cover-chart * { pointer-events: none !important; }
   .card-cover-glow {
     position: absolute;
     width: 200px; height: 200px;
     border-radius: 50%;
     top: -80px; left: -40px;
-    pointer-events: none;
+    pointer-events: none !important;
   }
   .card-cover-glow2 {
     position: absolute;
     width: 140px; height: 140px;
     border-radius: 50%;
     top: -60px; right: -20px;
-    pointer-events: none;
+    pointer-events: none !important;
   }
   .card-stock-info {
     position: absolute;
@@ -671,7 +673,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgfirstretailing" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
@@ -721,7 +723,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgtoyota" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
@@ -777,7 +779,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgsoftbank" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
@@ -818,7 +820,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(6,182,212,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgnttdata" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
@@ -859,7 +861,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(239,68,68,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(245,158,11,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgfujitsu" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#EF4444" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
@@ -900,7 +902,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgmufg" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
@@ -933,7 +935,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.25) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgnomura" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
@@ -966,7 +968,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(6,182,212,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(99,102,241,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgsony" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
@@ -999,7 +1001,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(6,182,212,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgpanasonic" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
@@ -1032,7 +1034,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgkeyence" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
@@ -1065,7 +1067,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(16,185,129,0.35) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(6,182,212,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgaeon" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#10B981" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
@@ -1098,7 +1100,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgsi" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
@@ -1131,7 +1133,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(236,72,153,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(245,158,11,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgajinomoto" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#EC4899" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#EC4899" stop-opacity="0"/>
@@ -1164,7 +1166,7 @@
       <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.4) 0%,transparent 70%)"></div>
       <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
-      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="card-cover-chart" pointer-events="none" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="cgnissin" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
           <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
