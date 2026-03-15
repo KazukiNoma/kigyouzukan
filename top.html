@@ -106,7 +106,9 @@
   /* LAYOUT WITH SIDEBAR */
   .page-layout {
     display: flex;
+    align-items: flex-start;
     min-height: calc(100vh - 58px);
+    position: relative;
   }
 
   /* SIDEBAR */
@@ -121,6 +123,7 @@
     height: calc(100vh - 58px);
     overflow-y: auto;
     z-index: 50;
+    align-self: flex-start;
   }
   .sidebar-section {
     padding: 0 12px 20px;
@@ -197,7 +200,7 @@
   .sidebar-btn.filled:hover { opacity: 0.9; }
 
   /* メインコンテンツ */
-  .main-content { flex: 1; min-width: 0; }
+  .main-content { flex: 1; min-width: 0; overflow-x: hidden; width: 0; }
 
   /* ハンバーガーボタン（スマホ用） */
   .hamburger {
@@ -300,6 +303,8 @@
     max-width: 600px;
     margin: 0 auto 20px;
     padding: 0 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .search-bar-inner {
     display: flex;
@@ -384,6 +389,7 @@
     position: relative;
     padding: 16px 0 24px;
     cursor: pointer;
+    width: 100%;
   }
   .scroll-track-wrap::before,
   .scroll-track-wrap::after {
@@ -649,7 +655,7 @@
     border-top: 1px solid var(--border);
     overflow: hidden;
     position: relative;
-    z-index: 99;
+    z-index: 1;
     padding: 10px 0;
   }
   .ticker-wrap::before,
