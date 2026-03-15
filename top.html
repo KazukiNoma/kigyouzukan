@@ -232,17 +232,59 @@
     background: var(--grad);
     opacity: 0;
     transition: opacity 0.2s;
+    pointer-events: none;
   }
   .company-card:hover::before { opacity: 1; }
 
+  /* カードヒーローカバー */
   .card-cover {
-    height: 80px;
+    height: 110px;
     position: relative;
     overflow: hidden;
   }
+  .card-cover-chart {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .card-cover-glow {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    top: -80px; left: -40px;
+    pointer-events: none;
+  }
+  .card-cover-glow2 {
+    position: absolute;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    top: -60px; right: -20px;
+    pointer-events: none;
+  }
+  .card-stock-info {
+    position: absolute;
+    top: 10px; left: 14px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .card-stock-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 800;
+    color: #fff; letter-spacing: -0.5px; line-height: 1;
+  }
+  .card-stock-change {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 600; margin-top: 2px;
+  }
+  .card-stock-change.up { color: #34D399; }
+  .card-stock-change.down { color: #F87171; }
+
   .card-cover-grad {
     position: absolute;
     inset: 0;
+    pointer-events: none;
   }
   .card-cover-grid {
     position: absolute;
@@ -250,6 +292,7 @@
     background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 30px 30px;
+    pointer-events: none;
   }
 
   .card-body { padding: 0 16px 18px; }
@@ -444,64 +487,62 @@
   </div>
 </nav>
 
-
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track" id="tickerTrack">
-
-    <a class="ticker-item" href="firstretailing.html">
+    <a class="ticker-item" href="firstretailing.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)"><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span></div>
       <span class="ticker-name">ファーストリテイリング</span><span class="ticker-price">¥50,280</span><span class="ticker-change up">▲ +2.14%</span>
     </a>
-    <a class="ticker-item" href="toyota.html">
+    <a class="ticker-item" href="toyota.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)"><span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span></div>
       <span class="ticker-name">トヨタ自動車</span><span class="ticker-price">¥3,421</span><span class="ticker-change down">▼ -0.87%</span>
     </a>
-    <a class="ticker-item" href="softbank.html">
+    <a class="ticker-item" href="softbank.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SB</span></div>
       <span class="ticker-name">ソフトバンク</span><span class="ticker-price">¥2,156</span><span class="ticker-change up">▲ +1.13%</span>
     </a>
-    <a class="ticker-item" href="nttdata.html">
+    <a class="ticker-item" href="nttdata.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1a3e,#1a2a4e)"><span style="background:linear-gradient(135deg,#6366F1,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ND</span></div>
       <span class="ticker-name">NTTデータG</span><span class="ticker-price">¥2,847</span><span class="ticker-change up">▲ +1.10%</span>
     </a>
-    <a class="ticker-item" href="fujitsu.html">
+    <a class="ticker-item" href="fujitsu.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e1a3e)"><span style="background:linear-gradient(135deg,#EF4444,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FJ</span></div>
       <span class="ticker-name">富士通</span><span class="ticker-price">¥3,124</span><span class="ticker-change up">▲ +1.36%</span>
     </a>
-    <a class="ticker-item" href="mufg.html">
+    <a class="ticker-item" href="mufg.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1428,#1a2440)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MU</span></div>
       <span class="ticker-name">三菱UFJ</span><span class="ticker-price">¥1,842</span><span class="ticker-change up">▲ +0.99%</span>
     </a>
-    <a class="ticker-item" href="nomura.html">
+    <a class="ticker-item" href="nomura.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1a08)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NM</span></div>
       <span class="ticker-name">野村HD</span><span class="ticker-price">¥812</span><span class="ticker-change down">▼ -0.42%</span>
     </a>
-    <a class="ticker-item" href="sony.html">
+    <a class="ticker-item" href="sony.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2e)"><span style="background:linear-gradient(135deg,#06B6D4,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SN</span></div>
       <span class="ticker-name">ソニーG</span><span class="ticker-price">¥2,450</span><span class="ticker-change up">▲ +1.16%</span>
     </a>
-    <a class="ticker-item" href="panasonic.html">
+    <a class="ticker-item" href="panasonic.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#06B6D4,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PN</span></div>
       <span class="ticker-name">パナソニックHD</span><span class="ticker-price">¥1,284</span><span class="ticker-change down">▼ -0.31%</span>
     </a>
-    <a class="ticker-item" href="keyence.html">
+    <a class="ticker-item" href="keyence.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#2a1a3e)"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">KV</span></div>
       <span class="ticker-name">キーエンス</span><span class="ticker-price">¥67,800</span><span class="ticker-change up">▲ +0.80%</span>
     </a>
-    <a class="ticker-item" href="aeon.html">
+    <a class="ticker-item" href="aeon.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#10B981,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AE</span></div>
       <span class="ticker-name">イオン</span><span class="ticker-price">¥3,128</span><span class="ticker-change up">▲ +0.71%</span>
     </a>
-    <a class="ticker-item" href="7i.html">
+    <a class="ticker-item" href="7i.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">7i</span></div>
       <span class="ticker-name">セブン&アイ</span><span class="ticker-price">¥2,186</span><span class="ticker-change down">▼ -0.54%</span>
     </a>
-    <a class="ticker-item" href="ajinomoto.html">
+    <a class="ticker-item" href="ajinomoto.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e0a1a)"><span style="background:linear-gradient(135deg,#EC4899,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AJ</span></div>
       <span class="ticker-name">味の素</span><span class="ticker-price">¥4,840</span><span class="ticker-change up">▲ +1.00%</span>
     </a>
-    <a class="ticker-item" href="nissin.html">
+    <a class="ticker-item" href="nissin.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1e,#1a1430)"><span style="background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NS</span></div>
       <span class="ticker-name">日清食品HD</span><span class="ticker-price">¥4,218</span><span class="ticker-change up">▲ +0.91%</span>
     </a>
@@ -515,60 +556,59 @@
       <span class="ticker-divider">🏦</span><span class="ticker-name">TOPIX</span><span class="ticker-price">2,684</span><span class="ticker-change up">▲ +0.41%</span>
     </div>
 
-    
-    <a class="ticker-item" href="firstretailing.html">
+    <a class="ticker-item" href="firstretailing.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)"><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span></div>
       <span class="ticker-name">ファーストリテイリング</span><span class="ticker-price">¥50,280</span><span class="ticker-change up">▲ +2.14%</span>
     </a>
-    <a class="ticker-item" href="toyota.html">
+    <a class="ticker-item" href="toyota.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)"><span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span></div>
       <span class="ticker-name">トヨタ自動車</span><span class="ticker-price">¥3,421</span><span class="ticker-change down">▼ -0.87%</span>
     </a>
-    <a class="ticker-item" href="softbank.html">
+    <a class="ticker-item" href="softbank.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SB</span></div>
       <span class="ticker-name">ソフトバンク</span><span class="ticker-price">¥2,156</span><span class="ticker-change up">▲ +1.13%</span>
     </a>
-    <a class="ticker-item" href="nttdata.html">
+    <a class="ticker-item" href="nttdata.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1a3e,#1a2a4e)"><span style="background:linear-gradient(135deg,#6366F1,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ND</span></div>
       <span class="ticker-name">NTTデータG</span><span class="ticker-price">¥2,847</span><span class="ticker-change up">▲ +1.10%</span>
     </a>
-    <a class="ticker-item" href="fujitsu.html">
+    <a class="ticker-item" href="fujitsu.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e1a3e)"><span style="background:linear-gradient(135deg,#EF4444,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FJ</span></div>
       <span class="ticker-name">富士通</span><span class="ticker-price">¥3,124</span><span class="ticker-change up">▲ +1.36%</span>
     </a>
-    <a class="ticker-item" href="mufg.html">
+    <a class="ticker-item" href="mufg.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1428,#1a2440)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MU</span></div>
       <span class="ticker-name">三菱UFJ</span><span class="ticker-price">¥1,842</span><span class="ticker-change up">▲ +0.99%</span>
     </a>
-    <a class="ticker-item" href="nomura.html">
+    <a class="ticker-item" href="nomura.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1a08)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NM</span></div>
       <span class="ticker-name">野村HD</span><span class="ticker-price">¥812</span><span class="ticker-change down">▼ -0.42%</span>
     </a>
-    <a class="ticker-item" href="sony.html">
+    <a class="ticker-item" href="sony.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2e)"><span style="background:linear-gradient(135deg,#06B6D4,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SN</span></div>
       <span class="ticker-name">ソニーG</span><span class="ticker-price">¥2,450</span><span class="ticker-change up">▲ +1.16%</span>
     </a>
-    <a class="ticker-item" href="panasonic.html">
+    <a class="ticker-item" href="panasonic.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#06B6D4,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PN</span></div>
       <span class="ticker-name">パナソニックHD</span><span class="ticker-price">¥1,284</span><span class="ticker-change down">▼ -0.31%</span>
     </a>
-    <a class="ticker-item" href="keyence.html">
+    <a class="ticker-item" href="keyence.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#2a1a3e)"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">KV</span></div>
       <span class="ticker-name">キーエンス</span><span class="ticker-price">¥67,800</span><span class="ticker-change up">▲ +0.80%</span>
     </a>
-    <a class="ticker-item" href="aeon.html">
+    <a class="ticker-item" href="aeon.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#10B981,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AE</span></div>
       <span class="ticker-name">イオン</span><span class="ticker-price">¥3,128</span><span class="ticker-change up">▲ +0.71%</span>
     </a>
-    <a class="ticker-item" href="7i.html">
+    <a class="ticker-item" href="7i.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">7i</span></div>
       <span class="ticker-name">セブン&アイ</span><span class="ticker-price">¥2,186</span><span class="ticker-change down">▼ -0.54%</span>
     </a>
-    <a class="ticker-item" href="ajinomoto.html">
+    <a class="ticker-item" href="ajinomoto.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e0a1a)"><span style="background:linear-gradient(135deg,#EC4899,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AJ</span></div>
       <span class="ticker-name">味の素</span><span class="ticker-price">¥4,840</span><span class="ticker-change up">▲ +1.00%</span>
     </a>
-    <a class="ticker-item" href="nissin.html">
+    <a class="ticker-item" href="nissin.html" style="text-decoration:none;color:inherit">
       <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1e,#1a1430)"><span style="background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NS</span></div>
       <span class="ticker-name">日清食品HD</span><span class="ticker-price">¥4,218</span><span class="ticker-change up">▲ +0.91%</span>
     </a>
@@ -581,13 +621,14 @@
     <div class="ticker-item">
       <span class="ticker-divider">🏦</span><span class="ticker-name">TOPIX</span><span class="ticker-price">2,684</span><span class="ticker-change up">▲ +0.41%</span>
     </div>
-
   </div>
+</div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg-glow"></div>
+  <div id="companyCount" style="font-size:12px;color:var(--ink3);margin-bottom:6px;text-align:center"></div>
   <div class="hero-badge">✨ Z世代のための企業データベース</div>
   <h1 class="hero-title">就活・転職に使える<br><span>企業図鑑</span></h1>
   <p class="hero-sub">財務データ・平均年収・社風スコアまで。気になる企業をリアルな数字で比較しよう。</p>
@@ -611,10 +652,13 @@
 <div class="filter-bar">
   <span class="filter-label">業界：</span>
   <button class="filter-btn active">すべて</button>
-  <button class="filter-btn">自動車</button>
   <button class="filter-btn">アパレル</button>
+  <button class="filter-btn">自動車</button>
   <button class="filter-btn">IT・テック</button>
   <button class="filter-btn">金融</button>
+  <button class="filter-btn">製造</button>
+  <button class="filter-btn">小売</button>
+  <button class="filter-btn">食品</button>
 </div>
 
 <!-- COMPANY GRID -->
@@ -623,8 +667,22 @@
   <!-- ファーストリテイリング -->
   <a class="company-card" href="firstretailing.html">
     <div class="card-cover">
-      <div class="card-cover-grad" style="background: linear-gradient(135deg, #1a0533 0%, #2d1060 50%, #0d2818 100%)"></div>
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#1a0533 0%,#2d1060 40%,#0d2818 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgfirstretailing" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,80 C10,72 20,65 30,55 C40,45 50,48 60,38 C70,28 75,30 80,18 L80,110 L0,110 Z" fill="url(#cgfirstretailing)"/>
+        <path d="M0,80 C10,72 20,65 30,55 C40,45 50,48 60,38 C70,28 75,30 80,18" fill="none" stroke="#A855F7" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥50,280</div>
+        <div class="card-stock-change up">▲ +2.14%</div>
+      </div>
     </div>
     <div class="card-body">
       <div class="card-logo" style="background: linear-gradient(135deg, #1E1E2E, #2A1A3E); color: transparent; background-clip: text; -webkit-background-clip: text;">
@@ -659,8 +717,22 @@
   <!-- トヨタ自動車 -->
   <a class="company-card" href="toyota.html">
     <div class="card-cover">
-      <div class="card-cover-grad" style="background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 50%, #0d1f0d 100%)"></div>
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#0a1628 0%,#1a2a4a 40%,#0d1f0d 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgtoyota" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,20 C10,25 20,30 30,40 C40,50 50,45 60,55 C70,65 75,60 80,75 L80,110 L0,110 Z" fill="url(#cgtoyota)"/>
+        <path d="M0,20 C10,25 20,30 30,40 C40,50 50,45 60,55 C70,65 75,60 80,75" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥3,421</div>
+        <div class="card-stock-change down">▼ -0.87%</div>
+      </div>
     </div>
     <div class="card-body">
       <div class="card-logo" style="background: linear-gradient(135deg, #1E2A3E, #1A2A1E);">
@@ -676,7 +748,7 @@
       </div>
       <div class="card-stats">
         <div>
-          <div class="card-stat-val">45.1兆円</div>
+          <div class="card-stat-val">48.0兆円</div>
           <div class="card-stat-label">売上高</div>
         </div>
         <div>
@@ -698,12 +770,25 @@
     <div class="card-coming-text">企業追加予定</div>
   </div>
 
-
   <!-- ソフトバンク -->
   <a class="company-card" href="softbank.html">
     <div class="card-cover">
-      <div class="card-cover-grad" style="background:linear-gradient(135deg,#1a1a0a 0%,#2a2a10 50%,#0a0a1a 100%)"></div>
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#1a1a0a 0%,#2a2a10 40%,#0a0a1a 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgsoftbank" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,75 C10,68 20,60 30,52 C40,44 50,47 60,38 C70,29 75,32 80,22 L80,110 L0,110 Z" fill="url(#cgsoftbank)"/>
+        <path d="M0,75 C10,68 20,60 30,52 C40,44 50,47 60,38 C70,29 75,32 80,22" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥2,156</div>
+        <div class="card-stock-change up">▲ +1.13%</div>
+      </div>
     </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
@@ -729,8 +814,22 @@
   <!-- NTTデータ -->
   <a class="company-card" href="nttdata.html">
     <div class="card-cover">
-      <div class="card-cover-grad" style="background:linear-gradient(135deg,#050a1a 0%,#0a1428 50%,#020814 100%)"></div>
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#050a1a 0%,#0a1428 40%,#020814 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(6,182,212,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgnttdata" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,78 C10,70 20,62 30,54 C40,46 50,50 60,40 C70,30 75,33 80,20 L80,110 L0,110 Z" fill="url(#cgnttdata)"/>
+        <path d="M0,78 C10,70 20,62 30,54 C40,46 50,50 60,40 C70,30 75,33 80,20" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥2,847</div>
+        <div class="card-stock-change up">▲ +1.10%</div>
+      </div>
     </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#0a1a3e,#1a2a4e)">
@@ -756,8 +855,22 @@
   <!-- 富士通 -->
   <a class="company-card" href="fujitsu.html">
     <div class="card-cover">
-      <div class="card-cover-grad" style="background:linear-gradient(135deg,#1a0505 0%,#2a1010 50%,#050510 100%)"></div>
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#1a0505 0%,#2a1010 40%,#050510 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(239,68,68,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(245,158,11,0.3) 0%,transparent 70%)"></div>
       <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgfujitsu" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#EF4444" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,72 C10,65 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16 L80,110 L0,110 Z" fill="url(#cgfujitsu)"/>
+        <path d="M0,72 C10,65 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥3,124</div>
+        <div class="card-stock-change up">▲ +1.36%</div>
+      </div>
     </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e1a3e)">
@@ -782,7 +895,24 @@
 
   <!-- 三菱UFJ -->
   <a class="company-card" href="mufg.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#080c14 0%,#10182a 50%,#040810 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#080c14 0%,#10182a 40%,#040810 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgmufg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,80 C10,72 20,64 30,56 C40,48 50,52 60,42 C70,32 75,35 80,22 L80,110 L0,110 Z" fill="url(#cgmufg)"/>
+        <path d="M0,80 C10,72 20,64 30,56 C40,48 50,52 60,42 C70,32 75,35 80,22" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥1,842</div>
+        <div class="card-stock-change up">▲ +0.99%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#0a1428,#1a2440)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MU</span></div>
       <div class="card-name">三菱UFJフィナンシャル・グループ</div>
@@ -798,7 +928,24 @@
 
   <!-- 野村HD -->
   <a class="company-card" href="nomura.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#140800 0%,#201000 50%,#0c0800 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#140800 0%,#201000 40%,#0c0800 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.25) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgnomura" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,18 C10,24 20,30 30,38 C40,48 50,43 60,52 C70,62 75,58 80,72 L80,110 L0,110 Z" fill="url(#cgnomura)"/>
+        <path d="M0,18 C10,24 20,30 30,38 C40,48 50,43 60,52 C70,62 75,58 80,72" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥812</div>
+        <div class="card-stock-change down">▼ -0.42%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NM</span></div>
       <div class="card-name">野村ホールディングス株式会社</div>
@@ -814,7 +961,24 @@
 
   <!-- ソニー -->
   <a class="company-card" href="sony.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#050510 0%,#0a0a20 50%,#030310 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#050510 0%,#0a0a20 40%,#030310 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(6,182,212,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(99,102,241,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgsony" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,76 C10,68 20,60 30,52 C40,44 50,48 60,38 C70,28 75,31 80,18 L80,110 L0,110 Z" fill="url(#cgsony)"/>
+        <path d="M0,76 C10,68 20,60 30,52 C40,44 50,48 60,38 C70,28 75,31 80,18" fill="none" stroke="#06B6D4" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥2,450</div>
+        <div class="card-stock-change up">▲ +1.16%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2e)"><span style="background:linear-gradient(135deg,#06B6D4,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SN</span></div>
       <div class="card-name">ソニーグループ株式会社</div>
@@ -830,7 +994,24 @@
 
   <!-- パナソニック -->
   <a class="company-card" href="panasonic.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#000a14 0%,#001020 50%,#000810 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#000a14 0%,#001020 40%,#000810 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(6,182,212,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgpanasonic" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,22 C10,28 20,34 30,42 C40,52 50,47 60,56 C70,66 75,62 80,74 L80,110 L0,110 Z" fill="url(#cgpanasonic)"/>
+        <path d="M0,22 C10,28 20,34 30,42 C40,52 50,47 60,56 C70,66 75,62 80,74" fill="none" stroke="#06B6D4" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥1,284</div>
+        <div class="card-stock-change down">▼ -0.31%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#06B6D4,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PN</span></div>
       <div class="card-name">パナソニックホールディングス株式会社</div>
@@ -846,7 +1027,24 @@
 
   <!-- キーエンス -->
   <a class="company-card" href="keyence.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#0a0a1a 0%,#14082e 50%,#080810 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#0a0a1a 0%,#14082e 40%,#080810 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgkeyence" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,74 C10,66 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16 L80,110 L0,110 Z" fill="url(#cgkeyence)"/>
+        <path d="M0,74 C10,66 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16" fill="none" stroke="#A855F7" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥67,800</div>
+        <div class="card-stock-change up">▲ +0.80%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a1a2e,#2a1a3e)"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">KV</span></div>
       <div class="card-name">株式会社キーエンス</div>
@@ -862,7 +1060,24 @@
 
   <!-- イオン -->
   <a class="company-card" href="aeon.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#001408 0%,#002010 50%,#000c08 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#001408 0%,#002010 40%,#000c08 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(16,185,129,0.35) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(6,182,212,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgaeon" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10B981" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,78 C10,70 20,62 30,54 C40,46 50,50 60,40 C70,30 75,33 80,20 L80,110 L0,110 Z" fill="url(#cgaeon)"/>
+        <path d="M0,78 C10,70 20,62 30,54 C40,46 50,50 60,40 C70,30 75,33 80,20" fill="none" stroke="#10B981" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥3,128</div>
+        <div class="card-stock-change up">▲ +0.71%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#10B981,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AE</span></div>
       <div class="card-name">イオン株式会社</div>
@@ -878,7 +1093,24 @@
 
   <!-- セブン&アイ -->
   <a class="company-card" href="7i.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#140800 0%,#201000 50%,#0c0800 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#140800 0%,#201000 40%,#0c0800 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(245,158,11,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgsi" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,20 C10,26 20,32 30,40 C40,50 50,45 60,54 C70,64 75,60 80,74 L80,110 L0,110 Z" fill="url(#cgsi)"/>
+        <path d="M0,20 C10,26 20,32 30,40 C40,50 50,45 60,54 C70,64 75,60 80,74" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥2,186</div>
+        <div class="card-stock-change down">▼ -0.54%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">7i</span></div>
       <div class="card-name">セブン&アイ・ホールディングス</div>
@@ -894,7 +1126,24 @@
 
   <!-- 味の素 -->
   <a class="company-card" href="ajinomoto.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#140008 0%,#200010 50%,#0c0008 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#140008 0%,#200010 40%,#0c0008 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(236,72,153,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(245,158,11,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgajinomoto" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#EC4899" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#EC4899" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,76 C10,68 20,60 30,52 C40,44 50,48 60,38 C70,28 75,31 80,18 L80,110 L0,110 Z" fill="url(#cgajinomoto)"/>
+        <path d="M0,76 C10,68 20,60 30,52 C40,44 50,48 60,38 C70,28 75,31 80,18" fill="none" stroke="#EC4899" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥4,840</div>
+        <div class="card-stock-change up">▲ +1.00%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e0a1a)"><span style="background:linear-gradient(135deg,#EC4899,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AJ</span></div>
       <div class="card-name">味の素株式会社</div>
@@ -910,7 +1159,24 @@
 
   <!-- 日清食品 -->
   <a class="company-card" href="nissin.html">
-    <div class="card-cover"><div class="card-cover-grad" style="background:linear-gradient(135deg,#050510 0%,#0a0820 50%,#050310 100%)"></div><div class="card-cover-grid"></div></div>
+    <div class="card-cover">
+      <div class="card-cover-grad" style="background:linear-gradient(135deg,#050510 0%,#0a0820 40%,#050310 100%)"></div>
+      <div class="card-cover-glow" style="background:radial-gradient(circle,rgba(99,102,241,0.4) 0%,transparent 70%)"></div>
+      <div class="card-cover-glow2" style="background:radial-gradient(circle,rgba(236,72,153,0.3) 0%,transparent 70%)"></div>
+      <div class="card-cover-grid"></div>
+      <svg class="card-cover-chart" viewBox="0 0 80 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="cgnissin" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6366F1" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path d="M0,74 C10,66 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16 L80,110 L0,110 Z" fill="url(#cgnissin)"/>
+        <path d="M0,74 C10,66 20,58 30,50 C40,42 50,46 60,36 C70,26 75,29 80,16" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+      </svg>
+      <div class="card-stock-info">
+        <div class="card-stock-price">¥4,218</div>
+        <div class="card-stock-change up">▲ +0.91%</div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="card-logo" style="background:linear-gradient(135deg,#0a0a1e,#1a1430)"><span style="background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NS</span></div>
       <div class="card-name">日清食品ホールディングス株式会社</div>
@@ -926,6 +1192,16 @@
 </div>
 
 <script>
+  // 企業数カウント
+  function updateCount() {
+    const total = document.querySelectorAll('.company-card').length;
+    const visible = [...document.querySelectorAll('.company-card')].filter(c => c.style.display !== 'none').length;
+    const el = document.getElementById('companyCount');
+    if (el) el.textContent = visible < total ? `${visible}社表示中 / 全${total}社掲載` : `全${total}社掲載中`;
+  }
+  updateCount();
+
+  // フィルターボタン
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -934,6 +1210,7 @@
     });
   });
 
+  // 検索
   const searchInput = document.getElementById('searchInput');
   if (searchInput) searchInput.addEventListener('input', filterCards);
 
@@ -943,20 +1220,21 @@
     const cards = document.querySelectorAll('.company-card');
 
     cards.forEach(card => {
-      const text = (card.querySelector('.card-name')?.textContent || '') +
-                   (card.querySelector('.card-sub')?.textContent || '') +
-                   (card.querySelector('.card-tags')?.textContent || '');
-      const t = text.toLowerCase();
+      const t = [
+        card.querySelector('.card-name')?.textContent || '',
+        card.querySelector('.card-sub')?.textContent || '',
+        card.querySelector('.card-tags')?.textContent || '',
+      ].join('').toLowerCase();
 
       const matchQuery = query === '' || t.includes(query);
       const matchFilter = activeFilter === 'すべて' ||
-        (activeFilter === 'IT・通信' && (t.includes('通信') || t.includes('情報') || t.includes('sier') || t.includes('ソフトバンク') || t.includes('ntt') || t.includes('富士通'))) ||
-        (activeFilter === '自動車' && (t.includes('自動車') || t.includes('輸送'))) ||
-        (activeFilter === 'アパレル' && t.includes('アパレル')) ||
-        (activeFilter === '金融' && (t.includes('銀行') || t.includes('証券') || t.includes('金融'))) ||
-        (activeFilter === '製造' && (t.includes('電気機器') || t.includes('製造') || t.includes('センサー'))) ||
-        (activeFilter === '小売' && (t.includes('小売') || t.includes('コンビニ'))) ||
-        (activeFilter === '食品' && (t.includes('食料') || t.includes('食品') || t.includes('調味料')));
+        (activeFilter === 'アパレル'  && t.includes('アパレル')) ||
+        (activeFilter === '自動車'    && (t.includes('自動車') || t.includes('輸送'))) ||
+        (activeFilter === 'IT・テック' && (t.includes('通信') || t.includes('情報') || t.includes('itサービス') || t.includes('sier'))) ||
+        (activeFilter === '金融'      && (t.includes('銀行') || t.includes('証券') || t.includes('金融') || t.includes('メガバンク'))) ||
+        (activeFilter === '製造'      && (t.includes('電気機器') || t.includes('センサー') || t.includes('車載') || t.includes('ゲーム・音楽'))) ||
+        (activeFilter === '小売'      && (t.includes('小売') || t.includes('コンビニ') || t.includes('スーパー'))) ||
+        (activeFilter === '食品'      && (t.includes('食料') || t.includes('調味料') || t.includes('即席') || t.includes('カップヌードル')));
 
       card.style.display = (matchQuery && matchFilter) ? 'block' : 'none';
     });
@@ -966,11 +1244,12 @@
     if (!noResult) {
       noResult = document.createElement('div');
       noResult.id = 'noResult';
-      noResult.style.cssText = 'text-align:center;padding:60px 20px;color:var(--ink3);font-size:15px;display:none;grid-column:1/-1';
-      noResult.textContent = '該当する企業が見つかりませんでした';
+      noResult.style.cssText = 'text-align:center;padding:60px;color:var(--ink3);font-size:15px;grid-column:1/-1';
       document.querySelector('.container').appendChild(noResult);
     }
     noResult.style.display = visible === 0 ? 'block' : 'none';
+    if (visible === 0) noResult.textContent = '該当する企業が見つかりませんでした';
+    updateCount();
   }
 </script>
 </body>
