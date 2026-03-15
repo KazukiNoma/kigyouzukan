@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>パナソニック｜企業図鑑</title>
@@ -290,8 +295,17 @@
           <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
           <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
           <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
-        </div>
+        <
 
+        <div class="news-card" data-type="neg">
+          <span class="news-badge neg">ネガ</span>
+          <div class="news-content">
+            <div class="news-title">2026年3月期 中間決算で減収減益、構造改革コストが重荷</div>
+            <div class="news-meta"><span>📅 2025年11月</span><span>📰 日本経済新聞</span></div>
+            <div class="news-summary">2026年3月期中間決算は売上高が前年同期比9.7%減の減収減益となった。構造改革費用の計上と家電・テレビ事業の不振が響いた。BtoB転換の効果が出るのは来期以降との見方。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val neg">↓ 要注意</div><div class="news-impact-label">業績</div></div>
+        </div>
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
@@ -306,18 +320,9 @@
           <div class="news-content">
             <div class="news-title">BtoB事業への集中戦略が奏功、空質空調・FA分野で受注拡大</div>
             <div class="news-meta"><span>📅 2024年11月</span><span>📰 東洋経済</span></div>
-            <div class="news-summary">家電から法人向け事業（空調・FA・冷凍冷蔵）への重点シフトが進み、利益率が改善。製造業向けDXソリューション事業も成長している。</div>
+            <div class="news-summary">家電から法人向け事業への重点シフトが進み、利益率が改善。製造業向けDXソリューション事業も成長している。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">BtoB</div></div>
-        </div>
-        <div class="news-card" data-type="pos">
-          <span class="news-badge pos">ポジ</span>
-          <div class="news-content">
-            <div class="news-title">ホールディングス体制移行から2年、事業会社の自律経営が定着</div>
-            <div class="news-meta"><span>📅 2024年9月</span><span>📰 各メディア</span></div>
-            <div class="news-summary">持株会社制移行後、各事業会社の意思決定スピードが改善。事業ポートフォリオの最適化と資本効率の向上が進んでいる。</div>
-          </div>
-          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">経営</div></div>
         </div>
         <div class="news-card" data-type="neg">
           <span class="news-badge neg">ネガ</span>
@@ -341,11 +346,12 @@
           <span class="news-badge neg">ネガ</span>
           <div class="news-content">
             <div class="news-title">平均年齢43歳超、人材の若返りと組織変革のスピードが課題</div>
-            <div class="news-meta"><span>📅 2025年2月</span><span>📰 各メディア</span></div>
+            <div class="news-meta"><span>📅 2024年11月</span><span>📰 各メディア</span></div>
             <div class="news-summary">日本の大手製造業共通の課題として、組織の高齢化と変革スピードの遅さが指摘されている。デジタル人材の確保と若手育成が急務となっている。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 課題</div><div class="news-impact-label">組織</div></div>
         </div>
+
       </div>
 
     </div><!-- .card -->

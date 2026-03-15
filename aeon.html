@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>イオン｜企業図鑑</title>
@@ -290,8 +295,17 @@
           <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
           <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
           <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
-        </div>
+        <
 
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">流通大手と商品データ統一システムを2026年度に導入、DX推進</div>
+            <div class="news-meta"><span>📅 2026年1月</span><span>📰 日本経済新聞</span></div>
+            <div class="news-summary">イオンを含む製配販大手約30社が2026年度に統一商品情報システムを導入予定。流通の作業負担を3割削減できる見込みで、人手不足対策として業界全体の効率化を推進。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">DX</div></div>
+        </div>
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
@@ -309,15 +323,6 @@
             <div class="news-summary">ベトナム・カンボジアなどASEAN市場での成長が著しく、アジア事業の売上比率が上昇傾向。中間層の拡大を取り込んだ戦略が奏功している。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">海外</div></div>
-        </div>
-        <div class="news-card" data-type="pos">
-          <span class="news-badge pos">ポジ</span>
-          <div class="news-content">
-            <div class="news-title">イオンペイなどデジタル決済・金融サービスの会員数が増加</div>
-            <div class="news-meta"><span>📅 2024年10月</span><span>📰 各メディア</span></div>
-            <div class="news-summary">イオンカード会員数が3,000万件を超え、金融・デジタルサービスの収益が安定成長。小売とフィンテックの融合でリテールエコシステムを構築している。</div>
-          </div>
-          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">デジタル</div></div>
         </div>
         <div class="news-card" data-type="neg">
           <span class="news-badge neg">ネガ</span>
@@ -346,6 +351,7 @@
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 課題</div><div class="news-impact-label">ガバナンス</div></div>
         </div>
+
       </div>
 
     </div><!-- .card -->

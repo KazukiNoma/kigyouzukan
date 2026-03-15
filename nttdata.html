@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NTTデータ｜企業図鑑</title>
@@ -290,14 +295,14 @@
           <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
           <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
           <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
-        </div>
+        <
 
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
-            <div class="news-title">2025年3月期 売上高・営業利益ともに過去最高を更新</div>
-            <div class="news-meta"><span>📅 2025年5月</span><span>📰 日本経済新聞</span></div>
-            <div class="news-summary">売上高4.9兆円（前期比+6.0%）、営業利益3,940億円（+18.2%）を達成。公共・金融・法人の3分野すべてで増収増益。中期経営計画の目標を前倒しで達成した。</div>
+            <div class="news-title">2026年3月期 第3四半期 公共・金融・法人の全分野で増収増益</div>
+            <div class="news-meta"><span>📅 2026年2月</span><span>📰 NTTデータ IR</span></div>
+            <div class="news-summary">2026年3月期第3四半期は日本・海外セグメントともに増収増益。データセンター事業のREIT活用による資産効率化も進展。通期目標の達成が視野に入る。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">業績</div></div>
         </div>
@@ -313,18 +318,18 @@
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
-            <div class="news-title">データセンター事業をREIT活用で資産効率化、海外展開加速</div>
-            <div class="news-meta"><span>📅 2025年5月</span><span>📰 東洋経済</span></div>
-            <div class="news-summary">シンガポール上場REITへのデータセンター資産譲渡を発表。投資回収サイクルの短縮と海外事業拡大を同時に実現する戦略が投資家から高評価を得た。</div>
+            <div class="news-title">2025年3月期 売上高・営業利益ともに過去最高を更新</div>
+            <div class="news-meta"><span>📅 2025年5月</span><span>📰 日本経済新聞</span></div>
+            <div class="news-summary">売上高4.9兆円（前期比+6.0%）、営業利益3,940億円（+18.2%）を達成。公共・金融・法人の3分野すべてで増収増益。中期経営計画の目標を前倒しで達成した。</div>
           </div>
-          <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">戦略</div></div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">業績</div></div>
         </div>
         <div class="news-card" data-type="neg">
           <span class="news-badge neg">ネガ</span>
           <div class="news-content">
             <div class="news-title">大型公共案件の利益率低下、前年度の高水準からの剥落</div>
             <div class="news-meta"><span>📅 2025年2月</span><span>📰 ITmedia</span></div>
-            <div class="news-summary">パブリック分野で前年度に計上した高利益率案件の反動が出ており、第3四半期に減益となった。公共案件は競争入札が激しく、利益率の安定が課題。</div>
+            <div class="news-summary">パブリック分野で前年度に計上した高利益率案件の反動が出ており、一部四半期で減益となった。公共案件は競争入札が激しく、利益率の安定が課題。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 注視</div><div class="news-impact-label">収益性</div></div>
         </div>
@@ -333,7 +338,7 @@
           <div class="news-content">
             <div class="news-title">IT人材不足が深刻化、優秀なエンジニアの獲得競争が激化</div>
             <div class="news-meta"><span>📅 2024年10月</span><span>📰 各メディア</span></div>
-            <div class="news-summary">国内SIer全体でIT人材の争奪戦が激化。NTTデータも採用コストの増加と人材流出への対策を迫られており、人件費の上昇が中期的な課題となっている。</div>
+            <div class="news-summary">国内SIer全体でIT人材の争奪戦が激化。採用コストの増加と人材流出への対策を迫られており、人件費の上昇が中期的な課題となっている。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 課題</div><div class="news-impact-label">人材</div></div>
         </div>
@@ -342,10 +347,11 @@
           <div class="news-content">
             <div class="news-title">海外事業の為替リスク、円高局面での収益押し下げ懸念</div>
             <div class="news-meta"><span>📅 2024年12月</span><span>📰 ロイター</span></div>
-            <div class="news-summary">売上の約6割を占める海外事業はUSD建てが多く、円高が進行した場合の業績への影響が大きい。2026年3月期はドル円152円台を前提とするが下振れリスクも残る。</div>
+            <div class="news-summary">売上の約6割を占める海外事業はUSD建てが多く、円高が進行した場合の業績への影響が大きい。2026年3月期はドル円153円台を前提とするが下振れリスクも残る。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 要注意</div><div class="news-impact-label">為替</div></div>
         </div>
+
       </div>
 
     </div><!-- .card -->

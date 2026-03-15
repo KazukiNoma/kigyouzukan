@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日清食品｜企業図鑑</title>
@@ -290,8 +295,17 @@
           <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
           <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
           <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
-        </div>
+        <
 
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">「健康経営銘柄2026」に初選定、健康経営優良法人も8年連続認定</div>
+            <div class="news-meta"><span>📅 2026年3月</span><span>📰 日清食品 IR</span></div>
+            <div class="news-summary">日清食品HDが経済産業省・東証による「健康経営銘柄2026」に初選定。グループ4社が「健康経営優良法人（ホワイト500）」に8年連続で認定され、従業員健康管理への取り組みが高評価を受けた。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">ESG</div></div>
+        </div>
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
@@ -309,15 +323,6 @@
             <div class="news-summary">Z世代を中心とした「ラーメンブーム」に乗り、北米でのカップヌードルの売上が急拡大。SNSマーケティングと限定フレーバー戦略が功を奏した。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">北米</div></div>
-        </div>
-        <div class="news-card" data-type="pos">
-          <span class="news-badge pos">ポジ</span>
-          <div class="news-content">
-            <div class="news-title">植物性タンパク・健康食品分野に参入、新市場を開拓</div>
-            <div class="news-meta"><span>📅 2024年10月</span><span>📰 東洋経済</span></div>
-            <div class="news-summary">即席麺への健康・機能性付加と、植物性タンパク食品の新製品投入で新市場を開拓。消費者の健康意識の高まりに対応したポートフォリオ拡充が進んでいる。</div>
-          </div>
-          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">健康食品</div></div>
         </div>
         <div class="news-card" data-type="neg">
           <span class="news-badge neg">ネガ</span>
@@ -346,6 +351,7 @@
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 注視</div><div class="news-impact-label">ヘルス</div></div>
         </div>
+
       </div>
 
     </div><!-- .card -->

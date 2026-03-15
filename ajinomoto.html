@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>味の素｜企業図鑑</title>
@@ -290,8 +295,17 @@
           <button class="news-filter-btn all active" onclick="filterNews('all',this)">すべて</button>
           <button class="news-filter-btn pos" onclick="filterNews('pos',this)">👍 ポジティブ</button>
           <button class="news-filter-btn neg" onclick="filterNews('neg',this)">👎 ネガティブ</button>
-        </div>
+        <
 
+        <div class="news-card" data-type="pos">
+          <span class="news-badge pos">ポジ</span>
+          <div class="news-content">
+            <div class="news-title">流通大手と商品データ統一システム構築へ、DX推進を加速</div>
+            <div class="news-meta"><span>📅 2026年1月</span><span>📰 日本経済新聞</span></div>
+            <div class="news-summary">イオンなど流通大手約30社と協力し、2026年度に統一商品情報システムを導入予定。流通作業の効率化に加え、AI・データ活用による需要予測の精度向上も見込む。</div>
+          </div>
+          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">DX</div></div>
+        </div>
         <div class="news-card" data-type="pos">
           <span class="news-badge pos">ポジ</span>
           <div class="news-content">
@@ -309,15 +323,6 @@
             <div class="news-summary">AI・データセンター向け半導体に使用される「味の素ビルドアップフィルム（ABF）」の需要が急増。食品企業としての意外な高収益事業として注目を集めている。</div>
           </div>
           <div class="news-impact"><div class="news-impact-val pos">↑ 強気</div><div class="news-impact-label">電子材料</div></div>
-        </div>
-        <div class="news-card" data-type="pos">
-          <span class="news-badge pos">ポジ</span>
-          <div class="news-content">
-            <div class="news-title">ESG・サステナ経営でMSCI最高評価を獲得</div>
-            <div class="news-meta"><span>📅 2024年11月</span><span>📰 各メディア</span></div>
-            <div class="news-summary">ESG評価機関MSCIからAAAレーティングを維持し、食品業界で世界トップクラスのサステナビリティ企業として認定された。機関投資家からの評価も高い。</div>
-          </div>
-          <div class="news-impact"><div class="news-impact-val pos">↑ 好材料</div><div class="news-impact-label">ESG</div></div>
         </div>
         <div class="news-card" data-type="neg">
           <span class="news-badge neg">ネガ</span>
@@ -346,6 +351,7 @@
           </div>
           <div class="news-impact"><div class="news-impact-val neg">↓ 注視</div><div class="news-impact-label">構造</div></div>
         </div>
+
       </div>
 
     </div><!-- .card -->
