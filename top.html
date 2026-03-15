@@ -259,6 +259,7 @@
     overflow: hidden;
     position: relative;
     padding: 16px 0 24px;
+    cursor: pointer;
   }
   .scroll-track-wrap::before,
   .scroll-track-wrap::after {
@@ -274,14 +275,8 @@
   .scroll-track {
     display: flex;
     gap: 16px;
-    animation: card-scroll 40s linear infinite;
     width: max-content;
     padding: 0 16px;
-  }
-  .scroll-track:hover { animation-play-state: paused; }
-  @keyframes card-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
   }
   .scroll-track .company-card {
     width: 280px;
@@ -1826,13 +1821,38 @@
       navLogo.style.cursor = 'pointer';
       navLogo.addEventListener('click', () => window.location.href = 'top.html');
     }
+
+    // JSで横スクロールアニメーション（scrollLeft方式でクリック干渉なし）
+    let paused = false;
+    const speed = 1;
+
+    scrollWrap.addEventListener('mouseenter', () => paused = true);
+    scrollWrap.addEventListener('mouseleave', () => paused = false);
+
+    function animate() {
+      if (!paused && scrollWrap.style.display !== 'none') {
+        scrollWrap.scrollLeft += speed;
+        if (scrollWrap.scrollLeft >= scrollTrack.scrollWidth / 2) {
+          scrollWrap.scrollLeft = 0;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    // scroll-track-wrapをscroll可能にする
+    scrollWrap.style.overflowX = 'hidden';
+    requestAnimationFrame(animate);
   });
 
-  // カードクリック（アニメーション中でもhrefに飛ぶ）
+  // カード・ティッカークリック
   document.addEventListener('click', function(e) {
     const card = e.target.closest('a.company-card');
-    if (card) {
+    if (card && card.href) {
       window.location.href = card.href;
+      return;
+    }
+    const ticker = e.target.closest('a.ticker-item');
+    if (ticker && ticker.href) {
+      window.location.href = ticker.href;
     }
   });
 </script>
