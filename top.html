@@ -623,7 +623,67 @@
   .card-coming-text { font-size: 13px; color: var(--ink3); }
 
   @media (max-width: 768px) {
-    .container.grid-mode { grid-template-columns: repeat(2, 1fr); }
+    .container.grid-mode { grid-template-columns: 1fr; }
+    /* スマホ版グリッドカード：横長レイアウト */
+    .container.grid-mode .company-card {
+      display: grid !important;
+      grid-template-columns: 120px 1fr;
+      height: 120px;
+      overflow: hidden;
+    }
+    .container.grid-mode .card-cover {
+      height: 120px;
+      border-radius: 16px 0 0 16px;
+    }
+    .container.grid-mode .card-body {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .container.grid-mode .card-logo {
+      display: none;
+    }
+    .container.grid-mode .card-name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .container.grid-mode .card-sub {
+      font-size: 10px;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .container.grid-mode .card-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .container.grid-mode .card-tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+    .container.grid-mode .card-stats {
+      display: flex;
+      gap: 8px;
+    }
+    .container.grid-mode .card-stat-val {
+      font-size: 11px;
+    }
+    .container.grid-mode .card-stat-label {
+      font-size: 9px;
+    }
+    .container.grid-mode .card-arrow {
+      display: none;
+    }
     .hero-title { font-size: 32px; }
     .nav-search { display: none; }
     .hero-stats { gap: 24px; }
@@ -969,7 +1029,7 @@
   <div class="hero-bg-glow"></div>
   <div id="companyCount" style="font-size:12px;color:var(--ink3);margin-bottom:6px;text-align:center"></div>
   <div class="hero-badge">✨ Z世代のための企業データベース</div>
-  <h1 class="hero-title">就活・転職に使える<br><span>企業図鑑</span></h1>
+  <h1 class="hero-title"><span style="white-space:nowrap">就活・転職に使える</span><br><span>企業図鑑</span></h1>
   <p class="hero-sub">財務データ・平均年収・社風スコアまで。気になる企業をリアルな数字で比較しよう。</p>
   <div class="hero-stats">
     <div>
@@ -1004,7 +1064,7 @@
 <div class="search-bar">
   <div class="search-bar-inner">
     <span class="search-bar-icon">🔍</span>
-    <input id="searchInput" class="search-bar-input" type="text" placeholder="企業名・業界で検索...（例：商社、年収、トヨタ）">
+    <input id="searchInput" class="search-bar-input" type="text" placeholder="企業名・業界で検索...">
     <button class="search-bar-clear" id="searchClear">✕ クリア</button>
   </div>
 </div>
