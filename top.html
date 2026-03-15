@@ -38,6 +38,133 @@
     line-height: 1.6;
   }
 
+  /* ===== SIDEBAR LAYOUT ===== */
+  .page-wrap {
+    display: flex;
+    align-items: flex-start;
+  }
+  .sidebar {
+    width: 210px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 58px;
+    height: calc(100vh - 58px);
+    overflow-y: auto;
+    z-index: 10;
+  }
+  .sidebar-sep {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 8px 0;
+  }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 16px 4px;
+  }
+  .sb-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink2);
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    width: 100%;
+    text-align: left;
+    transition: all 0.15s;
+    border-radius: 0;
+  }
+  .sb-item:hover { background: rgba(168,85,247,0.08); color: var(--p1); }
+  .sb-item.active { background: rgba(168,85,247,0.12); color: var(--p1); }
+  .sb-item-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+  .sb-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 12px 12px;
+  }
+  .sb-btn {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .sb-btn.outline {
+    border: 1px solid var(--border2);
+    color: var(--ink2);
+    background: transparent;
+    width: 100%;
+  }
+  .sb-btn.outline:hover { border-color: var(--p1); color: var(--p1); }
+  .sb-btn.filled {
+    background: var(--grad);
+    border: none;
+    color: white;
+    box-shadow: var(--glow);
+    width: 100%;
+  }
+  .main-wrap { flex: 1; min-width: 0; overflow: hidden; }
+
+  /* ハンバーガー（スマホ） */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background: transparent;
+    margin-right: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--ink2);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 149;
+  }
+  @media (max-width: 900px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      height: 100vh;
+      width: 220px;
+      z-index: 150;
+      transition: left 0.3s ease;
+      padding-top: 70px;
+    }
+    .sidebar.open { left: 0; }
+    .sidebar-overlay.open { display: block; }
+    .hamburger { display: flex; }
+  }
+
   body::before {
     content: '';
     position: fixed;
@@ -594,7 +721,10 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="top.html" style="text-decoration:none">企業図鑑</a>
+  <div style="display:flex;align-items:center">
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+    <a class="nav-logo" href="top.html" style="text-decoration:none">企業図鑑</a>
+  </div>
   <!-- 検索窓はフィルターバー上に移動 -->
   <div class="nav-right">
     <button class="nav-btn">ログイン</button>
@@ -605,6 +735,37 @@
 
 
 <!-- MAIN -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="page-wrap">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-btns">
+    <button class="sb-btn outline">ログイン</button>
+    <button class="sb-btn filled">無料登録</button>
+  </div>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">メニュー</div>
+  <a class="sb-item active" href="top.html"><span class="sb-item-icon">🏠</span>企業一覧</a>
+  <a class="sb-item" href="shindan.html"><span class="sb-item-icon">🤖</span>AI適性診断</a>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">検索・絞り込み</div>
+  <button class="sb-item" id="sbSearch"><span class="sb-item-icon">🔍</span>企業を検索</button>
+  <button class="sb-item" id="sbFilter"><span class="sb-item-icon">📊</span>業界で絞り込み</button>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">ランキング</div>
+  <button class="sb-item" id="sbSalary"><span class="sb-item-icon">💰</span>年収ランキング</button>
+  <button class="sb-item" id="sbSales"><span class="sb-item-icon">📈</span>売上ランキング</button>
+  <hr class="sidebar-sep">
+  <div class="sidebar-label">コンテンツ</div>
+  <a class="sb-item" href="shindan.html"><span class="sb-item-icon">📝</span>企業診断（20問）</a>
+  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">📰</span>最新ニュース</button>
+  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">⭐</span>お気に入り</button>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrap">
 
 <!-- TICKER -->
 <div class="ticker-wrap">
@@ -1867,6 +2028,9 @@
   });
 </script>
 
+
+</div><!-- /main-wrap -->
+</div><!-- /page-wrap -->
 
 <footer style="background:var(--bg2);border-top:1px solid var(--border);padding:20px;text-align:center;font-size:11px;color:var(--ink3);margin-top:40px">
   © 2026 企業図鑑 All Rights Reserved.　｜　
