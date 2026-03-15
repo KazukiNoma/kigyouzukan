@@ -277,6 +277,13 @@
     gap: 16px;
     width: max-content;
     padding: 0 16px;
+    animation: card-scroll 60s linear infinite;
+    pointer-events: auto;
+  }
+  .scroll-track:hover { animation-play-state: paused; }
+  @keyframes card-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
   .scroll-track .company-card {
     width: 280px;
@@ -1822,37 +1829,34 @@
       navLogo.addEventListener('click', () => window.location.href = 'top.html');
     }
 
-    // JSで横スクロールアニメーション（scrollLeft方式でクリック干渉なし）
-    let paused = false;
-    const speed = 1;
 
-    scrollWrap.addEventListener('mouseenter', () => paused = true);
-    scrollWrap.addEventListener('mouseleave', () => paused = false);
-
-    function animate() {
-      if (!paused && scrollWrap.style.display !== 'none') {
-        scrollWrap.scrollLeft += speed;
-        if (scrollWrap.scrollLeft >= scrollTrack.scrollWidth / 2) {
-          scrollWrap.scrollLeft = 0;
-        }
-      }
-      requestAnimationFrame(animate);
-    }
-    // scroll-track-wrapをscroll可能にする
-    scrollWrap.style.overflowX = 'hidden';
-    requestAnimationFrame(animate);
   });
 
   // カード・ティッカークリック
+  // CSSアニメーション中はtransformでhitboxがずれるためElementFromPointで対処
   document.addEventListener('click', function(e) {
+    // まず通常のclosestを試みる
     const card = e.target.closest('a.company-card');
-    if (card && card.href) {
-      window.location.href = card.href;
+    if (card && card.getAttribute('href')) {
+      window.location.href = card.getAttribute('href');
       return;
     }
     const ticker = e.target.closest('a.ticker-item');
-    if (ticker && ticker.href) {
-      window.location.href = ticker.href;
+    if (ticker && ticker.getAttribute('href')) {
+      window.location.href = ticker.getAttribute('href');
+      return;
+    }
+    // hitboxがずれている場合: scroll-track内のカードを座標で探す
+    if (scrollWrap && scrollWrap.contains(e.target)) {
+      const allCards = scrollTrack.querySelectorAll('a.company-card');
+      for (const c of allCards) {
+        const rect = c.getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+            e.clientY >= rect.top  && e.clientY <= rect.bottom) {
+          window.location.href = c.getAttribute('href');
+          return;
+        }
+      }
     }
   });
 </script>
