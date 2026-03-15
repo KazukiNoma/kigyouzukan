@@ -734,6 +734,8 @@
 .detail-page-wrap .container {
   flex: 1;
   min-width: 0;
+  max-width: none;
+  margin: 0;
 }
 .sidebar-sep {
   border: none;
