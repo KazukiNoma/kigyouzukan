@@ -713,10 +713,20 @@
   }
 
 /* ===== 企業詳細ページ サイドバー ===== */
-.detail-page-wrap {
+body.has-detail-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+body.has-detail-sidebar nav {
+  flex-shrink: 0;
+}
+body.has-detail-sidebar .sidebar-overlay ~ * {
+  /* サイドバー以降のbody直下要素をflex-rowに */
+}
+.detail-layout {
   display: flex;
   align-items: flex-start;
-  min-height: calc(100vh - 58px);
+  flex: 1;
 }
 .detail-sidebar {
   width: 210px;
@@ -731,9 +741,11 @@
   z-index: 10;
   align-self: flex-start;
 }
-.detail-page-wrap .container {
+.detail-main {
   flex: 1;
   min-width: 0;
+}
+.detail-main .container {
   max-width: none;
   margin: 0;
 }

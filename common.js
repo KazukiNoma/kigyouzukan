@@ -95,10 +95,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // top.htmlでは実行しない
   if (location.pathname.endsWith('top.html') || location.pathname === '/') return;
 
-  // サイドバーHTML
-  const sidebarHTML = `
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<aside class="detail-sidebar" id="detailSidebar">
+
+
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+
+  // navの直後にoverlay＋detail-layout(sidebar+main)を挿入
+  // navの後の全要素をmain-wrapに移動
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
+  overlay.id = 'sidebarOverlay';
+
+  const aside = document.createElement('aside');
+  aside.className = 'detail-sidebar';
+  aside.id = 'detailSidebar';
+  aside.innerHTML = `
   <div class="sb-btns">
     <button class="sb-btn outline">ログイン</button>
     <button class="sb-btn filled">無料登録</button>
@@ -113,22 +124,22 @@ document.addEventListener('DOMContentLoaded', function() {
   <hr class="sidebar-sep">
   <div class="sidebar-label">コンテンツ</div>
   <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">📰</span>最新ニュース</button>
-  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">⭐</span>お気に入り</button>
-</aside>`;
+  <button class="sb-item" onclick="alert('近日公開予定！')"><span class="sb-item-icon">⭐</span>お気に入り</button>`;
 
-  // navの直後に挿入
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-  nav.insertAdjacentHTML('afterend', sidebarHTML);
+  const layout = document.createElement('div');
+  layout.className = 'detail-layout';
 
-  // containerをflex化（サイドバー＋メイン）
-  const container = document.querySelector('.container');
-  if (container) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'detail-page-wrap';
-    container.parentNode.insertBefore(wrapper, container);
-    wrapper.appendChild(container);
+  const main = document.createElement('div');
+  main.className = 'detail-main';
+
+  // navより後の全ノードをmainに移動
+  while (nav.nextSibling) {
+    main.appendChild(nav.nextSibling);
   }
+
+  layout.appendChild(aside);
+  layout.appendChild(main);
+  nav.after(overlay, layout);
 
   // ハンバーガーをnaに追加
   const hamburgerHTML = `<button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>`;
