@@ -475,6 +475,15 @@
     padding: 0 4px;
   }
 
+
+  /* カードクリック修正 */
+  .card-cover, .card-cover * {
+    pointer-events: none !important;
+  }
+  .company-card {
+    cursor: pointer;
+  }
+
 </style>
 </head>
 <body>
@@ -1253,6 +1262,17 @@
     if (visible === 0) noResult.textContent = '該当する企業が見つかりませんでした';
     updateCount();
   }
+
+  // カードクリック強制処理 - cover内要素がブロックしても確実に遷移
+  document.querySelectorAll('.company-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href) {
+        window.location.href = href;
+      }
+    });
+  });
+
 </script>
 </body>
 </html>
