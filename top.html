@@ -623,11 +623,11 @@
   .card-coming-text { font-size: 13px; color: var(--ink3); }
 
   @media (max-width: 768px) {
-    /* スマホはスクロールモードを非表示にしてグリッド表示 */
+    /* スマホはデフォルトでカード非表示 */
     .scroll-track-wrap { display: none !important; }
-    .container { display: block !important; padding: 0 12px 40px; }
+    .container { padding: 0 12px 40px; }
     .container.grid-mode { display: block !important; padding: 0 12px 40px; }
-    /* スマホはデフォルトでグリッド表示（全カード） */
+    /* 検索・ソート前は空メッセージ表示 */
     /* スマホ版グリッドカード：横長レイアウト */
     .container.grid-mode .company-card {
       display: grid !important;
@@ -1965,18 +1965,35 @@
     const query = (searchInput?.value || '').trim().toLowerCase();
     const activeFilter = document.querySelector('.filter-btn.active')?.textContent.trim() || 'すべて';
     const isAll = activeFilter === 'すべて' && query === '';
+    const isMobile = window.innerWidth <= 768;
 
     // 既存グリッドカードを削除
     document.querySelectorAll('.company-card.grid-card').forEach(c => c.remove());
 
-    if (isAll) {
-      // スクロールモード
+    if (isAll && !isMobile) {
+      // PC：スクロールモード
       container.classList.remove('grid-mode');
       scrollWrap.style.display = '';
-    } else {
-      // グリッドモード
+    } else if (isAll && isMobile) {
+      // スマホ：すべてに戻したら空メッセージ
       container.classList.add('grid-mode');
       scrollWrap.style.display = 'none';
+      let emptyMsg = document.getElementById('mobileEmptyMsg');
+      if (!emptyMsg) {
+        emptyMsg = document.createElement('div');
+        emptyMsg.id = 'mobileEmptyMsg';
+        emptyMsg.style.cssText = 'text-align:center;padding:48px 24px;color:var(--ink3);font-size:14px;line-height:1.8';
+        emptyMsg.innerHTML = '🔍 <strong style="color:var(--ink2);display:block;font-size:16px;margin-bottom:8px">企業を探してみよう</strong>上の検索窓や業界ボタンで絞り込めます';
+        container.appendChild(emptyMsg);
+      } else {
+        emptyMsg.style.display = 'block';
+      }
+    } else {
+      // グリッドモード（PC・スマホ共通）
+      container.classList.add('grid-mode');
+      scrollWrap.style.display = 'none';
+      const emptyMsg = document.getElementById('mobileEmptyMsg');
+      if (emptyMsg) emptyMsg.style.display = 'none';
 
       const filtered = getFilteredCards();
       filtered.forEach(card => {
@@ -2035,17 +2052,18 @@
 
     updateCount();
 
-    // スマホはデフォルトでグリッドモード表示
+    // スマホはデフォルトで空メッセージ表示
     if (window.innerWidth <= 768) {
       container.classList.add('grid-mode');
       scrollWrap.style.display = 'none';
-      const half = Math.floor(scrollTrack.querySelectorAll('.company-card').length / 2);
-      [...scrollTrack.querySelectorAll('.company-card')].slice(0, half).forEach(card => {
-        const cl = card.cloneNode(true);
-        cl.classList.add('grid-card');
-        cl.addEventListener('click', () => window.location.href = cl.getAttribute('href'));
-        container.appendChild(cl);
-      });
+      let emptyMsg = document.getElementById('mobileEmptyMsg');
+      if (!emptyMsg) {
+        emptyMsg = document.createElement('div');
+        emptyMsg.id = 'mobileEmptyMsg';
+        emptyMsg.style.cssText = 'text-align:center;padding:48px 24px;color:var(--ink3);font-size:14px;line-height:1.8';
+        emptyMsg.innerHTML = '🔍 <strong style="color:var(--ink2);display:block;font-size:16px;margin-bottom:8px">企業を探してみよう</strong>上の検索窓や業界ボタンで絞り込めます';
+        container.appendChild(emptyMsg);
+      }
     }
 
     // ロゴクリック
