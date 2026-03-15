@@ -381,7 +381,7 @@
   .ticker-track {
     display: flex;
     gap: 0;
-    animation: ticker-scroll 28s linear infinite;
+    animation: ticker-scroll 60s linear infinite;
     width: max-content;
   }
   .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
@@ -436,8 +436,8 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">企業図鑑</div>
-  <div class="nav-search">🔍 企業名・業界で検索...</div>
+  <a class="nav-logo" href="top.html" style="text-decoration:none">企業図鑑</a>
+  <div class="nav-search"><span>🔍</span><input id="searchInput" type="text" placeholder="企業名・業界で検索..." style="background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;font-family:inherit;width:100%"></div>
   <div class="nav-right">
     <button class="nav-btn">ログイン</button>
     <button class="nav-btn filled">無料登録</button>
@@ -449,84 +449,137 @@
 <div class="ticker-wrap">
   <div class="ticker-track" id="tickerTrack">
 
-    <!-- セット1 -->
     <a class="ticker-item" href="firstretailing.html">
-      <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)">
-        <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span>
-      </div>
-      <span class="ticker-name">ファーストリテイリング</span>
-      <span class="ticker-price">¥50,280</span>
-      <span class="ticker-change up">▲ +2.14%</span>
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)"><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span></div>
+      <span class="ticker-name">ファーストリテイリング</span><span class="ticker-price">¥50,280</span><span class="ticker-change up">▲ +2.14%</span>
     </a>
-
     <a class="ticker-item" href="toyota.html">
-      <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)">
-        <span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span>
-      </div>
-      <span class="ticker-name">トヨタ自動車</span>
-      <span class="ticker-price">¥3,421</span>
-      <span class="ticker-change down">▼ -0.87%</span>
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)"><span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span></div>
+      <span class="ticker-name">トヨタ自動車</span><span class="ticker-price">¥3,421</span><span class="ticker-change down">▼ -0.87%</span>
     </a>
-
+    <a class="ticker-item" href="softbank.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SB</span></div>
+      <span class="ticker-name">ソフトバンク</span><span class="ticker-price">¥2,156</span><span class="ticker-change up">▲ +1.13%</span>
+    </a>
+    <a class="ticker-item" href="nttdata.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1a3e,#1a2a4e)"><span style="background:linear-gradient(135deg,#6366F1,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ND</span></div>
+      <span class="ticker-name">NTTデータG</span><span class="ticker-price">¥2,847</span><span class="ticker-change up">▲ +1.10%</span>
+    </a>
+    <a class="ticker-item" href="fujitsu.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e1a3e)"><span style="background:linear-gradient(135deg,#EF4444,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FJ</span></div>
+      <span class="ticker-name">富士通</span><span class="ticker-price">¥3,124</span><span class="ticker-change up">▲ +1.36%</span>
+    </a>
+    <a class="ticker-item" href="mufg.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1428,#1a2440)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MU</span></div>
+      <span class="ticker-name">三菱UFJ</span><span class="ticker-price">¥1,842</span><span class="ticker-change up">▲ +0.99%</span>
+    </a>
+    <a class="ticker-item" href="nomura.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1a08)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NM</span></div>
+      <span class="ticker-name">野村HD</span><span class="ticker-price">¥812</span><span class="ticker-change down">▼ -0.42%</span>
+    </a>
+    <a class="ticker-item" href="sony.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2e)"><span style="background:linear-gradient(135deg,#06B6D4,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SN</span></div>
+      <span class="ticker-name">ソニーG</span><span class="ticker-price">¥2,450</span><span class="ticker-change up">▲ +1.16%</span>
+    </a>
+    <a class="ticker-item" href="panasonic.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#06B6D4,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PN</span></div>
+      <span class="ticker-name">パナソニックHD</span><span class="ticker-price">¥1,284</span><span class="ticker-change down">▼ -0.31%</span>
+    </a>
+    <a class="ticker-item" href="keyence.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#2a1a3e)"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">KV</span></div>
+      <span class="ticker-name">キーエンス</span><span class="ticker-price">¥67,800</span><span class="ticker-change up">▲ +0.80%</span>
+    </a>
+    <a class="ticker-item" href="aeon.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#10B981,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AE</span></div>
+      <span class="ticker-name">イオン</span><span class="ticker-price">¥3,128</span><span class="ticker-change up">▲ +0.71%</span>
+    </a>
+    <a class="ticker-item" href="7i.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">7i</span></div>
+      <span class="ticker-name">セブン&アイ</span><span class="ticker-price">¥2,186</span><span class="ticker-change down">▼ -0.54%</span>
+    </a>
+    <a class="ticker-item" href="ajinomoto.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e0a1a)"><span style="background:linear-gradient(135deg,#EC4899,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AJ</span></div>
+      <span class="ticker-name">味の素</span><span class="ticker-price">¥4,840</span><span class="ticker-change up">▲ +1.00%</span>
+    </a>
+    <a class="ticker-item" href="nissin.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1e,#1a1430)"><span style="background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NS</span></div>
+      <span class="ticker-name">日清食品HD</span><span class="ticker-price">¥4,218</span><span class="ticker-change up">▲ +0.91%</span>
+    </a>
     <div class="ticker-item">
-      <span class="ticker-divider">📈</span>
-      <span class="ticker-name">日経平均</span>
-      <span class="ticker-price">37,842</span>
-      <span class="ticker-change up">▲ +0.63%</span>
+      <span class="ticker-divider">📈</span><span class="ticker-name">日経平均</span><span class="ticker-price">37,842</span><span class="ticker-change up">▲ +0.63%</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-divider">💱</span><span class="ticker-name">USD/JPY</span><span class="ticker-price">149.32</span><span class="ticker-change down">▼ -0.21%</span>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-divider">🏦</span><span class="ticker-name">TOPIX</span><span class="ticker-price">2,684</span><span class="ticker-change up">▲ +0.41%</span>
     </div>
 
-    <div class="ticker-item">
-      <span class="ticker-divider">💱</span>
-      <span class="ticker-name">USD/JPY</span>
-      <span class="ticker-price">149.32</span>
-      <span class="ticker-change down">▼ -0.21%</span>
-    </div>
-
-    <div class="ticker-item">
-      <span class="ticker-divider">🏦</span>
-      <span class="ticker-name">TOPIX</span>
-      <span class="ticker-price">2,684</span>
-      <span class="ticker-change up">▲ +0.41%</span>
-    </div>
-
-    <!-- セット2（ループ用コピー） -->
+    
     <a class="ticker-item" href="firstretailing.html">
-      <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)">
-        <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span>
-      </div>
-      <span class="ticker-name">ファーストリテイリング</span>
-      <span class="ticker-price">¥50,280</span>
-      <span class="ticker-change up">▲ +2.14%</span>
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#2A1A3E,#1a0533)"><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FR</span></div>
+      <span class="ticker-name">ファーストリテイリング</span><span class="ticker-price">¥50,280</span><span class="ticker-change up">▲ +2.14%</span>
     </a>
-
     <a class="ticker-item" href="toyota.html">
-      <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)">
-        <span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span>
-      </div>
-      <span class="ticker-name">トヨタ自動車</span>
-      <span class="ticker-price">¥3,421</span>
-      <span class="ticker-change down">▼ -0.87%</span>
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1E2A3E,#1A2A1E)"><span style="background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">TM</span></div>
+      <span class="ticker-name">トヨタ自動車</span><span class="ticker-price">¥3,421</span><span class="ticker-change down">▼ -0.87%</span>
     </a>
-
+    <a class="ticker-item" href="softbank.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SB</span></div>
+      <span class="ticker-name">ソフトバンク</span><span class="ticker-price">¥2,156</span><span class="ticker-change up">▲ +1.13%</span>
+    </a>
+    <a class="ticker-item" href="nttdata.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1a3e,#1a2a4e)"><span style="background:linear-gradient(135deg,#6366F1,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ND</span></div>
+      <span class="ticker-name">NTTデータG</span><span class="ticker-price">¥2,847</span><span class="ticker-change up">▲ +1.10%</span>
+    </a>
+    <a class="ticker-item" href="fujitsu.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e1a3e)"><span style="background:linear-gradient(135deg,#EF4444,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">FJ</span></div>
+      <span class="ticker-name">富士通</span><span class="ticker-price">¥3,124</span><span class="ticker-change up">▲ +1.36%</span>
+    </a>
+    <a class="ticker-item" href="mufg.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a1428,#1a2440)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MU</span></div>
+      <span class="ticker-name">三菱UFJ</span><span class="ticker-price">¥1,842</span><span class="ticker-change up">▲ +0.99%</span>
+    </a>
+    <a class="ticker-item" href="nomura.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1a08)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NM</span></div>
+      <span class="ticker-name">野村HD</span><span class="ticker-price">¥812</span><span class="ticker-change down">▼ -0.42%</span>
+    </a>
+    <a class="ticker-item" href="sony.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2e)"><span style="background:linear-gradient(135deg,#06B6D4,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SN</span></div>
+      <span class="ticker-name">ソニーG</span><span class="ticker-price">¥2,450</span><span class="ticker-change up">▲ +1.16%</span>
+    </a>
+    <a class="ticker-item" href="panasonic.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#06B6D4,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PN</span></div>
+      <span class="ticker-name">パナソニックHD</span><span class="ticker-price">¥1,284</span><span class="ticker-change down">▼ -0.31%</span>
+    </a>
+    <a class="ticker-item" href="keyence.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1a2e,#2a1a3e)"><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">KV</span></div>
+      <span class="ticker-name">キーエンス</span><span class="ticker-price">¥67,800</span><span class="ticker-change up">▲ +0.80%</span>
+    </a>
+    <a class="ticker-item" href="aeon.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#001428,#002040)"><span style="background:linear-gradient(135deg,#10B981,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AE</span></div>
+      <span class="ticker-name">イオン</span><span class="ticker-price">¥3,128</span><span class="ticker-change up">▲ +0.71%</span>
+    </a>
+    <a class="ticker-item" href="7i.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a1005,#2a1808)"><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent">7i</span></div>
+      <span class="ticker-name">セブン&アイ</span><span class="ticker-price">¥2,186</span><span class="ticker-change down">▼ -0.54%</span>
+    </a>
+    <a class="ticker-item" href="ajinomoto.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#1a0a2e,#2e0a1a)"><span style="background:linear-gradient(135deg,#EC4899,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent">AJ</span></div>
+      <span class="ticker-name">味の素</span><span class="ticker-price">¥4,840</span><span class="ticker-change up">▲ +1.00%</span>
+    </a>
+    <a class="ticker-item" href="nissin.html">
+      <div class="ticker-logo" style="background:linear-gradient(135deg,#0a0a1e,#1a1430)"><span style="background:linear-gradient(135deg,#6366F1,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">NS</span></div>
+      <span class="ticker-name">日清食品HD</span><span class="ticker-price">¥4,218</span><span class="ticker-change up">▲ +0.91%</span>
+    </a>
     <div class="ticker-item">
-      <span class="ticker-divider">📈</span>
-      <span class="ticker-name">日経平均</span>
-      <span class="ticker-price">37,842</span>
-      <span class="ticker-change up">▲ +0.63%</span>
+      <span class="ticker-divider">📈</span><span class="ticker-name">日経平均</span><span class="ticker-price">37,842</span><span class="ticker-change up">▲ +0.63%</span>
     </div>
-
     <div class="ticker-item">
-      <span class="ticker-divider">💱</span>
-      <span class="ticker-name">USD/JPY</span>
-      <span class="ticker-price">149.32</span>
-      <span class="ticker-change down">▼ -0.21%</span>
+      <span class="ticker-divider">💱</span><span class="ticker-name">USD/JPY</span><span class="ticker-price">149.32</span><span class="ticker-change down">▼ -0.21%</span>
     </div>
-
     <div class="ticker-item">
-      <span class="ticker-divider">🏦</span>
-      <span class="ticker-name">TOPIX</span>
-      <span class="ticker-price">2,684</span>
-      <span class="ticker-change up">▲ +0.41%</span>
+      <span class="ticker-divider">🏦</span><span class="ticker-name">TOPIX</span><span class="ticker-price">2,684</span><span class="ticker-change up">▲ +0.41%</span>
     </div>
 
   </div>
@@ -873,13 +926,52 @@
 </div>
 
 <script>
-  // フィルターボタン
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      filterCards();
     });
   });
+
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.addEventListener('input', filterCards);
+
+  function filterCards() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const activeFilter = document.querySelector('.filter-btn.active')?.textContent.trim() || 'すべて';
+    const cards = document.querySelectorAll('.company-card');
+
+    cards.forEach(card => {
+      const text = (card.querySelector('.card-name')?.textContent || '') +
+                   (card.querySelector('.card-sub')?.textContent || '') +
+                   (card.querySelector('.card-tags')?.textContent || '');
+      const t = text.toLowerCase();
+
+      const matchQuery = query === '' || t.includes(query);
+      const matchFilter = activeFilter === 'すべて' ||
+        (activeFilter === 'IT・通信' && (t.includes('通信') || t.includes('情報') || t.includes('sier') || t.includes('ソフトバンク') || t.includes('ntt') || t.includes('富士通'))) ||
+        (activeFilter === '自動車' && (t.includes('自動車') || t.includes('輸送'))) ||
+        (activeFilter === 'アパレル' && t.includes('アパレル')) ||
+        (activeFilter === '金融' && (t.includes('銀行') || t.includes('証券') || t.includes('金融'))) ||
+        (activeFilter === '製造' && (t.includes('電気機器') || t.includes('製造') || t.includes('センサー'))) ||
+        (activeFilter === '小売' && (t.includes('小売') || t.includes('コンビニ'))) ||
+        (activeFilter === '食品' && (t.includes('食料') || t.includes('食品') || t.includes('調味料')));
+
+      card.style.display = (matchQuery && matchFilter) ? 'block' : 'none';
+    });
+
+    const visible = [...cards].filter(c => c.style.display !== 'none').length;
+    let noResult = document.getElementById('noResult');
+    if (!noResult) {
+      noResult = document.createElement('div');
+      noResult.id = 'noResult';
+      noResult.style.cssText = 'text-align:center;padding:60px 20px;color:var(--ink3);font-size:15px;display:none;grid-column:1/-1';
+      noResult.textContent = '該当する企業が見つかりませんでした';
+      document.querySelector('.container').appendChild(noResult);
+    }
+    noResult.style.display = visible === 0 ? 'block' : 'none';
+  }
 </script>
 </body>
 </html>
