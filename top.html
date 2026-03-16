@@ -1096,6 +1096,7 @@
   <button class="filter-btn">商社</button>
   <button class="filter-btn">不動産</button>
   <button class="filter-btn">医薬品</button>
+  <button class="filter-btn">広告</button>
 </div>
 
 <!-- COMPANY GRID -->
@@ -2098,7 +2099,8 @@
         (activeFilter === '食品'      && (t.includes('食料') || t.includes('調味料') || t.includes('即席') || t.includes('カップヌードル'))) ||
         (activeFilter === '商社'      && t.includes('総合商社')) ||
         (activeFilter === '不動産'    && t.includes('不動産')) ||
-        (activeFilter === '医薬品'    && t.includes('医薬品'));
+        (activeFilter === '医薬品'    && t.includes('医薬品')) ||
+        (activeFilter === '広告'      && (t.includes('広告') || t.includes('マーケティング')));
 
       return matchQuery && matchFilter;
     });
