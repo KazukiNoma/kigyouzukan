@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/", "destination": "/top.html", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
