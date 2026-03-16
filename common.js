@@ -44,6 +44,9 @@ const COMPANIES = [
   { name: "三菱地所", sub: "不動産", url: "mec.html" },
   { name: "三井不動産", sub: "不動産", url: "mitsuifudosan.html" },
   { name: "武田薬品工業", sub: "医薬品", url: "takeda.html" },
+  { name: "KDDI", sub: "IT・通信", url: "kddi.html" },
+  { name: "みずほフィナンシャルグループ", sub: "金融", url: "mizuho.html" },
+  { name: "三井住友フィナンシャルグループ", sub: "金融", url: "smbc.html" },
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
