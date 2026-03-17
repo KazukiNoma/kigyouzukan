@@ -33,7 +33,7 @@ function onCompaniesReady(fn) {
 }
 
 (function loadCompanies() {
-  fetch('companies.json')
+  fetch('companies.json', { cache: 'no-store' })
     .then(r => r.json())
     .then(data => {
       COMPANIES_DATA = data;
@@ -174,6 +174,75 @@ document.addEventListener('DOMContentLoaded', function() {
       badge.textContent = `🤖 適性${score}%`;
       heroName.appendChild(badge);
     }
+  });
+})();
+
+/* ===== 企業詳細ページ: 類似企業を動的レンダリング ===== */
+(function() {
+  if (location.pathname.endsWith('top.html') || location.pathname === '/' ||
+      location.pathname.endsWith('compare.html') || location.pathname.endsWith('shindan.html')) return;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const pageId = location.pathname.split('/').pop().replace('.html', '');
+    onCompaniesReady(function(data) {
+      const current = data.find(c => c.id === pageId);
+      if (!current || !current.similar || !current.similar.length) return;
+
+      // sidebar-cardの「似たような企業」セクションを探す
+      const allCards = document.querySelectorAll('.sidebar-card');
+      let simCard = null;
+      allCards.forEach(card => {
+        const title = card.querySelector('.sidebar-title');
+        if (title && title.textContent.includes('似た')) simCard = card;
+      });
+      if (!simCard) return;
+
+      const simCompanies = current.similar
+        .map(id => data.find(c => c.id === id))
+        .filter(Boolean);
+
+      // 既存の .similar-company を全部削除して再レンダリング
+      simCard.querySelectorAll('.similar-company').forEach(el => el.remove());
+
+      simCompanies.forEach(c => {
+        const initials = (c.nameShort || c.name).replace(/[株式会社HD]/g,'').slice(0,2).toUpperCase();
+        const colors = {
+          'IT・通信': '#6366F1,#8B5CF6', '金融': '#10B981,#059669',
+          '製造': '#F59E0B,#D97706', '自動車': '#3B82F6,#2563EB',
+          '商社': '#EC4899,#DB2777', '小売': '#14B8A6,#0D9488',
+          '食品': '#F97316,#EA580C', '不動産': '#8B5CF6,#7C3AED',
+          '医薬品': '#06B6D4,#0891B2', 'アパレル': '#F43F5E,#E11D48',
+        };
+        const grad = colors[c.industry] || '#A855F7,#EC4899';
+        const div = document.createElement('div');
+        div.className = 'similar-company';
+        div.style.cursor = 'pointer';
+        div.onclick = () => location.href = c.url;
+        div.innerHTML = `
+          <div class="sim-logo" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
+            <span style="background:linear-gradient(135deg,${grad});-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:13px">${initials}</span>
+          </div>
+          <div class="sim-info">
+            <div class="sim-name">${c.nameShort || c.name}</div>
+            <div class="sim-sub">${c.industry}${c.avgSalary ? ' | ' + c.avgSalary.toLocaleString() + '万円' : ''}</div>
+          </div>`;
+        simCard.appendChild(div);
+      });
+
+      // 「比較する」ボタンを追加
+      const compareIds = [pageId, ...current.similar.slice(0,2)].join(',');
+      const existingBtn = simCard.querySelector('.sim-compare-btn');
+      if (!existingBtn) {
+        const btn = document.createElement('a');
+        btn.className = 'sim-compare-btn';
+        btn.href = `compare.html?ids=${compareIds}`;
+        btn.style.cssText = 'display:block;margin-top:12px;text-align:center;padding:8px;border-radius:10px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);color:#C084FC;font-size:12px;font-weight:600;text-decoration:none;transition:background 0.15s';
+        btn.onmouseover = () => btn.style.background = 'rgba(168,85,247,0.2)';
+        btn.onmouseout  = () => btn.style.background = 'rgba(168,85,247,0.1)';
+        btn.textContent = '⚡ これらを比較する';
+        simCard.appendChild(btn);
+      }
+    });
   });
 })();
 
