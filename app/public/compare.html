@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="企業を最大3社まで比較。年収・売上・従業員数・社風スコアをわかりやすく比較できる就活・転職支援ツール。">
+  <meta property="og:title" content="企業比較｜カイシャーク">
+  <meta property="og:description" content="企業を最大3社まで比較。年収・売上・従業員数・社風スコアを一覧で確認。">
+  <meta property="og:url" content="https://kigyouzukan.vercel.app/compare.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <title>企業比較｜カイシャーク</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="common.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6135193462833777" crossorigin="anonymous"></script>
+  <style>
+    .compare-hero {
+      text-align: center;
+      padding: 48px 24px 32px;
+    }
+    .compare-hero h1 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 900;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    .compare-hero p {
+      font-size: 14px;
+      color: var(--ink3);
+    }
+    /* 業種フィルター */
+    .industry-filter-area {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .ind-btn {
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      color: var(--ink3);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ind-btn:hover, .ind-btn.active {
+      background: rgba(168,85,247,0.15);
+      border-color: rgba(168,85,247,0.4);
+      color: #C084FC;
+    }
+    .selector-area {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 24px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .company-selector {
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+    }
+    .company-selector label {
+      display: block;
+      font-size: 11px;
+      color: var(--ink3);
+      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    /* カスタム検索セレクター */
+    .search-select-wrap {
+      position: relative;
+    }
+    .search-select-input {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 13px;
+      font-family: inherit;
+      padding: 8px 28px 8px 10px;
+      outline: none;
+      cursor: pointer;
+    }
+    .search-select-input:focus { border-color: var(--p1); }
+    .search-select-arrow {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink3);
+      font-size: 10px;
+      pointer-events: none;
+    }
+    .search-select-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 300;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .search-select-dropdown.open { display: block; }
+    .ssd-option {
+      padding: 9px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.1s;
+    }
+    .ssd-option:last-child { border-bottom: none; }
+    .ssd-option:hover, .ssd-option.focused { background: rgba(168,85,247,0.1); }
+    .ssd-option.selected { color: #C084FC; font-weight: 700; }
+    .ssd-option .ssd-tag {
+      font-size: 10px;
+      padding: 1px 7px;
+      border-radius: 10px;
+      background: rgba(168,85,247,0.12);
+      color: #C084FC;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ssd-no-result {
+      padding: 12px;
+      font-size: 12px;
+      color: var(--ink3);
+      text-align: center;
+    }
+    /* 類似企業サジェスト */
+    .similar-suggest {
+      max-width: 980px;
+      margin: 0 auto 16px;
+      padding: 0 16px;
+    }
+    .similar-suggest-inner {
+      background: rgba(168,85,247,0.06);
+      border: 1px solid rgba(168,85,247,0.18);
+      border-radius: 14px;
+      padding: 16px 20px;
+    }
+    .similar-suggest-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink3);
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+    .similar-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .similar-chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(168,85,247,0.3);
+      background: rgba(168,85,247,0.08);
+      color: #C084FC;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .similar-chip:hover {
+      background: rgba(168,85,247,0.2);
+      transform: translateY(-1px);
+    }
+    .compare-btn {
+      display: block;
+      margin: 0 auto 40px;
+      padding: 12px 40px;
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .compare-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* 比較テーブル */
+    .compare-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+      display: none;
+    }
+    .compare-wrap.visible { display: block; }
+    .compare-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 32px 0 12px;
+      border-left: 3px solid var(--p1);
+      padding-left: 10px;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg2);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .compare-table th, .compare-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+    }
+    .compare-table th {
+      background: var(--bg3);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .compare-table th.label-col {
+      text-align: left;
+      color: var(--ink3);
+      font-weight: 600;
+      width: 130px;
+    }
+    .compare-table td.label-col {
+      text-align: left;
+      color: var(--ink3);
+      font-size: 12px;
+    }
+    .compare-table tr:last-child td,
+    .compare-table tr:last-child th { border-bottom: none; }
+    .company-header-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .company-header-name {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .company-header-tag {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: rgba(168,85,247,0.12);
+      color: #C084FC;
+    }
+    .val-highlight {
+      font-weight: 900;
+      font-size: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .val-best {
+      font-weight: 900;
+      font-size: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #10B981;
+    }
+    .val-normal {
+      font-size: 14px;
+      color: var(--ink2);
+    }
+    .score-bar-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .score-bar-mini-bg {
+      width: 80px;
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .score-bar-mini-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--p1), var(--p2));
+      border-radius: 3px;
+      transition: width 0.6s ease;
+    }
+    .score-num-mini {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink2);
+      min-width: 28px;
+    }
+    .link-btn {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(168,85,247,0.4);
+      color: #C084FC;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .link-btn:hover { background: rgba(168,85,247,0.12); }
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--ink3);
+    }
+    .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
+    .empty-state p { font-size: 14px; line-height: 2; }
+    @media (max-width: 768px) {
+      .compare-table th, .compare-table td { padding: 10px 8px; font-size: 12px; }
+      .val-highlight, .val-best { font-size: 14px; }
+      .score-bar-mini-bg { width: 50px; }
+      .company-header-name { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<nav>
+  <div class="nav-logo">カイシャーク</div>
+  <div class="nav-search" style="position:relative">
+    <span>🔍</span>
+    <input id="navSearch" type="text" placeholder="企業名で検索..." autocomplete="off" style="background:transparent;border:none;outline:none;color:var(--ink);font-size:13px;font-family:inherit;width:100%">
+    <div id="navSuggest" style="display:none;position:absolute;top:44px;left:0;right:0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.4)"></div>
+  </div>
+  <div class="nav-right">
+    <a href="top.html" style="font-size:13px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid rgba(255,255,255,0.12);color:#B8B5CC;text-decoration:none">← 企業一覧</a>
+    <a href="shindan.html" style="font-size:13px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid rgba(168,85,247,0.4);color:#C084FC;background:rgba(168,85,247,0.08);text-decoration:none">🤖 企業診断</a>
+    <button class="nav-btn">ログイン</button>
+    <button class="nav-btn filled">無料登録</button>
+  </div>
+</nav>
+
+<div class="compare-hero">
+  <h1>⚡ 企業比較</h1>
+  <p>最大3社を選んで年収・財務・社風スコアを一括比較</p>
+</div>
+
+<!-- 業種フィルター -->
+<div class="industry-filter-area" id="industryFilterArea">
+  <button class="ind-btn active" onclick="filterIndustry('all',this)">すべて</button>
+  <button class="ind-btn" onclick="filterIndustry('IT・通信',this)">💻 IT・通信</button>
+  <button class="ind-btn" onclick="filterIndustry('金融',this)">🏦 金融</button>
+  <button class="ind-btn" onclick="filterIndustry('製造',this)">🏭 製造</button>
+  <button class="ind-btn" onclick="filterIndustry('商社',this)">🌐 商社</button>
+  <button class="ind-btn" onclick="filterIndustry('小売',this)">🛒 小売</button>
+  <button class="ind-btn" onclick="filterIndustry('食品',this)">🍱 食品</button>
+  <button class="ind-btn" onclick="filterIndustry('不動産',this)">🏢 不動産</button>
+  <button class="ind-btn" onclick="filterIndustry('自動車',this)">🚗 自動車</button>
+  <button class="ind-btn" onclick="filterIndustry('アパレル',this)">👗 アパレル</button>
+  <button class="ind-btn" onclick="filterIndustry('医薬品',this)">💊 医薬品</button>
+</div>
+
+<div class="selector-area" id="selectorArea">
+  <div class="company-selector">
+    <label>企業 1</label>
+    <div class="search-select-wrap" id="wrap1">
+      <input class="search-select-input" id="inp1" placeholder="名前で検索..." autocomplete="off" readonly onclick="openDrop(1)">
+      <span class="search-select-arrow">▼</span>
+      <div class="search-select-dropdown" id="drop1"></div>
+    </div>
+  </div>
+  <div class="company-selector">
+    <label>企業 2</label>
+    <div class="search-select-wrap" id="wrap2">
+      <input class="search-select-input" id="inp2" placeholder="名前で検索..." autocomplete="off" readonly onclick="openDrop(2)">
+      <span class="search-select-arrow">▼</span>
+      <div class="search-select-dropdown" id="drop2"></div>
+    </div>
+  </div>
+  <div class="company-selector">
+    <label>企業 3（任意）</label>
+    <div class="search-select-wrap" id="wrap3">
+      <input class="search-select-input" id="inp3" placeholder="名前で検索..." autocomplete="off" readonly onclick="openDrop(3)">
+      <span class="search-select-arrow">▼</span>
+      <div class="search-select-dropdown" id="drop3"></div>
+    </div>
+  </div>
+</div>
+<button class="compare-btn" onclick="runCompare()">比較する →</button>
+
+<!-- 類似企業サジェスト -->
+<div class="similar-suggest" id="similarSuggest" style="display:none">
+  <div class="similar-suggest-inner">
+    <div class="similar-suggest-title">🔍 この企業と似た企業も比較してみる</div>
+    <div class="similar-chips" id="similarChips"></div>
+  </div>
+</div>
+
+<div class="compare-wrap" id="compareWrap">
+  <div id="compareContent"></div>
+</div>
+
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:24px;text-align:center;margin-top:40px;position:relative;z-index:1">
+  <div style="max-width:900px;margin:0 auto;font-size:11px;color:var(--ink3);line-height:2">
+    <strong style="color:var(--ink2)">【免責事項】</strong>
+    本サイトに掲載している情報は、有価証券報告書（EDINET）・各社IR資料をもとに作成しています。
+    財務データは開示時点のものであり、最新情報と異なる場合があります。
+    情報の完全性・正確性を保証するものではありません。
+    <br>© 2026 カイシャーク All Rights Reserved.　｜　<a href="terms.html" style="color:var(--ink3);text-decoration:none">利用規約</a>　｜　<a href="privacy.html" style="color:var(--ink3);text-decoration:none">プライバシーポリシー</a>　｜　<a href="contact.html" style="color:var(--ink3);text-decoration:none">お問い合わせ</a>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+let companiesData = [];
+let selectedIds = [null, null, null];
+let currentFilter = 'all';
+
+fetch('companies.json', { cache: 'no-store' })
+  .then(r => r.json())
+  .then(data => {
+    companiesData = data;
+    buildDropdowns(data);
+
+    // URLパラメータから初期値
+    const params = new URLSearchParams(location.search);
+    const ids = (params.get('ids') || '').split(',').filter(Boolean);
+    if (ids[0]) setSelection(1, ids[0]);
+    if (ids[1]) setSelection(2, ids[1]);
+    if (ids[2]) setSelection(3, ids[2]);
+    if (ids.length >= 2) runCompare();
+  });
+
+/* ===== 業種フィルター ===== */
+function filterIndustry(industry, btn) {
+  currentFilter = industry;
+  document.querySelectorAll('.ind-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  [1,2,3].forEach(n => renderDropList(n, document.getElementById('inp'+n).dataset.query || ''));
+}
+
+/* ===== カスタム検索セレクター ===== */
+function buildDropdowns(data) {
+  [1,2,3].forEach(n => {
+    const inp = document.getElementById('inp'+n);
+    inp.removeAttribute('readonly');
+    inp.addEventListener('input', () => renderDropList(n, inp.value));
+    inp.addEventListener('focus', () => openDrop(n));
+    renderDropList(n, '');
+  });
+  document.addEventListener('click', e => {
+    [1,2,3].forEach(n => {
+      const wrap = document.getElementById('wrap'+n);
+      if (wrap && !wrap.contains(e.target)) closeDrop(n);
+    });
+  });
+}
+
+function renderDropList(n, query) {
+  const drop = document.getElementById('drop'+n);
+  const inp  = document.getElementById('inp'+n);
+  inp.dataset.query = query;
+  const q = query.trim().toLowerCase();
+
+  let filtered = companiesData.filter(c =>
+    (currentFilter === 'all' || c.industry === currentFilter) &&
+    (q === '' || c.nameShort.toLowerCase().includes(q) || c.name.toLowerCase().includes(q) || c.industry.includes(q))
+  );
+
+  if (filtered.length === 0) {
+    drop.innerHTML = '<div class="ssd-no-result">該当企業がありません</div>';
+    return;
+  }
+
+  drop.innerHTML = (n === 3 ? [{id:'', nameShort:'選択しない', industry:''}] : []).concat(filtered)
+    .map(c => `
+      <div class="ssd-option${selectedIds[n-1]===c.id?' selected':''}" data-id="${c.id}" onclick="setSelection(${n},'${c.id}')">
+        ${c.industry ? `<span class="ssd-tag">${c.industry}</span>` : ''}
+        <span>${c.nameShort || '選択しない'}</span>
+      </div>`).join('');
+}
+
+function openDrop(n) {
+  [1,2,3].forEach(i => { if(i!==n) closeDrop(i); });
+  document.getElementById('drop'+n).classList.add('open');
+  renderDropList(n, document.getElementById('inp'+n).dataset.query || '');
+}
+
+function closeDrop(n) {
+  document.getElementById('drop'+n).classList.remove('open');
+  // 選択中の企業名を表示に戻す
+  const sel = selectedIds[n-1];
+  const c = sel ? companiesData.find(x=>x.id===sel) : null;
+  const inp = document.getElementById('inp'+n);
+  inp.value = c ? c.nameShort : '';
+  inp.dataset.query = '';
+}
+
+function setSelection(n, id) {
+  selectedIds[n-1] = id || null;
+  const c = id ? companiesData.find(x=>x.id===id) : null;
+  const inp = document.getElementById('inp'+n);
+  inp.value = c ? c.nameShort : '';
+  inp.dataset.query = '';
+  closeDrop(n);
+}
+
+function runCompare() {
+  const ids = selectedIds.filter(Boolean);
+  if (ids.length < 2) {
+    alert('企業を2社以上選択してください');
+    return;
+  }
+  history.replaceState(null, '', `compare.html?ids=${ids.join(',')}`);
+  const selected = ids.map(id => companiesData.find(c => c.id === id)).filter(Boolean);
+  renderCompare(selected);
+  renderSimilarSuggest(selected);
+}
+
+/* ===== 類似企業サジェスト ===== */
+function renderSimilarSuggest(selected) {
+  const suggestEl = document.getElementById('similarSuggest');
+  const chipsEl   = document.getElementById('similarChips');
+  const currentIds = selected.map(c => c.id);
+
+  // 選択中の企業のsimilarをすべて集めて重複除去
+  const suggestIds = [...new Set(
+    selected.flatMap(c => c.similar || [])
+      .filter(id => !currentIds.includes(id))
+  )].slice(0, 8);
+
+  if (suggestIds.length === 0) { suggestEl.style.display = 'none'; return; }
+
+  chipsEl.innerHTML = suggestIds.map(id => {
+    const c = companiesData.find(x => x.id === id);
+    if (!c) return '';
+    const newIds = [...currentIds.slice(0, 2), id].join(',');
+    return `<a class="similar-chip" href="compare.html?ids=${newIds}" onclick="addToCompare('${id}');return false;">
+      + ${c.nameShort}
+      <span style="font-size:10px;opacity:0.7;margin-left:3px">${c.industry}</span>
+    </a>`;
+  }).join('');
+
+  suggestEl.style.display = 'block';
+}
+
+function addToCompare(id) {
+  // 空きスロットに追加して再比較
+  const emptySlot = selectedIds.findIndex(x => !x);
+  if (emptySlot >= 0) {
+    setSelection(emptySlot + 1, id);
+  } else {
+    setSelection(3, id); // 3枠目を上書き
+  }
+  runCompare();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderCompare(companies) {
+  const wrap = document.getElementById('compareWrap');
+  const content = document.getElementById('compareContent');
+  wrap.classList.add('visible');
+
+  // 最大値ハイライト用（dataRow内で個別に計算するためここには変数不要）
+
+  // ヘッダー行
+  const headerCells = companies.map(c => `
+    <th>
+      <div class="company-header-cell">
+        <div class="company-header-name">${c.nameShort}</div>
+        <span class="company-header-tag">${c.industry}</span>
+      </div>
+    </th>
+  `).join('');
+
+  // 基本データ行 (lowerIsBetter=true のとき最小値に👑)
+  function dataRow(label, fn, isHighlight, lowerIsBetter) {
+    const vals = companies.map(fn);
+    const nums = vals.map(v => parseFloat(String(v).replace(/[^\d.]/g,'')) || 0);
+    const hasValidNum = nums.some(n => n > 0);
+    const bestNum = lowerIsBetter
+      ? Math.min(...nums.filter(n => n > 0))
+      : Math.max(...nums);
+    return `<tr>
+      <td class="label-col">${label}</td>
+      ${companies.map((c, i) => {
+        const raw = fn(c);
+        const num = nums[i];
+        const isBest = isHighlight && hasValidNum && num === bestNum && num > 0;
+        return `<td><span class="${isBest ? 'val-best' : 'val-normal'}">${raw || '—'}${isBest ? ' 👑' : ''}</span></td>`;
+      }).join('')}
+    </tr>`;
+  }
+
+  // 社風スコア行
+  function scoreRow(label, key) {
+    const vals = companies.map(c => c.cultureScores?.[key] || 0);
+    const maxVal = Math.max(...vals);
+    return `<tr>
+      <td class="label-col">${label}</td>
+      ${companies.map((c, i) => {
+        const val = vals[i];
+        const isBest = val === maxVal && maxVal > 0;
+        return `<td>
+          <div class="score-bar-mini">
+            <div class="score-bar-mini-bg"><div class="score-bar-mini-fill" style="width:${val}%"></div></div>
+            <span class="score-num-mini" style="${isBest ? 'color:#10B981;font-weight:900' : ''}">${val || '—'}</span>
+          </div>
+        </td>`;
+      }).join('')}
+    </tr>`;
+  }
+
+  // すべての社風スコアキーを収集
+  const allScoreKeys = [...new Set(companies.flatMap(c => Object.keys(c.cultureScores || {})))];
+
+  content.innerHTML = `
+    <div class="compare-section-title">📊 基本データ</div>
+    <table class="compare-table">
+      <thead><tr><th class="label-col">項目</th>${headerCells}</tr></thead>
+      <tbody>
+        ${dataRow('平均年収', c => c.avgSalary ? `${c.avgSalary.toLocaleString()}万円` : '—', true)}
+        ${dataRow('売上高', c => c.revenue || '—', false)}
+        ${dataRow('従業員数', c => c.employees || '—', false)}
+        ${dataRow('平均年齢', c => c.avgAge ? `${c.avgAge}歳` : '—', true, true)}
+        ${dataRow('平均勤続年数', c => c.avgTenure || '—', true)}
+        ${dataRow('女性管理職比率', c => c.femaleMgrRatio || '—', true)}
+        ${dataRow('本社', c => c.headquarters || '—', false)}
+        ${dataRow('証券コード', c => c.ticker ? `${c.ticker}（東証P）` : '—', false)}
+        <tr>
+          <td class="label-col">詳細ページ</td>
+          ${companies.map(c => `<td><a href="${c.url}" class="link-btn">詳細を見る →</a></td>`).join('')}
+        </tr>
+      </tbody>
+    </table>
+
+    ${allScoreKeys.length > 0 ? `
+    <div class="compare-section-title">🎯 社風スコア比較</div>
+    <table class="compare-table">
+      <thead><tr><th class="label-col">スコア項目</th>${headerCells}</tr></thead>
+      <tbody>
+        ${allScoreKeys.map(key => scoreRow(key, key)).join('')}
+      </tbody>
+    </table>` : ''}
+
+    <div style="margin-top:24px;padding:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:12px;font-size:12px;color:var(--ink3)">
+      📌 出典：EDINET 有価証券報告書・各社IR資料｜👑 は比較企業中の最高値
+    </div>
+
+    <div style="margin-top:24px;text-align:center">
+      <div style="font-size:13px;color:var(--ink3);margin-bottom:16px">転職・就活エージェントに相談する（無料）</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://www.recruit-agent.co.jp/" target="_blank" rel="noopener" style="padding:10px 20px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.3);color:#C084FC;text-decoration:none;font-size:13px;font-weight:600">💼 リクルートエージェント</a>
+        <a href="https://doda.jp/" target="_blank" rel="noopener" style="padding:10px 20px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.3);color:#C084FC;text-decoration:none;font-size:13px;font-weight:600">🎯 doda</a>
+        <a href="https://job.mynavi.jp/" target="_blank" rel="noopener" style="padding:10px 20px;border-radius:20px;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.3);color:#C084FC;text-decoration:none;font-size:13px;font-weight:600">🎓 マイナビ</a>
+      </div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:8px">※アフィリエイトリンクを含みます</div>
+    </div>
+  `;
+
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- セキュリティヘッダー -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="20問の質問に答えてあなたに合う企業を診断。就活・転職活動に使えるZ世代向け企業マッチング診断。">
+<meta property="og:title" content="企業診断｜カイシャーク">
+<meta property="og:description" content="20問の質問に答えてあなたに合う企業を診断。就活・転職活動に使えるZ世代向け企業マッチング診断。">
+<meta property="og:url" content="https://kigyouzukan.vercel.app/shindan.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企業診断｜カイシャーク">
+<meta name="twitter:description" content="20問の質問に答えてあなたに合う企業を診断。就活・転職活動に使えるZ世代向け企業マッチング診断。">
+<title>AI社風診断｜カイシャーク</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0D0D12; --bg2: #13131A; --bg3: #1A1A24;
+    --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.12);
+    --ink: #F0EFF8; --ink2: #B8B5CC; --ink3: #7A778E;
+    --p1: #A855F7; --p2: #EC4899; --g1: #10B981;
+    --grad: linear-gradient(135deg, #A855F7, #EC4899);
+    --glow: 0 0 30px rgba(168,85,247,0.25);
+  }
+  body {
+    font-family: 'Noto Sans JP', 'Space Grotesk', sans-serif;
+    background: var(--bg); color: var(--ink);
+    min-height: 100vh; line-height: 1.6;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(13,13,18,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px;
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 13px; color: var(--ink3); text-decoration: none;
+    display: flex; align-items: center; gap: 6px; transition: color 0.15s;
+  }
+  .nav-back:hover { color: var(--p1); }
+
+  /* MAIN */
+  .main {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto; padding: 48px 16px 80px;
+  }
+
+  /* INTRO */
+  .intro { text-align: center; margin-bottom: 48px; }
+  .intro-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #C084FC;
+    font-weight: 600; margin-bottom: 16px;
+  }
+  .intro-title {
+    font-size: 36px; font-weight: 900; letter-spacing: -1px;
+    line-height: 1.2; margin-bottom: 12px;
+  }
+  .intro-title span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .intro-sub { font-size: 15px; color: var(--ink3); }
+
+  /* PROGRESS */
+  .progress-wrap { margin-bottom: 32px; }
+  .progress-header {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--ink3); margin-bottom: 8px;
+  }
+  .progress-bar-bg {
+    height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--grad); border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px; margin-bottom: 24px;
+    animation: fadeUp 0.3s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .q-category {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--p1); margin-bottom: 10px;
+  }
+  .q-number {
+    font-size: 12px; color: var(--ink3); margin-bottom: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .q-text {
+    font-size: 18px; font-weight: 700; color: var(--ink);
+    margin-bottom: 28px; line-height: 1.5;
+  }
+
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 12px; padding: 14px 18px;
+    font-size: 14px; font-weight: 500; color: var(--ink2);
+    cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.15s; text-align: left;
+  }
+  .option-btn:hover { border-color: var(--p1); color: var(--ink); background: rgba(168,85,247,0.06); }
+  .option-btn.selected {
+    border-color: var(--p1); color: var(--ink);
+    background: rgba(168,85,247,0.12);
+    box-shadow: 0 0 0 1px rgba(168,85,247,0.3);
+  }
+  .option-icon { font-size: 18px; flex-shrink: 0; }
+
+  /* NAV BTNS */
+  .nav-btns {
+    display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px;
+  }
+  .btn-prev {
+    background: transparent; border: 1px solid var(--border2);
+    color: var(--ink3); padding: 11px 24px; border-radius: 24px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: all 0.15s;
+  }
+  .btn-prev:hover { border-color: var(--p1); color: var(--p1); }
+  .btn-next {
+    background: var(--grad); border: none; color: white;
+    padding: 11px 28px; border-radius: 24px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+    box-shadow: var(--glow); transition: all 0.2s; opacity: 0.4; pointer-events: none;
+  }
+  .btn-next.enabled { opacity: 1; pointer-events: auto; }
+  .btn-next.enabled:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(168,85,247,0.4); }
+
+  /* RESULT */
+  .result { display: none; animation: fadeUp 0.4s ease both; }
+  .result-header { text-align: center; margin-bottom: 40px; }
+  .result-title {
+    font-size: 28px; font-weight: 900; margin-bottom: 8px;
+  }
+  .result-title span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .result-sub { font-size: 14px; color: var(--ink3); }
+
+  .result-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin-bottom: 16px;
+    display: flex; gap: 20px; align-items: center;
+    transition: all 0.2s; text-decoration: none; color: inherit;
+    position: relative; overflow: hidden;
+  }
+  .result-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--grad); opacity: 0; transition: opacity 0.2s;
+  }
+  .result-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-2px); }
+  .result-card:hover::before { opacity: 1; }
+
+  .result-rank {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 900; width: 44px; flex-shrink: 0;
+    background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .result-logo {
+    width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; font-family: 'Space Grotesk', sans-serif;
+    border: 1px solid var(--border2);
+  }
+  .result-info { flex: 1; }
+  .result-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .result-sub-text { font-size: 12px; color: var(--ink3); margin-bottom: 10px; }
+  .result-match-bar-bg {
+    height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; margin-bottom: 4px;
+  }
+  .result-match-bar-fill { height: 100%; background: var(--grad); border-radius: 3px; }
+  .result-match-label { font-size: 11px; color: var(--ink3); }
+  .result-score {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 900; flex-shrink: 0; text-align: center;
+  }
+  .result-score span { font-size: 14px; color: var(--ink3); }
+
+  .result-reasons {
+    background: var(--bg3); border-radius: 12px; padding: 16px; margin-top: 14px;
+  }
+  .result-reason-title { font-size: 12px; font-weight: 700; color: var(--p1); margin-bottom: 8px; }
+  .result-reason-item { font-size: 12px; color: var(--ink2); line-height: 1.8; }
+
+  .result-actions { display: flex; gap: 12px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
+  .btn-retry {
+    background: transparent; border: 1px solid var(--border2);
+    color: var(--ink2); padding: 11px 24px; border-radius: 24px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .btn-retry:hover { border-color: var(--p1); color: var(--p1); }
+  .btn-top {
+    background: var(--grad); border: none; color: white;
+    padding: 11px 28px; border-radius: 24px; text-decoration: none;
+    font-size: 14px; font-weight: 600; box-shadow: var(--glow); transition: all 0.2s;
+  }
+  .btn-top:hover { transform: translateY(-1px); }
+
+  @media (max-width: 480px) {
+    .intro-title { font-size: 28px; }
+    .q-text { font-size: 16px; }
+    .result-card { flex-wrap: wrap; }
+  }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6135193462833777"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="top.html">カイシャーク</a>
+  <a class="nav-back" href="top.html">← トップへ戻る</a>
+</nav>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="intro" id="introSection">
+    <div class="intro-badge">🤖 AI社風診断</div>
+    <h1 class="intro-title">あなたに合う企業を<br><span>診断しよう</span></h1>
+    <p class="intro-sub">20問に答えるだけ。働き方・価値観から<br>ぴったりの企業TOP3を見つけます。</p>
+    <br><br>
+    <button class="btn-next enabled" onclick="startQuiz()" style="font-size:16px;padding:14px 40px">診断スタート →</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quizSection" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span id="progressText">質問 1 / 20</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+      <div class="q-category" id="qCategory"></div>
+      <div class="q-number" id="qNumber"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsWrap"></div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-prev" id="btnPrev" onclick="prevQ()" style="display:none">← 戻る</button>
+      <button class="btn-next" id="btnNext" onclick="nextQ()">次へ →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="resultSection">
+    <div class="result-header">
+      <div class="intro-badge">🎉 診断完了</div>
+      <h2 class="result-title">あなたに合う企業<span>TOP3</span></h2>
+      <p class="result-sub">回答をもとにマッチ度を算出しました</p>
+    </div>
+    <div id="resultCards"></div>
+    <div class="result-actions">
+      <button class="btn-retry" onclick="retryQuiz()">🔄 もう一度診断する</button>
+      <a class="btn-top" href="top.html">企業一覧を見る →</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// 質問データ
+// ============================================================
+const QUESTIONS = [
+  // 働き方・環境
+  { cat: "💼 働き方・環境", text: "リモートワークや柔軟な働き方はどのくらい重視しますか？", options: [
+    { icon: "🏠", label: "かなり重視する。場所を選ばず働きたい", scores: { remote: 3 } },
+    { icon: "🔀", label: "ある程度あれば十分", scores: { remote: 1 } },
+    { icon: "🏢", label: "あまり気にしない。出社でも問題ない", scores: { remote: -1 } },
+    { icon: "❌", label: "むしろ出社派。対面でのやり取りが好き", scores: { remote: -3 } },
+  ]},
+  { cat: "💼 働き方・環境", text: "残業についてどう考えますか？", options: [
+    { icon: "⏰", label: "残業はなるべく避けたい", scores: { worklife: 3 } },
+    { icon: "⚖️", label: "繁忙期は仕方ないが普段は定時で帰りたい", scores: { worklife: 1 } },
+    { icon: "🔥", label: "成果のためなら残業も厭わない", scores: { worklife: -1 } },
+    { icon: "💪", label: "仕事に没頭したい。時間は気にしない", scores: { worklife: -3 } },
+  ]},
+  { cat: "💼 働き方・環境", text: "仕事の裁量はどのくらい欲しいですか？", options: [
+    { icon: "🎯", label: "自分で判断・決定できる仕事がしたい", scores: { autonomy: 3 } },
+    { icon: "🤝", label: "チームで話し合って決める方が好き", scores: { autonomy: 1, team: 1 } },
+    { icon: "📋", label: "指示がある程度あった方が動きやすい", scores: { autonomy: -1 } },
+    { icon: "🗺️", label: "明確な指示のもとで動く方が得意", scores: { autonomy: -2 } },
+  ]},
+  { cat: "💼 働き方・環境", text: "職場の人間関係についてどんなスタイルが合いますか？", options: [
+    { icon: "🤜", label: "ガッツリ連携するチームワーク重視", scores: { team: 3 } },
+    { icon: "🤝", label: "適度に協力しながらも個人の仕事は自分で", scores: { team: 1 } },
+    { icon: "🧩", label: "必要最低限の連携があればOK", scores: { team: -1 } },
+    { icon: "🦅", label: "基本的に個人プレーが好き", scores: { team: -2 } },
+  ]},
+
+  // キャリア志向
+  { cat: "🚀 キャリア志向", text: "海外での仕事や、グローバルな環境に興味はありますか？", options: [
+    { icon: "✈️", label: "ぜひ海外で働いてみたい", scores: { global: 3 } },
+    { icon: "🌐", label: "グローバルな仕事に関わりたいが海外赴任は考え中", scores: { global: 1 } },
+    { icon: "🗾", label: "国内での仕事の方が向いていると思う", scores: { global: -1 } },
+    { icon: "🏠", label: "地元や国内で腰を据えて働きたい", scores: { global: -3 } },
+  ]},
+  { cat: "🚀 キャリア志向", text: "将来的にどんなキャリアを歩みたいですか？", options: [
+    { icon: "👑", label: "マネジメント・リーダーとして組織を動かしたい", scores: { management: 3 } },
+    { icon: "🔬", label: "特定分野の専門家・スペシャリストになりたい", scores: { specialist: 3 } },
+    { icon: "🌱", label: "まだ決まっていないが、幅広く経験を積みたい", scores: { management: 1, specialist: 1 } },
+    { icon: "🎨", label: "自分でビジネスを作る起業家・イントレプレナーを目指す", scores: { autonomy: 2, management: 1 } },
+  ]},
+  { cat: "🚀 キャリア志向", text: "スキルアップについてどう考えますか？", options: [
+    { icon: "📚", label: "会社の研修・育成制度が充実していてほしい", scores: { training: 3 } },
+    { icon: "⚡", label: "OJTで実務を通じてどんどん学びたい", scores: { growth: 3 } },
+    { icon: "🌱", label: "自分のペースでゆっくり成長したい", scores: { worklife: 1 } },
+    { icon: "🔥", label: "結果で評価されることで自然と成長できる", scores: { performance: 2 } },
+  ]},
+  { cat: "🚀 キャリア志向", text: "入社後のキャリアステップはどう考えていますか？", options: [
+    { icon: "📈", label: "若いうちから抜擢されて早く上に行きたい", scores: { growth: 3, performance: 2 } },
+    { icon: "🪜", label: "着実に経験を積んでステップアップしたい", scores: { stability: 2 } },
+    { icon: "🔄", label: "社内で異動しながらいろんな経験を積みたい", scores: { management: 1, training: 1 } },
+    { icon: "💡", label: "専門性を深める一本道のキャリアがいい", scores: { specialist: 3 } },
+  ]},
+
+  // 文化・社風
+  { cat: "🏢 文化・社風", text: "評価制度はどんなスタイルが好みですか？", options: [
+    { icon: "🏆", label: "完全成果主義。結果で評価されたい", scores: { performance: 3 } },
+    { icon: "⚖️", label: "成果とプロセス両方を見てほしい", scores: { performance: 1, team: 1 } },
+    { icon: "📅", label: "年功序列でも安定して評価されればOK", scores: { stability: 2 } },
+    { icon: "🌈", label: "評価より働きがいや仕事の楽しさを重視", scores: { worklife: 2 } },
+  ]},
+  { cat: "🏢 文化・社風", text: "会社の規模感はどちらが好みですか？", options: [
+    { icon: "🏙️", label: "大企業。安定感とブランドが大事", scores: { stability: 3, brand: 3 } },
+    { icon: "🏘️", label: "中堅企業。安定しつつ裁量もほしい", scores: { stability: 1, autonomy: 1 } },
+    { icon: "🚀", label: "ベンチャー・スタートアップで挑戦したい", scores: { growth: 3, autonomy: 2 } },
+    { icon: "🤷", label: "規模より仕事内容や人間関係が大事", scores: { team: 1 } },
+  ]},
+  { cat: "🏢 文化・社風", text: "社内の雰囲気はどんな感じが合いますか？", options: [
+    { icon: "⚡", label: "スピード感があってチャレンジングな雰囲気", scores: { growth: 2, performance: 1 } },
+    { icon: "🤝", label: "アットホームで助け合える雰囲気", scores: { team: 3 } },
+    { icon: "🎯", label: "プロフェッショナル同士が切磋琢磨する雰囲気", scores: { specialist: 2, performance: 1 } },
+    { icon: "😌", label: "落ち着いていて働きやすい雰囲気", scores: { worklife: 2, stability: 1 } },
+  ]},
+  { cat: "🏢 文化・社風", text: "会社のブランドや知名度はどのくらい重視しますか？", options: [
+    { icon: "⭐", label: "誰もが知る有名企業で働きたい", scores: { brand: 3 } },
+    { icon: "📊", label: "知名度より業界内での評判や実力を重視", scores: { specialist: 1 } },
+    { icon: "💡", label: "無名でも面白い仕事や成長できる環境が大事", scores: { growth: 2 } },
+    { icon: "🤔", label: "特にこだわりはない", scores: {} },
+  ]},
+
+  // 業界・興味分野
+  { cat: "🎯 業界・興味分野", text: "どんな業界・分野に興味がありますか？（最も近いもの）", options: [
+    { icon: "👗", label: "ファッション・アパレル・消費財", scores: { apparel: 3 } },
+    { icon: "🚗", label: "自動車・製造・ものづくり", scores: { manufacturing: 3 } },
+    { icon: "💻", label: "IT・テクノロジー・DX", scores: { tech: 3 } },
+    { icon: "💰", label: "金融・コンサル・ビジネスサービス", scores: { finance: 3 } },
+  ]},
+  { cat: "🎯 業界・興味分野", text: "どんな社会貢献・インパクトを与えたいですか？", options: [
+    { icon: "🌍", label: "世界中の人の生活を豊かにしたい", scores: { global: 2, brand: 1 } },
+    { icon: "🌱", label: "環境・サステナビリティに貢献したい", scores: { manufacturing: 1, tech: 1 } },
+    { icon: "🔥", label: "業界に革命を起こすイノベーションがしたい", scores: { growth: 2, tech: 1 } },
+    { icon: "👥", label: "身近な人や地域社会に貢献したい", scores: { team: 1, stability: 1 } },
+  ]},
+  { cat: "🎯 業界・興味分野", text: "どんな仕事内容に興味がありますか？", options: [
+    { icon: "📊", label: "データ分析・戦略立案・企画", scores: { specialist: 2, tech: 1 } },
+    { icon: "🛒", label: "営業・マーケティング・ブランディング", scores: { performance: 1, apparel: 1, brand: 1 } },
+    { icon: "⚙️", label: "開発・製造・エンジニアリング", scores: { specialist: 2, manufacturing: 1, tech: 1 } },
+    { icon: "🤝", label: "人事・組織・コーポレート系", scores: { team: 2, management: 1 } },
+  ]},
+
+  // 年収・安定性
+  { cat: "💰 年収・安定性", text: "将来の年収についてどんな考え方ですか？", options: [
+    { icon: "🚀", label: "リスクをとってでも高年収を狙いたい", scores: { performance: 2, growth: 1 } },
+    { icon: "📈", label: "成果に見合った高い報酬がほしい", scores: { performance: 3 } },
+    { icon: "⚖️", label: "平均より少し上であれば十分", scores: { stability: 1 } },
+    { icon: "🏠", label: "安定した収入の方が生活設計しやすい", scores: { stability: 3 } },
+  ]},
+  { cat: "💰 年収・安定性", text: "雇用の安定性はどのくらい重要ですか？", options: [
+    { icon: "🏰", label: "最重要。倒産リスクの低い大企業がいい", scores: { stability: 3, brand: 2 } },
+    { icon: "⚖️", label: "ある程度の安定は欲しいが成長も大事", scores: { stability: 1, growth: 1 } },
+    { icon: "🎲", label: "多少リスクがあっても挑戦的な環境がいい", scores: { growth: 2, performance: 1 } },
+    { icon: "💡", label: "スキルを磨けば安定は後からついてくると思う", scores: { specialist: 2, growth: 1 } },
+  ]},
+  { cat: "💰 年収・安定性", text: "福利厚生についてどう考えますか？", options: [
+    { icon: "🏥", label: "健康保険・退職金など手厚い福利厚生を重視", scores: { stability: 3 } },
+    { icon: "🏠", label: "住宅補助や家族手当など生活支援が大事", scores: { stability: 2, worklife: 1 } },
+    { icon: "📚", label: "スキルアップ支援や自己啓発費用補助が嬉しい", scores: { training: 2, specialist: 1 } },
+    { icon: "✈️", label: "福利厚生より基本給・賞与の高さを優先", scores: { performance: 2 } },
+  ]},
+  { cat: "💰 年収・安定性", text: "転職についてどんな考え方ですか？", options: [
+    { icon: "🏯", label: "一つの会社で長く働きたい（終身雇用派）", scores: { stability: 3 } },
+    { icon: "🌱", label: "3〜5年で成長してステップアップしたい", scores: { growth: 2, performance: 1 } },
+    { icon: "🔄", label: "スキルや市場価値を高めて積極的に動く", scores: { specialist: 2, growth: 1 } },
+    { icon: "🤷", label: "まだ考えていない", scores: {} },
+  ]},
+  { cat: "💼 最後の質問", text: "仕事をする上で一番大切にしていることは？", options: [
+    { icon: "💡", label: "やりがい・仕事の面白さ", scores: { growth: 2, specialist: 1 } },
+    { icon: "💰", label: "年収・キャリアアップ", scores: { performance: 2, growth: 1 } },
+    { icon: "⚖️", label: "ワークライフバランス", scores: { worklife: 3 } },
+    { icon: "🤝", label: "仲間・チーム・人間関係", scores: { team: 3 } },
+  ]},
+];
+
+// ============================================================
+// 企業データ（スコア軸ごとの適合度）
+// ============================================================
+const COMPANIES = [
+  {
+    id: "firstretailing", short: "ファーストリテイリング", logo: "FR",
+    logoStyle: "background:linear-gradient(135deg,#2A1A3E,#1a0533)",
+    logoTextStyle: "background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "アパレル ｜ 東証プライム", url: "firstretailing.html",
+    profile: { remote:-1, worklife:-1, autonomy:2, team:1, global:3, management:2, specialist:1, growth:3, performance:3, stability:1, brand:3, training:1, apparel:3, manufacturing:0, tech:0, finance:0 },
+    reasons: ["グローバル展開が積極的で海外赴任のチャンスが多い", "成果主義で若手でも結果次第で高年収・昇進が狙える", "アパレル・ファッション業界トップクラスのブランド力"],
+  },
+  {
+    id: "toyota", short: "トヨタ自動車", logo: "TM",
+    logoStyle: "background:linear-gradient(135deg,#1E2A3E,#1A2A1E)",
+    logoTextStyle: "background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "自動車 ｜ 東証プライム", url: "toyota.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:2, specialist:3, growth:2, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:3, tech:2, finance:0 },
+    reasons: ["日本最大手メーカーとして抜群の安定性と福利厚生", "ものづくり・エンジニアリングの専門性を深められる", "EV・自動運転など次世代技術の最前線で働ける"],
+  },
+  {
+    id: "softbank", short: "ソフトバンク", logo: "SB",
+    logoStyle: "background:linear-gradient(135deg,#1a1a2e,#16213e)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCD34D,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "softbank.html",
+    profile: { remote:2, worklife:-1, autonomy:2, team:1, global:2, management:2, specialist:1, growth:3, performance:3, stability:1, brand:3, training:2, apparel:0, manufacturing:0, tech:3, finance:1 },
+    reasons: ["スピード感のある環境で若手から大きな仕事ができる", "通信・AI・DXなど最先端ビジネスに携われる", "成果主義で実力次第で早期昇進・高報酬が狙える"],
+  },
+  {
+    id: "nttdata", short: "NTTデータグループ", logo: "ND",
+    logoStyle: "background:linear-gradient(135deg,#0a1628,#0d2137)",
+    logoTextStyle: "background:linear-gradient(135deg,#60A5FA,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "nttdata.html",
+    profile: { remote:2, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:1, performance:1, stability:3, brand:2, training:3, apparel:0, manufacturing:0, tech:3, finance:0 },
+    reasons: ["国内最大手SIerとして安定した雇用と充実した研修制度", "グローバル展開中でITの専門性を深めながら海外経験も可能", "チームで大規模プロジェクトを推進する仕事が多い"],
+  },
+  {
+    id: "fujitsu", short: "富士通", logo: "FJ",
+    logoStyle: "background:linear-gradient(135deg,#0f1929,#1a1f3a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F87171,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "fujitsu.html",
+    profile: { remote:2, worklife:1, autonomy:1, team:2, global:2, management:1, specialist:2, growth:2, performance:2, stability:2, brand:2, training:2, apparel:0, manufacturing:1, tech:3, finance:0 },
+    reasons: ["DX推進・社会変革に取り組む大手IT企業", "リモートワーク推進など働き方改革が進む", "ITとものづくり両面の専門性を活かせる環境"],
+  },
+  {
+    id: "kddi", short: "KDDI", logo: "KD",
+    logoStyle: "background:linear-gradient(135deg,#0d1f3c,#1a2a4a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F97316,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "kddi.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:1, management:2, specialist:1, growth:2, performance:2, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:3, finance:0 },
+    reasons: ["通信インフラを支える安定企業で長期キャリアを築ける", "平均年収1,018万円の高待遇と充実した福利厚生", "5G・IoT・DXなど次世代技術に関われる"],
+  },
+  {
+    id: "mufg", short: "三菱UFJフィナンシャルG", logo: "MU",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1515)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#D97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "mufg.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:3, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["日本最大の金融グループとして抜群の安定性とブランド力", "グローバル拠点が多く海外でのキャリア形成が可能", "充実した研修制度とマネジメントへの明確なキャリアパス"],
+  },
+  {
+    id: "nomura", short: "野村ホールディングス", logo: "NM",
+    logoStyle: "background:linear-gradient(135deg,#1a1a0a,#2a2a15)",
+    logoTextStyle: "background:linear-gradient(135deg,#FBBF24,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "nomura.html",
+    profile: { remote:0, worklife:-2, autonomy:2, team:1, global:3, management:2, specialist:3, growth:2, performance:3, stability:1, brand:3, training:2, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["証券・投資銀行のプロとしてハイレベルな専門性を磨ける", "成果次第で高報酬が狙える実力主義の環境", "グローバルな金融市場で活躍できる舞台がある"],
+  },
+  {
+    id: "mizuho", short: "みずほフィナンシャルグループ", logo: "MZ",
+    logoStyle: "background:linear-gradient(135deg,#0a1a2e,#0d2137)",
+    logoTextStyle: "background:linear-gradient(135deg,#34D399,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "mizuho.html",
+    profile: { remote:1, worklife:0, autonomy:1, team:2, global:2, management:2, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["三大メガバンクの一角として高い社会的信用とブランド", "金融×DXで変革期を担う人材として成長できる", "充実した研修と段階的なキャリア形成が可能"],
+  },
+  {
+    id: "smbc", short: "三井住友フィナンシャルG", logo: "SM",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#0d2a1e)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "smbc.html",
+    profile: { remote:1, worklife:0, autonomy:1, team:2, global:2, management:3, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["メガバンクトップクラスの安定性と抜群のブランド力", "金融のプロとして幅広いキャリアを積める", "平均年収1,157万円の高待遇と手厚い福利厚生"],
+  },
+  {
+    id: "sony", short: "ソニーグループ", logo: "SN",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2e)",
+    logoTextStyle: "background:linear-gradient(135deg,#A78BFA,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "sony.html",
+    profile: { remote:2, worklife:1, autonomy:2, team:1, global:3, management:1, specialist:3, growth:2, performance:2, stability:2, brand:3, training:2, apparel:0, manufacturing:2, tech:2, finance:0 },
+    reasons: ["エンタメ×テクノロジーで世界に影響を与えられる", "クリエイティブな専門性を活かせる多様な事業領域", "グローバルブランドで海外キャリアのチャンスも豊富"],
+  },
+  {
+    id: "panasonic", short: "パナソニックHD", logo: "PN",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1a2040)",
+    logoTextStyle: "background:linear-gradient(135deg,#60A5FA,#2563EB);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "panasonic.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:1, performance:1, stability:2, brand:2, training:2, apparel:0, manufacturing:3, tech:1, finance:0 },
+    reasons: ["くらしとビジネスを変えるグリーン・ソサエティを推進", "ものづくりの専門性をじっくり磨ける環境", "組織改革中で変化に関わりたい人に向いている"],
+  },
+  {
+    id: "keyence", short: "キーエンス", logo: "KN",
+    logoStyle: "background:linear-gradient(135deg,#0a0a0a,#1a1a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "keyence.html",
+    profile: { remote:-3, worklife:-3, autonomy:2, team:1, global:2, management:2, specialist:2, growth:3, performance:3, stability:3, brand:2, training:2, apparel:0, manufacturing:3, tech:2, finance:0 },
+    reasons: ["平均年収2,039万円・日本トップクラスの圧倒的高待遇", "完全成果主義で実力を正当に評価してもらえる", "製造業×ITの専門的スキルを最高水準で磨ける"],
+  },
+  {
+    id: "aeon", short: "イオン", logo: "AE",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#34D399,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "小売 ｜ 東証プライム", url: "aeon.html",
+    profile: { remote:-2, worklife:1, autonomy:1, team:3, global:1, management:2, specialist:0, growth:1, performance:1, stability:3, brand:3, training:2, apparel:1, manufacturing:0, tech:0, finance:0 },
+    reasons: ["日本最大級の小売グループで安定したキャリアを築ける", "チームワークを大切にするアットホームな職場環境", "全国転勤や多様な業態でキャリアの幅を広げられる"],
+  },
+  {
+    id: "7i", short: "セブン&アイHD", logo: "7i",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1e1a0a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "小売 ｜ 東証プライム", url: "7i.html",
+    profile: { remote:-1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:0, growth:1, performance:1, stability:3, brand:3, training:2, apparel:1, manufacturing:0, tech:0, finance:0 },
+    reasons: ["セブン-イレブンなど国民的ブランドを抱える大手小売", "グローバル展開も進む安定した大企業環境", "流通・小売の幅広いキャリアパスが用意されている"],
+  },
+  {
+    id: "ajinomoto", short: "味の素", logo: "AJ",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1010)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCA5A5,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "食品 ｜ 東証プライム", url: "ajinomoto.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:3, management:1, specialist:3, growth:2, performance:2, stability:3, brand:2, training:2, apparel:0, manufacturing:1, tech:1, finance:0 },
+    reasons: ["食品×バイオの専門性で世界の食と健康に貢献できる", "グローバル展開が進み海外でのキャリアが築きやすい", "安定した大企業でじっくりR&D専門性を磨ける"],
+  },
+  {
+    id: "nissin", short: "日清食品HD", logo: "NS",
+    logoStyle: "background:linear-gradient(135deg,#1a1a0a,#2a2a10)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "食品 ｜ 東証プライム", url: "nissin.html",
+    profile: { remote:1, worklife:1, autonomy:2, team:2, global:2, management:1, specialist:2, growth:2, performance:2, stability:2, brand:3, training:1, apparel:0, manufacturing:1, tech:0, finance:0 },
+    reasons: ["独創的なブランドと企業文化でユニークな仕事ができる", "グローバル展開も積極的で海外ビジネスに関われる", "食のイノベーションを通じて社会に貢献できる"],
+  },
+  {
+    id: "mitsubishi", short: "三菱商事", logo: "MC",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1010)",
+    logoTextStyle: "background:linear-gradient(135deg,#F87171,#DC2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "mitsubishi.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:3, specialist:2, growth:3, performance:3, stability:2, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["平均年収2,033万円・総合商社最高水準の高待遇", "世界中でビジネスを動かすグローバルな仕事ができる", "マネジメントとして若いうちから大きな裁量が持てる"],
+  },
+  {
+    id: "itochu", short: "伊藤忠商事", logo: "IC",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#818CF8,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "itochu.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:3, specialist:2, growth:3, performance:3, stability:2, brand:3, training:3, apparel:1, manufacturing:0, tech:1, finance:2 },
+    reasons: ["総合商社首位クラスの純利益・高い成長性", "消費財からエネルギーまで幅広い業界でグローバル活躍", "実力主義で若手から大きな仕事と高報酬を狙える"],
+  },
+  {
+    id: "mitsui", short: "三井物産", logo: "MT",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "mitsui.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["資源・エネルギー分野で世界をリードする商社", "海外赴任の機会が豊富でグローバルキャリアを築ける", "平均年収1,996万円の超高待遇と安定した経営基盤"],
+  },
+  {
+    id: "sumitomo", short: "住友商事", logo: "SC",
+    logoStyle: "background:linear-gradient(135deg,#1a0a1a,#2a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#C084FC,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "sumitomo.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["5大商社の一角として安定性とブランド力を兼備", "グローバルに活躍しながら着実にキャリアアップできる", "平均年収1,744万円の高待遇と充実した福利厚生"],
+  },
+  {
+    id: "marubeni", short: "丸紅", logo: "MB",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1515)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCA5A5,#DC2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "marubeni.html",
+    profile: { remote:0, worklife:0, autonomy:2, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:2, brand:2, training:2, apparel:1, manufacturing:1, tech:0, finance:2 },
+    reasons: ["穀物・電力など生活インフラを支えるグローバルビジネス", "比較的アットホームな社風で働きやすい商社文化", "海外で大きなビジネスを動かしながら成長できる環境"],
+  },
+  {
+    id: "mec", short: "三菱地所", logo: "ME",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1a2040)",
+    logoTextStyle: "background:linear-gradient(135deg,#93C5FD,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "不動産 ｜ 東証プライム", url: "mec.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:1, specialist:3, growth:1, performance:1, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:0, finance:1 },
+    reasons: ["丸の内を中心に都市開発・不動産の専門性を磨ける", "抜群のブランド力と安定性を誇る不動産トップ企業", "平均年収1,265万円の高待遇とゆとりある職場環境"],
+  },
+  {
+    id: "mitsuifudosan", short: "三井不動産", logo: "MF",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "不動産 ｜ 東証プライム", url: "mitsuifudosan.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:0, finance:1 },
+    reasons: ["不動産業界最大手クラスの安定性と超高待遇", "商業・住宅・ホテルなど多様な不動産ビジネスに関われる", "平均年収1,756万円・業界トップレベルの収入が得られる"],
+  },
+  {
+    id: "takeda", short: "武田薬品工業", logo: "TK",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#A78BFA,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "医薬品 ｜ 東証プライム", url: "takeda.html",
+    profile: { remote:1, worklife:1, autonomy:2, team:2, global:3, management:1, specialist:3, growth:2, performance:2, stability:2, brand:3, training:2, apparel:0, manufacturing:1, tech:1, finance:0 },
+    reasons: ["グローバル製薬企業として世界の医療に貢献できる", "R&D・医薬品の専門家として高い専門性を築ける", "海外拠点が多く国際的なキャリア形成が可能"],
+  },
+];
+
+// ============================================================
+// 診断ロジック
+// ============================================================
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+
+function startQuiz() {
+  document.getElementById('introSection').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  document.getElementById('qCategory').textContent = q.cat;
+  document.getElementById('qNumber').textContent = `質問 ${current + 1} / ${QUESTIONS.length}`;
+  document.getElementById('qText').textContent = q.text;
+
+  const wrap = document.getElementById('optionsWrap');
+  wrap.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
+    btn.innerHTML = `<span class="option-icon">${opt.icon}</span><span>${opt.label}</span>`;
+    btn.onclick = () => selectOption(i);
+    wrap.appendChild(btn);
+  });
+
+  const pct = Math.round((current / QUESTIONS.length) * 100);
+  document.getElementById('progressText').textContent = `質問 ${current + 1} / ${QUESTIONS.length}`;
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  document.getElementById('btnPrev').style.display = current > 0 ? 'block' : 'none';
+
+  const btnNext = document.getElementById('btnNext');
+  btnNext.textContent = current === QUESTIONS.length - 1 ? '結果を見る 🎉' : '次へ →';
+  if (answers[current] !== null) {
+    btnNext.classList.add('enabled');
+  } else {
+    btnNext.classList.remove('enabled');
+  }
+
+  // アニメーションリセット
+  const card = document.getElementById('questionCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = '';
+}
+
+function selectOption(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option-btn').forEach((btn, idx) => {
+    btn.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btnNext').classList.add('enabled');
+}
+
+function nextQ() {
+  if (answers[current] === null) return;
+  if (current < QUESTIONS.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function prevQ() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function showResult() {
+  // スコア集計
+  const totals = {};
+  answers.forEach((ansIdx, qIdx) => {
+    if (ansIdx === null) return;
+    const scores = QUESTIONS[qIdx].options[ansIdx].scores;
+    Object.entries(scores).forEach(([k, v]) => {
+      totals[k] = (totals[k] || 0) + v;
+    });
+  });
+
+  // マッチ度計算（コサイン類似度的な簡易計算）
+  const ranked = COMPANIES.map(company => {
+    let score = 0;
+    let maxScore = 0;
+    Object.entries(company.profile).forEach(([k, v]) => {
+      const userVal = totals[k] || 0;
+      score += userVal * v;
+      maxScore += Math.abs(v) * 3;
+    });
+    const match = Math.min(99, Math.max(40, Math.round(50 + (score / Math.max(maxScore, 1)) * 50)));
+    return { ...company, match };
+  }).sort((a, b) => b.match - a.match);
+
+  // 診断結果をlocalStorageに保存（企業詳細ページで適性スコアを表示するため）
+  localStorage.setItem('kigyouzukan_diagnosis', JSON.stringify({
+    results: ranked.map(c => ({ id: c.id, match: c.match })),
+    timestamp: Date.now()
+  }));
+
+  document.getElementById('quizSection').style.display = 'none';
+  const resultSection = document.getElementById('resultSection');
+  resultSection.style.display = 'block';
+
+  const cards = document.getElementById('resultCards');
+  cards.innerHTML = '';
+  ranked.forEach((c, i) => {
+    const rankLabel = ['🥇', '🥈', '🥉'][i] || (i + 1);
+    const card = document.createElement('a');
+    card.className = 'result-card';
+    card.href = c.url;
+    card.innerHTML = `
+      <div class="result-rank">${rankLabel}</div>
+      <div class="result-logo" style="${c.logoStyle}">
+        <span style="${c.logoTextStyle}">${c.logo}</span>
+      </div>
+      <div class="result-info">
+        <div class="result-name">${c.short}</div>
+        <div class="result-sub-text">${c.sub}</div>
+        <div class="result-match-bar-bg">
+          <div class="result-match-bar-fill" style="width:${c.match}%"></div>
+        </div>
+        <div class="result-match-label">マッチ度 ${c.match}%</div>
+        <div class="result-reasons">
+          <div class="result-reason-title">✅ マッチする理由</div>
+          ${c.reasons.map(r => `<div class="result-reason-item">・${r}</div>`).join('')}
+        </div>
+      </div>
+      <div class="result-score" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+        ${c.match}<span style="-webkit-text-fill-color:var(--ink3)">%</span>
+      </div>
+    `;
+    cards.appendChild(card);
+  });
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  localStorage.removeItem('kigyouzukan_diagnosis');
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  renderQuestion();
+}
+</script>
+
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:20px;text-align:center;font-size:11px;color:var(--ink3);margin-top:40px">
+  © 2026 カイシャーク All Rights Reserved.　｜　
+  <a href="terms.html" style="color:var(--ink3);text-decoration:none">利用規約</a>　｜　
+  <a href="privacy.html" style="color:var(--ink3);text-decoration:none">プライバシーポリシー</a>　｜　<a href="contact.html" style="color:var(--ink3);text-decoration:none">お問い合わせ</a>
+</footer>
+</body>
+</html>
