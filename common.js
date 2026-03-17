@@ -1,5 +1,5 @@
 /* ============================================================
-   企業図鑑 - 共通JavaScript (common.js)
+   カイシャーク - 共通JavaScript (common.js)
    最終更新: 2026-03-15
    ============================================================ */
 
@@ -376,6 +376,59 @@ document.addEventListener('DOMContentLoaded', function() {
       overlay.classList.remove('open');
       const input = document.getElementById('navSearch');
       if (input) { input.focus(); input.select(); }
+    });
+  });
+})();
+
+/* ===== JSON-LD 構造化データを動的注入 ===== */
+(function() {
+  const BASE_URL = 'https://kaishark.jp';
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'カイシャーク',
+    'url': BASE_URL,
+    'description': 'Z世代のための企業データベース。就活・転職に使える企業情報・比較・診断。',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': BASE_URL + '/top.html?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
+    }
+  };
+
+  function injectSchema(schema) {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    injectSchema(websiteSchema);
+
+    onCompaniesReady(function(data) {
+      const path = location.pathname.split('/').pop();
+      const company = data.find(c => c.url === path);
+      if (!company) return;
+
+      const orgSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'name': company.name,
+        'url': company.officialSite || BASE_URL + '/' + company.url,
+        'description': company.nameShort + 'の平均年収・売上・社風を徹底解説。就活・転職に使える企業データ。',
+        'numberOfEmployees': { '@type': 'QuantitativeValue', 'value': company.employees },
+        'sameAs': [company.officialSite]
+      };
+      injectSchema(orgSchema);
+
+      if (!document.querySelector('meta[property="og:site_name"]')) {
+        const siteName = document.createElement('meta');
+        siteName.setAttribute('property', 'og:site_name');
+        siteName.setAttribute('content', 'カイシャーク');
+        document.head.appendChild(siteName);
+      }
     });
   });
 })();
