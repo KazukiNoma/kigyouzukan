@@ -1,0 +1,702 @@
+[
+  {
+    "id": "firstretailing",
+    "url": "firstretailing.html",
+    "name": "株式会社ファーストリテイリング",
+    "nameShort": "ファーストリテイリング",
+    "ticker": "9983",
+    "industry": "アパレル",
+    "headquarters": "山口県山口市",
+    "officialSite": "https://www.fastretailing.com/jp/",
+    "revenue": "3.1兆",
+    "avgSalary": 1179,
+    "employees": "1,601",
+    "avgAge": 38.0,
+    "avgTenure": "6年",
+    "femaleMgrRatio": "22.4%",
+    "cultureScores": {
+      "グローバル志向": 92,
+      "成長スピード": 85,
+      "革新性": 78,
+      "専門職重視": 60
+    },
+    "suitableFor": [
+      "グローバルに活躍したい人",
+      "成果主義・実力主義を好む人",
+      "ファッション・小売に情熱がある人",
+      "若いうちからマネジメントしたい人"
+    ]
+  },
+  {
+    "id": "toyota",
+    "url": "toyota.html",
+    "name": "トヨタ自動車株式会社",
+    "nameShort": "トヨタ自動車",
+    "ticker": "7203",
+    "industry": "自動車",
+    "headquarters": "愛知県豊田市",
+    "officialSite": "https://www.toyota.co.jp/",
+    "revenue": "48.0兆",
+    "avgSalary": 983,
+    "employees": "72,617",
+    "avgAge": 40.7,
+    "avgTenure": "21.8年",
+    "femaleMgrRatio": "15.8%",
+    "cultureScores": {
+      "グローバル志向": 85,
+      "安定性": 95,
+      "技術・専門性": 91,
+      "チームワーク": 88
+    },
+    "suitableFor": [
+      "ものづくり・エンジニアリングが好きな人",
+      "安定した環境でじっくり専門性を磨きたい人",
+      "EV・AI・自動運転など最先端技術に関わりたい人",
+      "長期的なキャリアを一社で築きたい人"
+    ]
+  },
+  {
+    "id": "softbank",
+    "url": "softbank.html",
+    "name": "ソフトバンク株式会社",
+    "nameShort": "ソフトバンク",
+    "ticker": "9434",
+    "industry": "IT・通信",
+    "headquarters": "東京都港区",
+    "officialSite": "https://www.softbank.jp/",
+    "revenue": "6.5兆",
+    "avgSalary": 849,
+    "employees": "55,070",
+    "avgAge": 41.7,
+    "avgTenure": "14.5年",
+    "femaleMgrRatio": "20.1%",
+    "cultureScores": {
+      "グローバル志向": 55,
+      "成長スピード": 80,
+      "テクノロジー志向": 85,
+      "安定性": 80
+    },
+    "suitableFor": [
+      "AI・5G・DXなど最先端技術に携わりたい人",
+      "通信インフラを支える仕事に誇りを持ちたい人",
+      "成果主義でスピード感のある環境を求める人",
+      "安定しながらも成長できる大企業を求める人"
+    ]
+  },
+  {
+    "id": "nttdata",
+    "url": "nttdata.html",
+    "name": "株式会社NTTデータグループ",
+    "nameShort": "NTTデータグループ",
+    "ticker": "9613",
+    "industry": "IT・通信",
+    "headquarters": "東京都江東区",
+    "officialSite": "https://www.nttdata.com/global/ja/",
+    "revenue": "4.9兆",
+    "avgSalary": 923,
+    "employees": "195,100",
+    "avgAge": 39.9,
+    "avgTenure": "16.2年",
+    "femaleMgrRatio": "18.5%",
+    "cultureScores": {
+      "グローバル志向": 80,
+      "安定性": 92,
+      "技術・専門性": 90,
+      "チームワーク": 85
+    },
+    "suitableFor": [
+      "公共・金融など社会インフラを支える仕事がしたい人",
+      "安定した大企業でじっくり専門性を磨きたい人",
+      "グローバルなITプロジェクトに携わりたい人",
+      "長期的なキャリアを一社で着実に積みたい人"
+    ]
+  },
+  {
+    "id": "fujitsu",
+    "url": "fujitsu.html",
+    "name": "富士通株式会社",
+    "nameShort": "富士通",
+    "ticker": "6702",
+    "industry": "IT・通信",
+    "headquarters": "神奈川県川崎市",
+    "officialSite": "https://www.fujitsu.com/jp/",
+    "revenue": "3.6兆",
+    "avgSalary": 929,
+    "employees": "34,850",
+    "avgAge": 43.1,
+    "avgTenure": "18.2年",
+    "femaleMgrRatio": "16.2%",
+    "cultureScores": {
+      "グローバル志向": 72,
+      "安定性": 88,
+      "技術・専門性": 88,
+      "変革志向": 75
+    },
+    "suitableFor": [
+      "DXやモダナイゼーションで社会課題を解決したい人",
+      "長く安定して働きながら専門性を磨きたい人",
+      "ジョブ型でスキルに見合った評価を受けたい人",
+      "国内外の大規模プロジェクトに携わりたい人"
+    ]
+  },
+  {
+    "id": "kddi",
+    "url": "kddi.html",
+    "name": "KDDI株式会社",
+    "nameShort": "KDDI",
+    "ticker": "9433",
+    "industry": "IT・通信",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.kddi.com/",
+    "revenue": "5.7兆",
+    "avgSalary": 1018,
+    "employees": "46,468",
+    "avgAge": 43.0,
+    "avgTenure": "1,018万円",
+    "femaleMgrRatio": "",
+    "cultureScores": {
+      "安定性": 92,
+      "技術志向": 85,
+      "DX・革新性": 75,
+      "ワークライフバランス": 72
+    },
+    "suitableFor": [
+      "通信・IT・DX分野で長く働きたい人",
+      "安定した大企業環境を求める人",
+      "エンジニアとして高度な技術に触れたい人",
+      "福利厚生・待遇を重視する人"
+    ]
+  },
+  {
+    "id": "mufg",
+    "url": "mufg.html",
+    "name": "株式会社三菱UFJフィナンシャル・グループ",
+    "nameShort": "三菱UFJフィナンシャルG",
+    "ticker": "8306",
+    "industry": "金融",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.mufg.jp/",
+    "revenue": "21.7兆",
+    "avgSalary": 1093,
+    "employees": "156,253",
+    "avgAge": 40.1,
+    "avgTenure": "13.1年",
+    "femaleMgrRatio": "23.4%",
+    "cultureScores": {
+      "グローバル志向": 88,
+      "安定性": 96,
+      "専門性・資格重視": 90,
+      "成果主義": 70
+    },
+    "suitableFor": [
+      "金融・経済のプロとしてキャリアを積みたい人",
+      "グローバルな金融市場で働きたい人",
+      "安定した大企業で長期キャリアを築きたい人",
+      "資格を活かして専門性を高めたい人"
+    ]
+  },
+  {
+    "id": "nomura",
+    "url": "nomura.html",
+    "name": "野村ホールディングス株式会社",
+    "nameShort": "野村ホールディングス",
+    "ticker": "8604",
+    "industry": "金融",
+    "headquarters": "東京都中央区",
+    "officialSite": "https://www.nomuraholdings.com/jp/",
+    "revenue": "1.9兆",
+    "avgSalary": 1050,
+    "employees": "26,850",
+    "avgAge": 42.5,
+    "avgTenure": "12.5年",
+    "femaleMgrRatio": "18.2%",
+    "cultureScores": {
+      "グローバル志向": 85,
+      "成果主義": 92,
+      "専門性": 95,
+      "成長スピード": 82
+    },
+    "suitableFor": [
+      "金融マーケット・投資銀行でキャリアを積みたい人",
+      "成果主義で実力に見合った高収入を得たい人",
+      "グローバルな金融取引の最前線で働きたい人",
+      "証券・資産運用の専門家を目指したい人"
+    ]
+  },
+  {
+    "id": "mizuho",
+    "url": "mizuho.html",
+    "name": "株式会社みずほフィナンシャルグループ",
+    "nameShort": "みずほフィナンシャルグループ",
+    "ticker": "8411",
+    "industry": "金融",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.mizuhogroup.com/",
+    "revenue": "9.0兆",
+    "avgSalary": 1117,
+    "employees": "5万",
+    "avgAge": 41.8,
+    "avgTenure": "1,117万円",
+    "femaleMgrRatio": "",
+    "cultureScores": {
+      "安定性": 90,
+      "グローバル志向": 80,
+      "DX・デジタル化": 68,
+      "ワークライフバランス": 65
+    },
+    "suitableFor": [
+      "金融・経済の最前線で働きたい人",
+      "大企業の安定した環境を求める人",
+      "法人営業・投資銀行・リテールに興味がある人",
+      "グローバルに活躍したい金融人材"
+    ]
+  },
+  {
+    "id": "smbc",
+    "url": "smbc.html",
+    "name": "株式会社三井住友フィナンシャルグループ",
+    "nameShort": "三井住友フィナンシャルグループ",
+    "ticker": "8316",
+    "industry": "金融",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.smfg.co.jp/",
+    "revenue": "1兆1,779",
+    "avgSalary": 1157,
+    "employees": "約10万",
+    "avgAge": 39.8,
+    "avgTenure": "1,157万円",
+    "femaleMgrRatio": "",
+    "cultureScores": {
+      "収益性・効率性": 94,
+      "安定性": 90,
+      "DX・デジタル化": 78,
+      "グローバル志向": 82
+    },
+    "suitableFor": [
+      "金融業界で高い専門性を身につけたい人",
+      "安定した大企業環境＋高待遇を求める人",
+      "法人営業・投資銀行・デジタル金融に興味がある人",
+      "アジアを中心にグローバルに活躍したい人"
+    ]
+  },
+  {
+    "id": "sony",
+    "url": "sony.html",
+    "name": "ソニーグループ株式会社",
+    "nameShort": "ソニーグループ",
+    "ticker": "6758",
+    "industry": "製造",
+    "headquarters": "東京都港区",
+    "officialSite": "https://www.sony.com/ja/",
+    "revenue": "",
+    "avgSalary": 1113,
+    "employees": "113,000",
+    "avgAge": 42.0,
+    "avgTenure": "15.5年",
+    "femaleMgrRatio": "19.8%",
+    "cultureScores": {
+      "グローバル志向": 95,
+      "クリエイティブ志向": 95,
+      "多様性": 88,
+      "成長性": 85
+    },
+    "suitableFor": [
+      "エンターテイメント×テクノロジーの融合に携わりたい人",
+      "クリエイティブな製品・サービスを生み出したい人",
+      "グローバルに活躍したい人",
+      "多様なビジネス領域でキャリアを広げたい人"
+    ]
+  },
+  {
+    "id": "panasonic",
+    "url": "panasonic.html",
+    "name": "パナソニックホールディングス株式会社",
+    "nameShort": "パナソニックHD",
+    "ticker": "6752",
+    "industry": "製造",
+    "headquarters": "大阪府門真市",
+    "officialSite": "https://holdings.panasonic/jp/",
+    "revenue": "8.5兆",
+    "avgSalary": 759,
+    "employees": "232,493",
+    "avgAge": 43.5,
+    "avgTenure": "17.2年",
+    "femaleMgrRatio": "12.5%",
+    "cultureScores": {
+      "グローバル志向": 78,
+      "安定性": 85,
+      "ものづくり志向": 92,
+      "変革志向": 68
+    },
+    "suitableFor": [
+      "電池・BtoB領域で技術者として活躍したい人",
+      "大企業の安定感の中で製造業のキャリアを積みたい人",
+      "EV・エネルギー分野の最前線に携わりたい人",
+      "グローバルな製造・サプライチェーンを支えたい人"
+    ]
+  },
+  {
+    "id": "keyence",
+    "url": "keyence.html",
+    "name": "株式会社キーエンス",
+    "nameShort": "キーエンス",
+    "ticker": "6861",
+    "industry": "製造",
+    "headquarters": "大阪府大阪市",
+    "officialSite": "https://www.keyence.co.jp/",
+    "revenue": "1.0兆",
+    "avgSalary": 2039,
+    "employees": "3,205",
+    "avgAge": 34.8,
+    "avgTenure": "8.5年",
+    "femaleMgrRatio": "15.2%",
+    "cultureScores": {
+      "グローバル志向": 82,
+      "成果主義": 98,
+      "営業・提案力重視": 95,
+      "成長スピード": 90
+    },
+    "suitableFor": [
+      "高収入・成果主義の環境で実力を試したい人",
+      "製造業の課題解決に携わるコンサル的な営業がしたい人",
+      "少数精鋭で裁量を持って働きたい人",
+      "若くして高いポジションと報酬を得たい人"
+    ]
+  },
+  {
+    "id": "aeon",
+    "url": "aeon.html",
+    "name": "イオン株式会社",
+    "nameShort": "イオン",
+    "ticker": "8267",
+    "industry": "小売",
+    "headquarters": "千葉県千葉市",
+    "officialSite": "https://www.aeon.info/",
+    "revenue": "9.9兆",
+    "avgSalary": 482,
+    "employees": "592,000",
+    "avgAge": 41.2,
+    "avgTenure": "11.5年",
+    "femaleMgrRatio": "35.2%",
+    "cultureScores": {
+      "グローバル志向": 70,
+      "安定性": 90,
+      "チームワーク": 85,
+      "多様な働き方": 80
+    },
+    "suitableFor": [
+      "流通・小売のビジネスに興味がある人",
+      "安定した大企業で長く働きたい人",
+      "アジア展開など海外業務に関わりたい人",
+      "金融・デジタルとリテールの融合に携わりたい人"
+    ]
+  },
+  {
+    "id": "7i",
+    "url": "7i.html",
+    "name": "株式会社セブン&アイ・ホールディングス",
+    "nameShort": "セブン&アイHD",
+    "ticker": "3382",
+    "industry": "小売",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.7andi.com/",
+    "revenue": "11.4兆",
+    "avgSalary": 735,
+    "employees": "155,000",
+    "avgAge": 39.5,
+    "avgTenure": "10.2年",
+    "femaleMgrRatio": "28.5%",
+    "cultureScores": {
+      "グローバル志向": 82,
+      "安定性": 85,
+      "変革志向": 75,
+      "成長スピード": 78
+    },
+    "suitableFor": [
+      "コンビニ・小売の最前線で働きたい人",
+      "グローバルな小売ビジネスに携わりたい人",
+      "安定した大企業でキャリアを築きたい人",
+      "デジタル・金融×小売の融合に興味がある人"
+    ]
+  },
+  {
+    "id": "ajinomoto",
+    "url": "ajinomoto.html",
+    "name": "味の素株式会社",
+    "nameShort": "味の素",
+    "ticker": "2802",
+    "industry": "食品",
+    "headquarters": "東京都中央区",
+    "officialSite": "https://www.ajinomoto.co.jp/",
+    "revenue": "1.4兆",
+    "avgSalary": 1036,
+    "employees": "35,791",
+    "avgAge": 42.5,
+    "avgTenure": "17.5年",
+    "femaleMgrRatio": "28.4%",
+    "cultureScores": {
+      "グローバル志向": 88,
+      "安定性": 90,
+      "サステナ志向": 92,
+      "専門性・研究": 88
+    },
+    "suitableFor": [
+      "食・健康・生命科学に興味がある人",
+      "グローバルに活躍したい文理どちらの方にも",
+      "サステナビリティ経営に共感できる人",
+      "安定した大企業でじっくりキャリアを積みたい人"
+    ]
+  },
+  {
+    "id": "nissin",
+    "url": "nissin.html",
+    "name": "日清食品ホールディングス株式会社",
+    "nameShort": "日清食品HD",
+    "ticker": "2897",
+    "industry": "食品",
+    "headquarters": "東京都新宿区",
+    "officialSite": "https://www.nissin.com/jp/",
+    "revenue": "7,080",
+    "avgSalary": 881,
+    "employees": "15,892",
+    "avgAge": 40.2,
+    "avgTenure": "14.2年",
+    "femaleMgrRatio": "22.4%",
+    "cultureScores": {
+      "グローバル志向": 82,
+      "安定性": 88,
+      "ブランド志向": 90,
+      "成長スピード": 78
+    },
+    "suitableFor": [
+      "食品・マーケティングに情熱がある人",
+      "グローバルブランドの海外展開に携わりたい人",
+      "安定した食品大手で専門性を磨きたい人",
+      "創業者精神・チャレンジングな文化が好きな人"
+    ]
+  },
+  {
+    "id": "mitsubishi",
+    "url": "mitsubishi.html",
+    "name": "三菱商事株式会社",
+    "nameShort": "三菱商事",
+    "ticker": "8058",
+    "industry": "商社",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.mitsubishicorp.com/jp/ja/",
+    "revenue": "18.6兆",
+    "avgSalary": 2033,
+    "employees": "5,700",
+    "avgAge": 42.4,
+    "avgTenure": "18年",
+    "femaleMgrRatio": "約20%",
+    "cultureScores": {
+      "グローバル志向": 95,
+      "安定性": 90,
+      "総合力": 92,
+      "年収水準": 100
+    },
+    "suitableFor": [
+      "世界規模のビジネスに携わりたい人",
+      "バランスの取れた総合力を活かしたい人",
+      "長期的に安定したキャリアを築きたい人",
+      "年収2,000万円超を目指す人"
+    ]
+  },
+  {
+    "id": "itochu",
+    "url": "itochu.html",
+    "name": "伊藤忠商事株式会社",
+    "nameShort": "伊藤忠商事",
+    "ticker": "8001",
+    "industry": "商社",
+    "headquarters": "大阪府大阪市",
+    "officialSite": "https://www.itochu.co.jp/ja/",
+    "revenue": "約14兆",
+    "avgSalary": 1805,
+    "employees": "約4,100",
+    "avgAge": 42.2,
+    "avgTenure": "17年",
+    "femaleMgrRatio": "約22%",
+    "cultureScores": {
+      "非資源強み": 95,
+      "安定性": 92,
+      "若手活躍": 88,
+      "年収水準": 95
+    },
+    "suitableFor": [
+      "消費者に近いビジネスがしたい人",
+      "安定した非資源ビジネスで働きたい人",
+      "若手のうちから裁量ある仕事がしたい人",
+      "朝型・効率重視の働き方が合う人"
+    ]
+  },
+  {
+    "id": "mitsui",
+    "url": "mitsui.html",
+    "name": "三井物産株式会社",
+    "nameShort": "三井物産",
+    "ticker": "8031",
+    "industry": "商社",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.mitsui.com/jp/ja/",
+    "revenue": "約14兆",
+    "avgSalary": 1996,
+    "employees": "約5,500",
+    "avgAge": 42.1,
+    "avgTenure": "17年",
+    "femaleMgrRatio": "約18%",
+    "cultureScores": {
+      "資源強み": 96,
+      "少数精鋭": 94,
+      "グローバル": 93,
+      "年収水準": 98
+    },
+    "suitableFor": [
+      "資源・エネルギービジネスに興味がある人",
+      "「人の三井」の個を尊重する社風が合う人",
+      "少数精鋭で大きな仕事をしたい人",
+      "年収2,000万円近くを目指す人"
+    ]
+  },
+  {
+    "id": "sumitomo",
+    "url": "sumitomo.html",
+    "name": "住友商事株式会社",
+    "nameShort": "住友商事",
+    "ticker": "8053",
+    "industry": "商社",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.sumitomocorp.com/ja/jp",
+    "revenue": "約7兆",
+    "avgSalary": 1744,
+    "employees": "約5,000",
+    "avgAge": 43.2,
+    "avgTenure": "16年",
+    "femaleMgrRatio": "約20%",
+    "cultureScores": {
+      "安定性": 90,
+      "非資源強み": 85,
+      "堅実さ": 88,
+      "年収水準": 87
+    },
+    "suitableFor": [
+      "安定した大企業でじっくり働きたい人",
+      "メディア・デジタル・不動産に興味がある人",
+      "腰が低く堅実な社風が合う人",
+      "長期的なキャリアを一社で積みたい人"
+    ]
+  },
+  {
+    "id": "marubeni",
+    "url": "marubeni.html",
+    "name": "丸紅株式会社",
+    "nameShort": "丸紅",
+    "ticker": "8002",
+    "industry": "商社",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.marubeni.com/jp/",
+    "revenue": "約9兆",
+    "avgSalary": 1709,
+    "employees": "約4,400",
+    "avgAge": 42.5,
+    "avgTenure": "15年",
+    "femaleMgrRatio": "約22%",
+    "cultureScores": {
+      "穀物・電力": 95,
+      "フラットさ": 90,
+      "若手活躍": 85,
+      "年収水準": 85
+    },
+    "suitableFor": [
+      "穀物・食料・農業ビジネスに興味がある人",
+      "電力・インフラ・エネルギー分野で働きたい人",
+      "フラットで親しみやすい社風が合う人",
+      "若手のうちから大きな裁量で働きたい人"
+    ]
+  },
+  {
+    "id": "mec",
+    "url": "mec.html",
+    "name": "三菱地所株式会社",
+    "nameShort": "三菱地所",
+    "ticker": "8802",
+    "industry": "不動産",
+    "headquarters": "東京都千代田区",
+    "officialSite": "https://www.mec.co.jp/",
+    "revenue": "1.6兆",
+    "avgSalary": 1265,
+    "employees": "約1,000",
+    "avgAge": 42.4,
+    "avgTenure": "14年",
+    "femaleMgrRatio": "約20%",
+    "cultureScores": {
+      "立地・ブランド": 98,
+      "安定性": 95,
+      "少数精鋭": 92,
+      "年収水準": 63
+    },
+    "suitableFor": [
+      "都市開発・街づくりに情熱がある人",
+      "丸の内・大手町エリアで働きたい人",
+      "少数精鋭の高品質環境を好む人",
+      "不動産業界でトップブランドを目指す人"
+    ]
+  },
+  {
+    "id": "mitsuifudosan",
+    "url": "mitsuifudosan.html",
+    "name": "三井不動産株式会社",
+    "nameShort": "三井不動産",
+    "ticker": "8801",
+    "industry": "不動産",
+    "headquarters": "東京都中央区",
+    "officialSite": "https://www.mitsuifudosan.co.jp/",
+    "revenue": "約2.5兆",
+    "avgSalary": 1756,
+    "employees": "1,928",
+    "avgAge": 42.4,
+    "avgTenure": "15年",
+    "femaleMgrRatio": "約30%",
+    "cultureScores": {
+      "多角化": 93,
+      "働きやすさ": 92,
+      "業界ブランド": 95,
+      "年収水準": 88
+    },
+    "suitableFor": [
+      "商業施設・不動産の多角的な事業に興味がある人",
+      "ライフワークバランスを重視する人",
+      "業界ブランド力No.1で働きたい人",
+      "育休・女性活躍推進が充実した環境を求める人"
+    ]
+  },
+  {
+    "id": "takeda",
+    "url": "takeda.html",
+    "name": "武田薬品工業株式会社",
+    "nameShort": "武田薬品工業",
+    "ticker": "4502",
+    "industry": "医薬品",
+    "headquarters": "大阪府大阪市",
+    "officialSite": "https://www.takeda.com/ja-jp/",
+    "revenue": "約4.4兆",
+    "avgSalary": 1104,
+    "employees": "約6,700",
+    "avgAge": 43.4,
+    "avgTenure": "14年",
+    "femaleMgrRatio": "約35%",
+    "cultureScores": {
+      "グローバル": 96,
+      "研究開発": 94,
+      "ダイバーシティ": 90,
+      "年収水準": 55
+    },
+    "suitableFor": [
+      "製薬・医療・バイオに情熱がある人",
+      "グローバルな環境で働きたい人",
+      "研究職・MRとして専門性を磨きたい人",
+      "ダイバーシティを重視する職場を求める人"
+    ]
+  }
+]

@@ -20,34 +20,48 @@ function filterNews(type, el) {
   });
 }
 
-/* ナビ企業検索 */
-const COMPANIES = [
-  { name: "ファーストリテイリング", sub: "アパレル", url: "firstretailing.html" },
-  { name: "トヨタ自動車", sub: "自動車", url: "toyota.html" },
-  { name: "ソフトバンク", sub: "IT・通信", url: "softbank.html" },
-  { name: "NTTデータグループ", sub: "IT・通信", url: "nttdata.html" },
-  { name: "富士通", sub: "IT・通信", url: "fujitsu.html" },
-  { name: "三菱UFJフィナンシャルG", sub: "金融", url: "mufg.html" },
-  { name: "野村ホールディングス", sub: "金融", url: "nomura.html" },
-  { name: "ソニーグループ", sub: "製造", url: "sony.html" },
-  { name: "パナソニックHD", sub: "製造", url: "panasonic.html" },
-  { name: "キーエンス", sub: "製造", url: "keyence.html" },
-  { name: "イオン", sub: "小売", url: "aeon.html" },
-  { name: "セブン&アイHD", sub: "小売", url: "7i.html" },
-  { name: "味の素", sub: "食品", url: "ajinomoto.html" },
-  { name: "日清食品HD", sub: "食品", url: "nissin.html" },
-  { name: "三菱商事", sub: "商社", url: "mitsubishi.html" },
-  { name: "伊藤忠商事", sub: "商社", url: "itochu.html" },
-  { name: "三井物産", sub: "商社", url: "mitsui.html" },
-  { name: "住友商事", sub: "商社", url: "sumitomo.html" },
-  { name: "丸紅", sub: "商社", url: "marubeni.html" },
-  { name: "三菱地所", sub: "不動産", url: "mec.html" },
-  { name: "三井不動産", sub: "不動産", url: "mitsuifudosan.html" },
-  { name: "武田薬品工業", sub: "医薬品", url: "takeda.html" },
-  { name: "KDDI", sub: "IT・通信", url: "kddi.html" },
-  { name: "みずほフィナンシャルグループ", sub: "金融", url: "mizuho.html" },
-  { name: "三井住友フィナンシャルグループ", sub: "金融", url: "smbc.html" },
-];
+/* ナビ企業検索 - companies.json から動的ロード */
+let COMPANIES = [];
+let COMPANIES_DATA = []; // 詳細データ（compare等で利用）
+
+(function loadCompanies() {
+  fetch('companies.json')
+    .then(r => r.json())
+    .then(data => {
+      COMPANIES_DATA = data;
+      COMPANIES = data.map(c => ({ name: c.nameShort, sub: c.industry, url: c.url }));
+    })
+    .catch(() => {
+      // フォールバック: JSONロード失敗時は静的リスト
+      COMPANIES = [
+        { name: "ファーストリテイリング", sub: "アパレル", url: "firstretailing.html" },
+        { name: "トヨタ自動車", sub: "自動車", url: "toyota.html" },
+        { name: "ソフトバンク", sub: "IT・通信", url: "softbank.html" },
+        { name: "NTTデータグループ", sub: "IT・通信", url: "nttdata.html" },
+        { name: "富士通", sub: "IT・通信", url: "fujitsu.html" },
+        { name: "三菱UFJフィナンシャルG", sub: "金融", url: "mufg.html" },
+        { name: "野村ホールディングス", sub: "金融", url: "nomura.html" },
+        { name: "ソニーグループ", sub: "製造", url: "sony.html" },
+        { name: "パナソニックHD", sub: "製造", url: "panasonic.html" },
+        { name: "キーエンス", sub: "製造", url: "keyence.html" },
+        { name: "イオン", sub: "小売", url: "aeon.html" },
+        { name: "セブン&アイHD", sub: "小売", url: "7i.html" },
+        { name: "味の素", sub: "食品", url: "ajinomoto.html" },
+        { name: "日清食品HD", sub: "食品", url: "nissin.html" },
+        { name: "三菱商事", sub: "商社", url: "mitsubishi.html" },
+        { name: "伊藤忠商事", sub: "商社", url: "itochu.html" },
+        { name: "三井物産", sub: "商社", url: "mitsui.html" },
+        { name: "住友商事", sub: "商社", url: "sumitomo.html" },
+        { name: "丸紅", sub: "商社", url: "marubeni.html" },
+        { name: "三菱地所", sub: "不動産", url: "mec.html" },
+        { name: "三井不動産", sub: "不動産", url: "mitsuifudosan.html" },
+        { name: "武田薬品工業", sub: "医薬品", url: "takeda.html" },
+        { name: "KDDI", sub: "IT・通信", url: "kddi.html" },
+        { name: "みずほフィナンシャルグループ", sub: "金融", url: "mizuho.html" },
+        { name: "三井住友フィナンシャルグループ", sub: "金融", url: "smbc.html" },
+      ];
+    });
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
   // ロゴクリックでトップへ
@@ -93,6 +107,62 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+/* ===== 企業詳細ページ: 比較ボタン + AI診断マッチスコア ===== */
+(function() {
+  if (location.pathname.endsWith('top.html') || location.pathname === '/' ||
+      location.pathname.endsWith('compare.html') || location.pathname.endsWith('shindan.html')) return;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // 現在のページIDを取得
+    const pageId = location.pathname.split('/').pop().replace('.html', '');
+
+    // --- 比較ボタンをhero-actionsに追加 ---
+    const heroActions = document.querySelector('.hero-actions');
+    if (heroActions) {
+      const compareBtn = document.createElement('a');
+      compareBtn.href = `compare.html?ids=${pageId}`;
+      compareBtn.className = 'btn-outline';
+      compareBtn.style.cssText = 'text-decoration:none;display:inline-flex;align-items:center;gap:5px';
+      compareBtn.innerHTML = '⚡ 比較する';
+      heroActions.appendChild(compareBtn);
+    }
+
+    // --- AI診断結果からマッチスコアを表示 ---
+    const diagData = JSON.parse(localStorage.getItem('kigyouzukan_diagnosis') || 'null');
+    if (!diagData || !diagData.results) return;
+
+    const myResult = diagData.results.find(r => r.id === pageId);
+    if (!myResult) return;
+
+    const score = myResult.match;
+
+    // 社風タブにマッチスコアバナーを挿入
+    const cultureTab = document.getElementById('tab-culture');
+    if (cultureTab) {
+      const banner = document.createElement('div');
+      banner.style.cssText = 'background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.3);border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px';
+      banner.innerHTML = `
+        <div style="font-size:36px;font-weight:900;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0">${score}%</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:4px">🤖 あなたとのAI適性マッチ度</div>
+          <div style="font-size:12px;color:var(--ink3)">AI社風診断の結果をもとに算出しています</div>
+          <a href="shindan.html" style="font-size:11px;color:#C084FC;text-decoration:none">診断をやり直す →</a>
+        </div>
+      `;
+      cultureTab.insertBefore(banner, cultureTab.firstChild);
+    }
+
+    // ヒーロー部分にも小バッジを追加
+    const heroName = document.querySelector('.hero-name');
+    if (heroName) {
+      const badge = document.createElement('span');
+      badge.style.cssText = 'font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);color:#C084FC;vertical-align:middle;margin-left:8px';
+      badge.textContent = `🤖 適性${score}%`;
+      heroName.appendChild(badge);
+    }
+  });
+})();
+
 /* ===== サイドバー（企業詳細ページ） ===== */
 (function() {
   // top.htmlでは実行しない
@@ -121,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="sidebar-label">メニュー</div>
   <a class="sb-item" href="top.html"><span class="sb-item-icon">🏠</span>企業一覧</a>
   <a class="sb-item" href="shindan.html"><span class="sb-item-icon">🤖</span>AI適性診断</a>
+  <a class="sb-item" href="compare.html"><span class="sb-item-icon">⚡</span>企業比較</a>
   <hr class="sidebar-sep">
   <div class="sidebar-label">企業を探す</div>
   <button class="sb-item" id="sbNavSearch"><span class="sb-item-icon">🔍</span>企業を検索</button>

@@ -429,44 +429,204 @@ const QUESTIONS = [
 // ============================================================
 const COMPANIES = [
   {
-    name: "株式会社ファーストリテイリング",
-    short: "ファーストリテイリング",
-    logo: "FR",
+    id: "firstretailing", short: "ファーストリテイリング", logo: "FR",
     logoStyle: "background:linear-gradient(135deg,#2A1A3E,#1a0533)",
     logoTextStyle: "background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
-    sub: "アパレル・小売業 ｜ 東証プライム",
-    url: "/firstretailing.html",
-    profile: {
-      remote: -1, worklife: -1, autonomy: 2, team: 1,
-      global: 3, management: 2, specialist: 1, growth: 3,
-      performance: 3, stability: 1, brand: 3, training: 1,
-      apparel: 3, manufacturing: 0, tech: 0, finance: 0,
-    },
-    reasons: [
-      "グローバル展開が積極的で海外赴任のチャンスが多い",
-      "成果主義で若手でも結果次第で高年収・昇進が狙える",
-      "アパレル・ファッション業界トップクラスのブランド力",
-    ],
+    sub: "アパレル ｜ 東証プライム", url: "firstretailing.html",
+    profile: { remote:-1, worklife:-1, autonomy:2, team:1, global:3, management:2, specialist:1, growth:3, performance:3, stability:1, brand:3, training:1, apparel:3, manufacturing:0, tech:0, finance:0 },
+    reasons: ["グローバル展開が積極的で海外赴任のチャンスが多い", "成果主義で若手でも結果次第で高年収・昇進が狙える", "アパレル・ファッション業界トップクラスのブランド力"],
   },
   {
-    name: "トヨタ自動車株式会社",
-    short: "トヨタ自動車",
-    logo: "TM",
+    id: "toyota", short: "トヨタ自動車", logo: "TM",
     logoStyle: "background:linear-gradient(135deg,#1E2A3E,#1A2A1E)",
     logoTextStyle: "background:linear-gradient(135deg,#6366F1,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
-    sub: "自動車・輸送機器 ｜ 東証プライム",
-    url: "/toyota.html",
-    profile: {
-      remote: 0, worklife: 0, autonomy: 1, team: 2,
-      global: 3, management: 2, specialist: 3, growth: 2,
-      performance: 1, stability: 3, brand: 3, training: 3,
-      apparel: 0, manufacturing: 3, tech: 2, finance: 0,
-    },
-    reasons: [
-      "日本最大手メーカーとして抜群の安定性と福利厚生",
-      "ものづくり・エンジニアリングの専門性を深められる",
-      "EV・自動運転など次世代技術の最前線で働ける",
-    ],
+    sub: "自動車 ｜ 東証プライム", url: "toyota.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:2, specialist:3, growth:2, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:3, tech:2, finance:0 },
+    reasons: ["日本最大手メーカーとして抜群の安定性と福利厚生", "ものづくり・エンジニアリングの専門性を深められる", "EV・自動運転など次世代技術の最前線で働ける"],
+  },
+  {
+    id: "softbank", short: "ソフトバンク", logo: "SB",
+    logoStyle: "background:linear-gradient(135deg,#1a1a2e,#16213e)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCD34D,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "softbank.html",
+    profile: { remote:2, worklife:-1, autonomy:2, team:1, global:2, management:2, specialist:1, growth:3, performance:3, stability:1, brand:3, training:2, apparel:0, manufacturing:0, tech:3, finance:1 },
+    reasons: ["スピード感のある環境で若手から大きな仕事ができる", "通信・AI・DXなど最先端ビジネスに携われる", "成果主義で実力次第で早期昇進・高報酬が狙える"],
+  },
+  {
+    id: "nttdata", short: "NTTデータグループ", logo: "ND",
+    logoStyle: "background:linear-gradient(135deg,#0a1628,#0d2137)",
+    logoTextStyle: "background:linear-gradient(135deg,#60A5FA,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "nttdata.html",
+    profile: { remote:2, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:1, performance:1, stability:3, brand:2, training:3, apparel:0, manufacturing:0, tech:3, finance:0 },
+    reasons: ["国内最大手SIerとして安定した雇用と充実した研修制度", "グローバル展開中でITの専門性を深めながら海外経験も可能", "チームで大規模プロジェクトを推進する仕事が多い"],
+  },
+  {
+    id: "fujitsu", short: "富士通", logo: "FJ",
+    logoStyle: "background:linear-gradient(135deg,#0f1929,#1a1f3a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F87171,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "fujitsu.html",
+    profile: { remote:2, worklife:1, autonomy:1, team:2, global:2, management:1, specialist:2, growth:2, performance:2, stability:2, brand:2, training:2, apparel:0, manufacturing:1, tech:3, finance:0 },
+    reasons: ["DX推進・社会変革に取り組む大手IT企業", "リモートワーク推進など働き方改革が進む", "ITとものづくり両面の専門性を活かせる環境"],
+  },
+  {
+    id: "kddi", short: "KDDI", logo: "KD",
+    logoStyle: "background:linear-gradient(135deg,#0d1f3c,#1a2a4a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F97316,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "IT・通信 ｜ 東証プライム", url: "kddi.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:1, management:2, specialist:1, growth:2, performance:2, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:3, finance:0 },
+    reasons: ["通信インフラを支える安定企業で長期キャリアを築ける", "平均年収1,018万円の高待遇と充実した福利厚生", "5G・IoT・DXなど次世代技術に関われる"],
+  },
+  {
+    id: "mufg", short: "三菱UFJフィナンシャルG", logo: "MU",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1515)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#D97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "mufg.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:3, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["日本最大の金融グループとして抜群の安定性とブランド力", "グローバル拠点が多く海外でのキャリア形成が可能", "充実した研修制度とマネジメントへの明確なキャリアパス"],
+  },
+  {
+    id: "nomura", short: "野村ホールディングス", logo: "NM",
+    logoStyle: "background:linear-gradient(135deg,#1a1a0a,#2a2a15)",
+    logoTextStyle: "background:linear-gradient(135deg,#FBBF24,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "nomura.html",
+    profile: { remote:0, worklife:-2, autonomy:2, team:1, global:3, management:2, specialist:3, growth:2, performance:3, stability:1, brand:3, training:2, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["証券・投資銀行のプロとしてハイレベルな専門性を磨ける", "成果次第で高報酬が狙える実力主義の環境", "グローバルな金融市場で活躍できる舞台がある"],
+  },
+  {
+    id: "mizuho", short: "みずほフィナンシャルグループ", logo: "MZ",
+    logoStyle: "background:linear-gradient(135deg,#0a1a2e,#0d2137)",
+    logoTextStyle: "background:linear-gradient(135deg,#34D399,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "mizuho.html",
+    profile: { remote:1, worklife:0, autonomy:1, team:2, global:2, management:2, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["三大メガバンクの一角として高い社会的信用とブランド", "金融×DXで変革期を担う人材として成長できる", "充実した研修と段階的なキャリア形成が可能"],
+  },
+  {
+    id: "smbc", short: "三井住友フィナンシャルG", logo: "SM",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#0d2a1e)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "金融 ｜ 東証プライム", url: "smbc.html",
+    profile: { remote:1, worklife:0, autonomy:1, team:2, global:2, management:3, specialist:1, growth:1, performance:1, stability:3, brand:3, training:3, apparel:0, manufacturing:0, tech:1, finance:3 },
+    reasons: ["メガバンクトップクラスの安定性と抜群のブランド力", "金融のプロとして幅広いキャリアを積める", "平均年収1,157万円の高待遇と手厚い福利厚生"],
+  },
+  {
+    id: "sony", short: "ソニーグループ", logo: "SN",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2e)",
+    logoTextStyle: "background:linear-gradient(135deg,#A78BFA,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "sony.html",
+    profile: { remote:2, worklife:1, autonomy:2, team:1, global:3, management:1, specialist:3, growth:2, performance:2, stability:2, brand:3, training:2, apparel:0, manufacturing:2, tech:2, finance:0 },
+    reasons: ["エンタメ×テクノロジーで世界に影響を与えられる", "クリエイティブな専門性を活かせる多様な事業領域", "グローバルブランドで海外キャリアのチャンスも豊富"],
+  },
+  {
+    id: "panasonic", short: "パナソニックHD", logo: "PN",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1a2040)",
+    logoTextStyle: "background:linear-gradient(135deg,#60A5FA,#2563EB);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "panasonic.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:1, performance:1, stability:2, brand:2, training:2, apparel:0, manufacturing:3, tech:1, finance:0 },
+    reasons: ["くらしとビジネスを変えるグリーン・ソサエティを推進", "ものづくりの専門性をじっくり磨ける環境", "組織改革中で変化に関わりたい人に向いている"],
+  },
+  {
+    id: "keyence", short: "キーエンス", logo: "KN",
+    logoStyle: "background:linear-gradient(135deg,#0a0a0a,#1a1a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "製造 ｜ 東証プライム", url: "keyence.html",
+    profile: { remote:-3, worklife:-3, autonomy:2, team:1, global:2, management:2, specialist:2, growth:3, performance:3, stability:3, brand:2, training:2, apparel:0, manufacturing:3, tech:2, finance:0 },
+    reasons: ["平均年収2,039万円・日本トップクラスの圧倒的高待遇", "完全成果主義で実力を正当に評価してもらえる", "製造業×ITの専門的スキルを最高水準で磨ける"],
+  },
+  {
+    id: "aeon", short: "イオン", logo: "AE",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#34D399,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "小売 ｜ 東証プライム", url: "aeon.html",
+    profile: { remote:-2, worklife:1, autonomy:1, team:3, global:1, management:2, specialist:0, growth:1, performance:1, stability:3, brand:3, training:2, apparel:1, manufacturing:0, tech:0, finance:0 },
+    reasons: ["日本最大級の小売グループで安定したキャリアを築ける", "チームワークを大切にするアットホームな職場環境", "全国転勤や多様な業態でキャリアの幅を広げられる"],
+  },
+  {
+    id: "7i", short: "セブン&アイHD", logo: "7i",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1e1a0a)",
+    logoTextStyle: "background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "小売 ｜ 東証プライム", url: "7i.html",
+    profile: { remote:-1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:0, growth:1, performance:1, stability:3, brand:3, training:2, apparel:1, manufacturing:0, tech:0, finance:0 },
+    reasons: ["セブン-イレブンなど国民的ブランドを抱える大手小売", "グローバル展開も進む安定した大企業環境", "流通・小売の幅広いキャリアパスが用意されている"],
+  },
+  {
+    id: "ajinomoto", short: "味の素", logo: "AJ",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1010)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCA5A5,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "食品 ｜ 東証プライム", url: "ajinomoto.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:3, management:1, specialist:3, growth:2, performance:2, stability:3, brand:2, training:2, apparel:0, manufacturing:1, tech:1, finance:0 },
+    reasons: ["食品×バイオの専門性で世界の食と健康に貢献できる", "グローバル展開が進み海外でのキャリアが築きやすい", "安定した大企業でじっくりR&D専門性を磨ける"],
+  },
+  {
+    id: "nissin", short: "日清食品HD", logo: "NS",
+    logoStyle: "background:linear-gradient(135deg,#1a1a0a,#2a2a10)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "食品 ｜ 東証プライム", url: "nissin.html",
+    profile: { remote:1, worklife:1, autonomy:2, team:2, global:2, management:1, specialist:2, growth:2, performance:2, stability:2, brand:3, training:1, apparel:0, manufacturing:1, tech:0, finance:0 },
+    reasons: ["独創的なブランドと企業文化でユニークな仕事ができる", "グローバル展開も積極的で海外ビジネスに関われる", "食のイノベーションを通じて社会に貢献できる"],
+  },
+  {
+    id: "mitsubishi", short: "三菱商事", logo: "MC",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1010)",
+    logoTextStyle: "background:linear-gradient(135deg,#F87171,#DC2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "mitsubishi.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:3, specialist:2, growth:3, performance:3, stability:2, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["平均年収2,033万円・総合商社最高水準の高待遇", "世界中でビジネスを動かすグローバルな仕事ができる", "マネジメントとして若いうちから大きな裁量が持てる"],
+  },
+  {
+    id: "itochu", short: "伊藤忠商事", logo: "IC",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#818CF8,#6366F1);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "itochu.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:3, specialist:2, growth:3, performance:3, stability:2, brand:3, training:3, apparel:1, manufacturing:0, tech:1, finance:2 },
+    reasons: ["総合商社首位クラスの純利益・高い成長性", "消費財からエネルギーまで幅広い業界でグローバル活躍", "実力主義で若手から大きな仕事と高報酬を狙える"],
+  },
+  {
+    id: "mitsui", short: "三井物産", logo: "MT",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "mitsui.html",
+    profile: { remote:0, worklife:-1, autonomy:2, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["資源・エネルギー分野で世界をリードする商社", "海外赴任の機会が豊富でグローバルキャリアを築ける", "平均年収1,996万円の超高待遇と安定した経営基盤"],
+  },
+  {
+    id: "sumitomo", short: "住友商事", logo: "SC",
+    logoStyle: "background:linear-gradient(135deg,#1a0a1a,#2a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#C084FC,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "sumitomo.html",
+    profile: { remote:0, worklife:0, autonomy:1, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:3, apparel:0, manufacturing:1, tech:1, finance:2 },
+    reasons: ["5大商社の一角として安定性とブランド力を兼備", "グローバルに活躍しながら着実にキャリアアップできる", "平均年収1,744万円の高待遇と充実した福利厚生"],
+  },
+  {
+    id: "marubeni", short: "丸紅", logo: "MB",
+    logoStyle: "background:linear-gradient(135deg,#1a0a0a,#2a1515)",
+    logoTextStyle: "background:linear-gradient(135deg,#FCA5A5,#DC2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "商社 ｜ 東証プライム", url: "marubeni.html",
+    profile: { remote:0, worklife:0, autonomy:2, team:2, global:3, management:2, specialist:2, growth:2, performance:2, stability:2, brand:2, training:2, apparel:1, manufacturing:1, tech:0, finance:2 },
+    reasons: ["穀物・電力など生活インフラを支えるグローバルビジネス", "比較的アットホームな社風で働きやすい商社文化", "海外で大きなビジネスを動かしながら成長できる環境"],
+  },
+  {
+    id: "mec", short: "三菱地所", logo: "ME",
+    logoStyle: "background:linear-gradient(135deg,#0a1428,#1a2040)",
+    logoTextStyle: "background:linear-gradient(135deg,#93C5FD,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "不動産 ｜ 東証プライム", url: "mec.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:1, specialist:3, growth:1, performance:1, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:0, finance:1 },
+    reasons: ["丸の内を中心に都市開発・不動産の専門性を磨ける", "抜群のブランド力と安定性を誇る不動産トップ企業", "平均年収1,265万円の高待遇とゆとりある職場環境"],
+  },
+  {
+    id: "mitsuifudosan", short: "三井不動産", logo: "MF",
+    logoStyle: "background:linear-gradient(135deg,#0a1a0a,#1a2a1a)",
+    logoTextStyle: "background:linear-gradient(135deg,#6EE7B7,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "不動産 ｜ 東証プライム", url: "mitsuifudosan.html",
+    profile: { remote:1, worklife:1, autonomy:1, team:2, global:2, management:2, specialist:2, growth:2, performance:2, stability:3, brand:3, training:2, apparel:0, manufacturing:0, tech:0, finance:1 },
+    reasons: ["不動産業界最大手クラスの安定性と超高待遇", "商業・住宅・ホテルなど多様な不動産ビジネスに関われる", "平均年収1,756万円・業界トップレベルの収入が得られる"],
+  },
+  {
+    id: "takeda", short: "武田薬品工業", logo: "TK",
+    logoStyle: "background:linear-gradient(135deg,#0a0a1a,#1a1a2a)",
+    logoTextStyle: "background:linear-gradient(135deg,#A78BFA,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent",
+    sub: "医薬品 ｜ 東証プライム", url: "takeda.html",
+    profile: { remote:1, worklife:1, autonomy:2, team:2, global:3, management:1, specialist:3, growth:2, performance:2, stability:2, brand:3, training:2, apparel:0, manufacturing:1, tech:1, finance:0 },
+    reasons: ["グローバル製薬企業として世界の医療に貢献できる", "R&D・医薬品の専門家として高い専門性を築ける", "海外拠点が多く国際的なキャリア形成が可能"],
   },
 ];
 
@@ -566,6 +726,12 @@ function showResult() {
     return { ...company, match };
   }).sort((a, b) => b.match - a.match);
 
+  // 診断結果をlocalStorageに保存（企業詳細ページで適性スコアを表示するため）
+  localStorage.setItem('kigyouzukan_diagnosis', JSON.stringify({
+    results: ranked.map(c => ({ id: c.id, match: c.match })),
+    timestamp: Date.now()
+  }));
+
   document.getElementById('quizSection').style.display = 'none';
   const resultSection = document.getElementById('resultSection');
   resultSection.style.display = 'block';
@@ -605,6 +771,7 @@ function showResult() {
 function retryQuiz() {
   current = 0;
   answers = new Array(QUESTIONS.length).fill(null);
+  localStorage.removeItem('kigyouzukan_diagnosis');
   document.getElementById('resultSection').style.display = 'none';
   document.getElementById('quizSection').style.display = 'block';
   renderQuestion();
