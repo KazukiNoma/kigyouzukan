@@ -108,7 +108,6 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin: 32px 0 12px;
-      padding-left: 4px;
       border-left: 3px solid var(--p1);
       padding-left: 10px;
     }
@@ -339,9 +338,7 @@ function renderCompare(companies) {
   const content = document.getElementById('compareContent');
   wrap.classList.add('visible');
 
-  // 最大値ハイライト用
-  const maxSalary = Math.max(...companies.map(c => c.avgSalary));
-  const maxAge = Math.min(...companies.map(c => c.avgAge || 99)); // 若い方が良い就活観点
+  // 最大値ハイライト用（dataRow内で個別に計算するためここには変数不要）
 
   // ヘッダー行
   const headerCells = companies.map(c => `
@@ -353,16 +350,20 @@ function renderCompare(companies) {
     </th>
   `).join('');
 
-  // 基本データ行
-  function dataRow(label, fn, isHighlight) {
+  // 基本データ行 (lowerIsBetter=true のとき最小値に👑)
+  function dataRow(label, fn, isHighlight, lowerIsBetter) {
     const vals = companies.map(fn);
-    const maxNum = Math.max(...vals.map(v => parseFloat(String(v).replace(/[^\d.]/g,'')) || 0));
+    const nums = vals.map(v => parseFloat(String(v).replace(/[^\d.]/g,'')) || 0);
+    const hasValidNum = nums.some(n => n > 0);
+    const bestNum = lowerIsBetter
+      ? Math.min(...nums.filter(n => n > 0))
+      : Math.max(...nums);
     return `<tr>
       <td class="label-col">${label}</td>
       ${companies.map((c, i) => {
         const raw = fn(c);
-        const num = parseFloat(String(raw).replace(/[^\d.]/g,'')) || 0;
-        const isBest = isHighlight && num === maxNum && maxNum > 0;
+        const num = nums[i];
+        const isBest = isHighlight && hasValidNum && num === bestNum && num > 0;
         return `<td><span class="${isBest ? 'val-best' : 'val-normal'}">${raw || '—'}${isBest ? ' 👑' : ''}</span></td>`;
       }).join('')}
     </tr>`;
@@ -398,7 +399,7 @@ function renderCompare(companies) {
         ${dataRow('平均年収', c => c.avgSalary ? `${c.avgSalary.toLocaleString()}万円` : '—', true)}
         ${dataRow('売上高', c => c.revenue || '—', false)}
         ${dataRow('従業員数', c => c.employees || '—', false)}
-        ${dataRow('平均年齢', c => c.avgAge ? `${c.avgAge}歳` : '—', false)}
+        ${dataRow('平均年齢', c => c.avgAge ? `${c.avgAge}歳` : '—', true, true)}
         ${dataRow('平均勤続年数', c => c.avgTenure || '—', true)}
         ${dataRow('女性管理職比率', c => c.femaleMgrRatio || '—', true)}
         ${dataRow('本社', c => c.headquarters || '—', false)}

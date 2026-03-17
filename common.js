@@ -22,7 +22,15 @@ function filterNews(type, el) {
 
 /* ナビ企業検索 - companies.json から動的ロード */
 let COMPANIES = [];
-let COMPANIES_DATA = []; // 詳細データ（compare等で利用）
+let COMPANIES_DATA = [];
+let _companiesReady = false;
+const _companiesCallbacks = [];
+
+/** companies.json 読み込み完了後にコールバックを実行 */
+function onCompaniesReady(fn) {
+  if (_companiesReady) { fn(COMPANIES_DATA); return; }
+  _companiesCallbacks.push(fn);
+}
 
 (function loadCompanies() {
   fetch('companies.json')
@@ -30,9 +38,15 @@ let COMPANIES_DATA = []; // 詳細データ（compare等で利用）
     .then(data => {
       COMPANIES_DATA = data;
       COMPANIES = data.map(c => ({ name: c.nameShort, sub: c.industry, url: c.url }));
+      _companiesReady = true;
+      _companiesCallbacks.forEach(fn => fn(COMPANIES_DATA));
+      _companiesCallbacks.length = 0;
     })
     .catch(() => {
       // フォールバック: JSONロード失敗時は静的リスト
+      _companiesReady = true;
+      _companiesCallbacks.forEach(fn => fn([]));
+      _companiesCallbacks.length = 0;
       COMPANIES = [
         { name: "ファーストリテイリング", sub: "アパレル", url: "firstretailing.html" },
         { name: "トヨタ自動車", sub: "自動車", url: "toyota.html" },
@@ -160,6 +174,58 @@ document.addEventListener('DOMContentLoaded', function() {
       badge.textContent = `🤖 適性${score}%`;
       heroName.appendChild(badge);
     }
+  });
+})();
+
+/* ===== 企業詳細ページ: 社風タブに事実データ（有価証券報告書）を動的注入 ===== */
+(function() {
+  if (location.pathname.endsWith('top.html') || location.pathname === '/' ||
+      location.pathname.endsWith('compare.html') || location.pathname.endsWith('shindan.html')) return;
+
+  function injectCultureFactData(companyData) {
+    const cultureTab = document.getElementById('tab-culture');
+    if (!cultureTab || cultureTab.querySelector('.culture-fact-data')) return;
+
+    const salary    = companyData.avgSalary    ? companyData.avgSalary.toLocaleString() + '万円' : 'データなし';
+    const tenure    = companyData.avgTenure    || 'データなし';
+    const age       = companyData.avgAge       ? companyData.avgAge + '歳'                       : 'データなし';
+    const femaleMgr = companyData.femaleMgrRatio || 'データなし';
+
+    const factBlock = document.createElement('div');
+    factBlock.className = 'culture-fact-data';
+    factBlock.innerHTML = `
+      <div class="section-title" style="margin-top:0">📋 <span>実態データ（有価証券報告書より）</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:12px">
+        ${[
+          ['平均年収',     salary],
+          ['平均勤続年数', tenure],
+          ['平均年齢',     age],
+          ['女性管理職比率', femaleMgr],
+        ].map(([label, val]) => `
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center">
+            <div style="font-size:20px;font-weight:900;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2">${val}</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:4px">${label}</div>
+          </div>`).join('')}
+      </div>
+      <div style="font-size:11px;color:var(--ink3);padding:7px 12px;background:rgba(168,85,247,0.05);border-radius:8px">
+        📌 出典：EDINET 有価証券報告書・各社IR資料（独自調査・推定値を含む）
+      </div>`;
+
+    // AI適性バナーがあればその直後、なければ先頭に挿入
+    const aiMatchBanner = cultureTab.querySelector('[style*="AI適性マッチ度"]');
+    if (aiMatchBanner) {
+      aiMatchBanner.insertAdjacentElement('afterend', factBlock);
+    } else {
+      cultureTab.insertBefore(factBlock, cultureTab.firstChild);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const pageId = location.pathname.split('/').pop().replace('.html', '');
+    onCompaniesReady(function(data) {
+      const company = data.find(c => c.id === pageId);
+      if (company) injectCultureFactData(company);
+    });
   });
 })();
 
